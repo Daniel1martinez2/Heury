@@ -1,0 +1,22 @@
+.page-header__project{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.page-header__project a{
+  text-decoration: none;
+  color: #FAFAFE; 
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  gap: 12px;
+}
+
+.page-header__project a:hover{
+  background-color: #262837;
+  border-radius: 4px;
+}
+
+.page-header__project:nth-child(1){
+  color: #7F7D8E;
+}

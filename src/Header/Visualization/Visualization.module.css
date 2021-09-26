@@ -1,0 +1,29 @@
+.page-header__nav{
+  display: flex;
+  gap: 12px;
+}
+
+.page-header__nav h1{
+  font-weight: 400;
+  color: #7F828F; 
+}
+.page-header__nav > *{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 6px; 
+}
+
+.page-header__nav > *:hover{
+  background-color: #262837;
+  border-radius: 4px;
+  cursor: pointer; 
+}
+
+.active h1{
+  color: #FF7451 !important; 
+}
+
+.active svg path{
+  fill: #FF7451; 
+}
