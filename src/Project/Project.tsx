@@ -1,7 +1,14 @@
 import Header from '../Header/Header'; 
+import HeuristicChunk from '../HeuristicChunk/HeuristicChunk'; 
+
+import styles from './Project.module.css'; 
+
 const Project = () => {
   return(
-    <Header/>
+    <div className={styles['app']}>
+      <Header/>
+      <HeuristicChunk/>
+    </div>
   ); 
 }
 
