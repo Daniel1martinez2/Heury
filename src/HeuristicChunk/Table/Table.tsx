@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react'
 
 import Observation from '../../Observation/Observation'; 
+import ObservationForm from '../../Observation/ObservationForm/ObservationForm'; 
 
 import styles from './Table.module.css'; 
 
@@ -12,6 +13,7 @@ export default function Table() {
       </section>
 
       {/* Table */}
+      <ObservationForm />
       <section className={styles["wrapper"]}>
         <div className={styles["table-container"]}>
           {/* Table itself */}
