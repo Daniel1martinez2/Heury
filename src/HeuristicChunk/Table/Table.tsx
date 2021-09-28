@@ -1,19 +1,37 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useState} from 'react'
 
 import Observation from '../../Observation/Observation'; 
 import ObservationForm from '../../Observation/ObservationForm/ObservationForm'; 
-
+import {ObservationInterface} from '../../common/types';
 import styles from './Table.module.css'; 
 
 export default function Table() {
+
+  const [showModal, setShowModal] = useState(false); 
+  const [DUMMY_OBSERVATIONS, setDUMMY_OBSERVATIONS] = useState<ObservationInterface[]> ([]); 
+
+  const onAddObservation = (observation:ObservationInterface) => {
+    setDUMMY_OBSERVATIONS(prev => [...prev, {...observation, index: DUMMY_OBSERVATIONS.length + 1}]); 
+  }
+  // 🔥
+  const onSetObservation = ({newObservation, id}:{newObservation:ObservationInterface, id: string}) => {
+    const currentObservation = DUMMY_OBSERVATIONS.findIndex(elem => elem.id === id)
+    console.log(currentObservation, '😡');
+    const newDummyData = DUMMY_OBSERVATIONS; 
+
+    newDummyData[currentObservation] = {...newObservation, index: currentObservation + 1}; 
+    console.log(DUMMY_OBSERVATIONS.filter(elem => elem.id === id), '✨');
+    console.log(newObservation, '🌈');
+    setDUMMY_OBSERVATIONS([...newDummyData]); 
+  }
+
   return (
     <Fragment>
+      {showModal && <ObservationForm onAddObservation={onAddObservation} setShowModal={setShowModal} />}
       {/* Actions */}
       <section className={styles["filter"]}>
       </section>
-
       {/* Table */}
-      <ObservationForm />
       <section className={styles["wrapper"]}>
         <div className={styles["table-container"]}>
           {/* Table itself */}
@@ -30,11 +48,12 @@ export default function Table() {
             </thead>
             <tbody>
               {/* Observations */}
-              <Observation/>
+              {DUMMY_OBSERVATIONS.map(elem => <Observation onSetObservation={onSetObservation} key={Math.random()} observationData={elem}/>)}
+              
             </tbody>
           </table>
           <div className={styles["btn-container"]}>
-            <button>New Observation</button>
+            <button onClick={() => setShowModal(true)} >New Observation</button>
           </div>
         </div>
       </section>

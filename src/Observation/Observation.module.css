@@ -42,9 +42,9 @@ table tr:hover .t-header .more{
   
 }
 
-.severity{
+/* .severity{
   background-color: #E05D33 !important;
-}
+} */
 
 .row-actions{
   left: 40px;
