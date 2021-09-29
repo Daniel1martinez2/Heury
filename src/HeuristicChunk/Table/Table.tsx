@@ -11,7 +11,7 @@ export default function Table() {
   const [DUMMY_OBSERVATIONS, setDUMMY_OBSERVATIONS] = useState<ObservationInterface[]> ([]); 
 
   const onAddObservation = (observation:ObservationInterface) => {
-    setDUMMY_OBSERVATIONS(prev => [...prev, {...observation, index: DUMMY_OBSERVATIONS.length + 1}]); 
+    setDUMMY_OBSERVATIONS(prev => [...prev, observation ]); 
   }
   // 🔥
   const onSetObservation = ({newObservation, id}:{newObservation:ObservationInterface, id: string}) => {
@@ -19,7 +19,7 @@ export default function Table() {
     console.log(currentObservation, '😡');
     const newDummyData = DUMMY_OBSERVATIONS; 
 
-    newDummyData[currentObservation] = {...newObservation, index: currentObservation + 1}; 
+    newDummyData[currentObservation] = {...newObservation}; 
     console.log(DUMMY_OBSERVATIONS.filter(elem => elem.id === id), '✨');
     console.log(newObservation, '🌈');
     setDUMMY_OBSERVATIONS([...newDummyData]); 
@@ -48,8 +48,7 @@ export default function Table() {
             </thead>
             <tbody>
               {/* Observations */}
-              {DUMMY_OBSERVATIONS.map(elem => <Observation onSetObservation={onSetObservation} key={Math.random()} observationData={elem}/>)}
-              
+              {DUMMY_OBSERVATIONS.map((elem, index) => <Observation index={index+1} onSetObservation={onSetObservation} key={Math.random()} observationData={elem}/>)}
             </tbody>
           </table>
           <div className={styles["btn-container"]}>

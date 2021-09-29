@@ -13,7 +13,7 @@ const severityColor =[
   '#E05D33'
 ]; 
 
-export default function Observation({observationData, onSetObservation}:{observationData:ObservationInterface, onSetObservation?: any}) {
+export default function Observation({observationData, onSetObservation, index}:{observationData:ObservationInterface, onSetObservation?: any, index: number}) {
   const [actionsActive, setActionsActive] = useState(true); 
   const [showModal, setShowModal] = useState(false); 
 
@@ -26,7 +26,7 @@ export default function Observation({observationData, onSetObservation}:{observa
       {showModal && <ObservationForm onSetObservation={onSetObservation} editData={observationData} setShowModal={setShowModal} />}
       <tr>
         <th className={styles["t-header"]} >
-          <h3>{observationData.index}</h3>
+          <h3>{index}</h3>
           <button onBlur={() => {
             setActionsActive(true)
             }} onClick={() => setActionsActive(false) } className={`${styles["transparent"]} ${styles["more"]}`}>

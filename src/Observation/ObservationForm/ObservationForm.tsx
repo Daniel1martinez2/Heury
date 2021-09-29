@@ -1,60 +1,21 @@
-import React, {Fragment} from 'react'; 
+import React, {Fragment, useState} from 'react'; 
 import ReactDOM from 'react-dom';
 import styles from './ObservationForm.module.css'; 
+import {heuristicData} from '../../common/dummyData'; 
 
 
-
-export const heuristicData = [
-  {
-    value: 'visibility',
-    heuristicData: 'Visibility of system status',
-  },
-  {
-    value: 'match',
-    heuristicData: 'Match between system and the real world',
-  },
-  {
-    value: 'control,',
-    heuristicData: 'User control and freedom',
-  },
-  {
-    value: 'consistency',
-    heuristicData: 'Consistency and standards',
-  },
-  {
-    value: 'error',
-    heuristicData: 'Error prevention',
-  },
-  {
-    value: 'recognition',
-    heuristicData: 'Recognition rather than recall',
-  },
-  {
-    value: 'scales',
-    heuristicData: 'Flexibility and efficiency of use',
-  },
-  {
-    value: 'flexibility',
-    heuristicData: 'Aesthetic and minimalist design',
-  },
-  {
-    value: 'recover',
-    heuristicData: 'Help recognize & recover from errors',
-  },
-  {
-    value: 'documentation',
-    heuristicData: 'Help and documentation',
-  },
-]; 
 
 const ModalOverlay = ({onAddObservation, setShowModal, editData, onSetObservation}:{onAddObservation: any, setShowModal: any, editData?: any, onSetObservation?: any}) => {
+  const [notes, setNotes] = useState(editData? editData.notes : ''); 
+  const [recommendations, setRecommendations] = useState(editData? editData.recommendations : ''); 
+  const [severity, setSeverity] = useState(editData? editData.severity : ''); 
+  const onSetNotes:React.ChangeEventHandler<HTMLInputElement> = (event) => setNotes(event.target.value); 
+  const onSetRecommendations:React.ChangeEventHandler<HTMLInputElement> = (event) => setRecommendations(event.target.value); 
+  const onSetSeverity:React.ChangeEventHandler<HTMLSelectElement> = (event) => setSeverity(event.target.value); 
   
+
   let dataTest:string[] | null= [
     // 'visibility',
-    // 'match',
-    // 'control',
-    // 'consistency',
-
   ]; 
 
   if(editData){
@@ -66,16 +27,12 @@ const ModalOverlay = ({onAddObservation, setShowModal, editData, onSetObservatio
   
 
   const getChecked = (checkBoxArray:React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>[]) => {
-    // checkBoxArray.forEach(elem => console.log(elem.checked))
     return checkBoxArray.filter(elem => elem.checked).map(elem => elem.name); 
   }
 
   const handlerSubmit:React.FormEventHandler<HTMLFormElement>  = (event:any) => {
-    
-
     event.preventDefault();
     const formRef = event.target;
-    // console.log(formRef.match.checked);
     const checkBoxArray = [
       formRef.visibility, 
       formRef.match, 
@@ -94,13 +51,14 @@ const ModalOverlay = ({onAddObservation, setShowModal, editData, onSetObservatio
 
     // Validations
     if(formRef.severity.value === '') return; 
-    
+    // Creating the final observation obj which will be sended
+
     const currentObservation = {
       index: 2,
       notes: formRef.notes.value,
       heuristics:heuristicsName ,
       severity:formRef.severity.value.split('-').join(' '),
-      evidence: 'https://daniel1martinez2.github.io/heuristic_example/UX%20Check%20Results%20664902979aa943b9b76c765bff7dde7a/Untitled%209.png', 
+      evidence: /http/.test(formRef.evidence.value)? formRef.evidence.value : 'https://daniel1martinez2.github.io/heuristic_example/UX%20Check%20Results%20664902979aa943b9b76c765bff7dde7a/Untitled%209.png', 
       recommendations: formRef.solution.value, 
       id: Math.random().toString()
     }
@@ -109,16 +67,14 @@ const ModalOverlay = ({onAddObservation, setShowModal, editData, onSetObservatio
     }else{
       onSetObservation({newObservation:currentObservation, id: editData.id})
     }
+    // hide the modal
     setShowModal(false); 
-    // heuristicData[heuristicData.findIndex(e => e.value === elem.name)].value
-    // check the box with code
-    // formRef.documentation.checked = true; 
   }
   return(
     <form className={styles['form']} onSubmit={handlerSubmit}>
         <label>
           Notes
-          <input type="text" name="notes" />
+          <input onChange={onSetNotes} value={notes} type="text" name="notes" />
         </label>
         <div className={styles['check-box']}>
           <label>
@@ -165,12 +121,12 @@ const ModalOverlay = ({onAddObservation, setShowModal, editData, onSetObservatio
 
         <label>
           Evidence
-          <input type="text" />
+          <input name="evidence" type="text" />
         </label>
           
         <label>
           Severity
-          <select name="severity">
+          <select onChange={onSetSeverity} value={severity.split(' ').join('-')} name="severity">
             <option value="">--Please choose an option--</option>
             <option value="1-Minor">1 Minor</option>
             <option value="2-Middle">2 Middle</option>
@@ -181,10 +137,10 @@ const ModalOverlay = ({onAddObservation, setShowModal, editData, onSetObservatio
         
         <label>
           Solution
-          <input name="solution" type="text" />
+          <input onChange={onSetRecommendations} value={recommendations} name="solution" type="text" />
         </label>
 
-        <button>Create Observation</button>
+        <button>{editData? 'Save Changes' : 'Create Observation'}</button>
       </form>
   ); 
 }
