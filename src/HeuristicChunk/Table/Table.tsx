@@ -2,20 +2,19 @@ import React, {Fragment, useState} from 'react'
 
 import Observation from '../../Observation/Observation'; 
 import ObservationForm from '../../Observation/ObservationForm/ObservationForm'; 
-import {ObservationInterface} from '../../common/types';
+import {ObservationType} from '../../common/types';
 import styles from './Table.module.css'; 
 
 export default function Table() {
 
   const [showModal, setShowModal] = useState(false); 
-  const [DUMMY_OBSERVATIONS, setDUMMY_OBSERVATIONS] = useState<ObservationInterface[]> ([]); 
+  const [DUMMY_OBSERVATIONS, setDUMMY_OBSERVATIONS] = useState<ObservationType[]> ([]); 
 
-  const onAddObservation = (observation:ObservationInterface) => {
+  const onAddObservation = (observation:ObservationType) => {
     setDUMMY_OBSERVATIONS(prev => [...prev, observation ]); 
   }
-  // (observation:ObservationInterface)=>void
-  // 🔥
-  const onSetObservation = ({newObservation, id}:{newObservation:ObservationInterface, id: string}) => {
+  
+  const onSetObservation = ({newObservation, id}:{newObservation:ObservationType, id: string}) => {
     const currentObservation = DUMMY_OBSERVATIONS.findIndex(elem => elem.id === id)
     console.log(currentObservation, '😡');
     const newDummyData = DUMMY_OBSERVATIONS; 

@@ -1,25 +1,12 @@
-import React, {useState} from 'react'
-import {Heuristics} from '../../common/types'; 
+import React from 'react'
+import {CheckInputInterface} from '../../common/types'; 
 import {transformTypeToConstansCase} from '../../common/commonFunc'; 
 
-export interface test{
-  name: string; 
-  observationHeuristics: string[];
-  validation: boolean; 
-  onEditCheckBoxArray: any; 
-}; 
-
-const CheckInput: React.FC<test> = ({name, observationHeuristics, validation, onEditCheckBoxArray}) => {
-  const [checked, setChecked] = useState(observationHeuristics.includes(name))
-  // const [checked, setChecked] = useState(false)
-  const toggleCheckboxChange:React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setChecked(event.target.checked)
-    onEditCheckBoxArray(name); 
-    // setChecked((prev) => !prev );
-  }
+const CheckInput: React.FC<CheckInputInterface> = ({name, validation, onEditCheckBoxArray}) => {
+  const toggleCheckboxChange:React.ChangeEventHandler<HTMLInputElement> = () => onEditCheckBoxArray(name); 
   return (
     <label>
-      <input onChange={toggleCheckboxChange} checked={checked} type="checkbox" name={name}/>
+      <input onChange={toggleCheckboxChange} checked={validation} type="checkbox" name={name}/>
       <span>{transformTypeToConstansCase(name).toLowerCase()} {validation}</span>
     </label>
   )

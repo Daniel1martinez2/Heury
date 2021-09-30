@@ -18,7 +18,7 @@ export type Severity= (
   | '4 Major'
 ); 
 
-export type ObservationInterface = {
+export type ObservationType = {
   index: number;
   notes: string;
   heuristics: string[];
@@ -28,4 +28,31 @@ export type ObservationInterface = {
   id: string; 
 }
 
-export type addObservation = (observation:ObservationInterface)=>void; 
+export interface ObservationInterface {
+  observationData:ObservationType;
+  onSetObservation?: any;
+  index: number
+}
+
+export interface ObservationFormInterface{
+  onAddObservation?: addObservation;
+  setShowModal:any ;
+  editData?:any;
+  onSetObservation?:any
+}; 
+
+export interface CheckInputInterface{
+  name: string; 
+  validation: boolean; 
+  onEditCheckBoxArray: any; 
+}; 
+
+export interface ModalOverlayInterface {
+  onAddObservation?: addObservation;
+  setShowModal: any;
+  editData?: any;
+  onSetObservation?: any
+}; 
+
+
+export type addObservation = (observation:ObservationType)=>void; 

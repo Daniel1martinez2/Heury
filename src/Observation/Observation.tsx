@@ -3,24 +3,16 @@ import styles from './Observation.module.css';
 import ModalCard from '../UI/ModalCard'; 
 import ObservationForm from './ObservationForm/ObservationForm'; 
 import '../index.css';
-
 import {ObservationInterface} from '../common/types'; 
+import {severityColor} from '../common/commonData'; 
 
-const severityColor =[
-  '#33A2E0',
-  '#E0C433',
-  '#E09033',
-  '#E05D33'
-]; 
-
-export default function Observation({observationData, onSetObservation, index}:{observationData:ObservationInterface, onSetObservation?: any, index: number}) {
+const Observation:React.FC<ObservationInterface> = ({observationData, onSetObservation, index}) =>{
   const [actionsActive, setActionsActive] = useState(true); 
   const [showModal, setShowModal] = useState(false); 
 
   const setSeverityColor = (severity:string) => {
     return severityColor[parseInt(severity.split(' ')[0])-1]; 
   }
-
   return (
     <Fragment>
       {showModal && <ObservationForm onSetObservation={onSetObservation} editData={observationData} setShowModal={setShowModal} />}
@@ -45,7 +37,7 @@ export default function Observation({observationData, onSetObservation, index}:{
           <p>{observationData.notes}</p>
         </td>
         <td>
-          {observationData.heuristics.map(elem => <p key={Math.random()} >{elem}</p>)}
+          {observationData.heuristics.map(elem => <p key={Math.random()} >{(elem.charAt(0).toUpperCase() + elem.slice(1).toLocaleLowerCase())}</p>)}
         </td>
         <td style={{backgroundColor: setSeverityColor(observationData.severity) }} className={styles["severity"]}>{observationData.severity}</td>
         <td>
@@ -59,5 +51,6 @@ export default function Observation({observationData, onSetObservation, index}:{
       </tr>    
     </Fragment>
   ); 
+}; 
 
-}
+export default Observation; 
