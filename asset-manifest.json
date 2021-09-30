@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/Heury/static/css/main.64d406f4.chunk.css",
+    "main.js": "/Heury/static/js/main.f139ee49.chunk.js",
+    "main.js.map": "/Heury/static/js/main.f139ee49.chunk.js.map",
+    "runtime-main.js": "/Heury/static/js/runtime-main.9f76a91a.js",
+    "runtime-main.js.map": "/Heury/static/js/runtime-main.9f76a91a.js.map",
+    "static/js/2.87f46377.chunk.js": "/Heury/static/js/2.87f46377.chunk.js",
+    "static/js/2.87f46377.chunk.js.map": "/Heury/static/js/2.87f46377.chunk.js.map",
+    "index.html": "/Heury/index.html",
+    "static/css/main.64d406f4.chunk.css.map": "/Heury/static/css/main.64d406f4.chunk.css.map",
+    "static/js/2.87f46377.chunk.js.LICENSE.txt": "/Heury/static/js/2.87f46377.chunk.js.LICENSE.txt",
+    "static/media/ObservationForm.module.css": "/Heury/static/media/noCheck.277b2a24.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9f76a91a.js",
+    "static/js/2.87f46377.chunk.js",
+    "static/css/main.64d406f4.chunk.css",
+    "static/js/main.f139ee49.chunk.js"
+  ]
+}
