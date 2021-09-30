@@ -1,14 +1,14 @@
 export type Heuristics = (
-  "Visibility of system status"
-  | "Match between system and the real world"
-  | "User control and freedom"
-  | "Consistency and standards"
-  | "Error prevention"
-  | "Recognition rather than recall"
-  | "Flexibility and efficiency of use"
-  | "Aesthetic and minimalist design"
-  | "Help recognize & recover from errors"
-  | "Help and documentation"
+  "visibility of system status"
+  | "match between system and the real world"
+  | "user control and freedom"
+  | "consistency and standards"
+  | "error prevention"
+  | "recognition rather than recall"
+  | "flexibility and efficiency of use"
+  | "aesthetic and minimalist design"
+  | "help recognize & recover from errors"
+  | "help and documentation"
 );
 
 export type Severity= (
@@ -21,7 +21,7 @@ export type Severity= (
 export type ObservationInterface = {
   index: number;
   notes: string;
-  heuristics: Heuristics[];
+  heuristics: string[];
   severity: Severity;
   evidence: string; 
   recommendations: string; 

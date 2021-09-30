@@ -108,7 +108,6 @@
   height: 12px; 
 }
 .check-box input:focus  + label{
-  /* display: none;  */
   color: red; 
 }
 
