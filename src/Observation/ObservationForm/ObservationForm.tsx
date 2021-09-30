@@ -2,15 +2,20 @@ import React, {Fragment, useState} from 'react';
 import ReactDOM from 'react-dom';
 import styles from './ObservationForm.module.css'; 
 import {heuristicData} from '../../common/dummyData'; 
+import '../../index.css';
+import {ObservationInterface, addObservation} from '../../common/types'; 
+import HTMLAttributes from "../../../index.d";
 
+const transformTypeToConstansCase = (word:string) => {
+  return (word.match(/[A-Z]+(?![a-z])|[A-Z]?[a-z]+|\d+/g) || [ word ]).join(' ');
+};
 
-
-const ModalOverlay = ({onAddObservation, setShowModal, editData, onSetObservation}:{onAddObservation: any, setShowModal: any, editData?: any, onSetObservation?: any}) => {
+const ModalOverlay = ({onAddObservation, setShowModal, editData, onSetObservation}:{onAddObservation?: addObservation, setShowModal: any, editData?: any, onSetObservation?: any}) => {
   const [notes, setNotes] = useState(editData? editData.notes : ''); 
   const [recommendations, setRecommendations] = useState(editData? editData.recommendations : ''); 
   const [severity, setSeverity] = useState(editData? editData.severity : ''); 
-  const onSetNotes:React.ChangeEventHandler<HTMLInputElement> = (event) => setNotes(event.target.value); 
-  const onSetRecommendations:React.ChangeEventHandler<HTMLInputElement> = (event) => setRecommendations(event.target.value); 
+  const onSetNotes:React.ChangeEventHandler<HTMLTextAreaElement> = (event) => setNotes(event.target.value); 
+  const onSetRecommendations:React.ChangeEventHandler<HTMLTextAreaElement> = (event) => setRecommendations(event.target.value); 
   const onSetSeverity:React.ChangeEventHandler<HTMLSelectElement> = (event) => setSeverity(event.target.value); 
   
 
@@ -62,7 +67,8 @@ const ModalOverlay = ({onAddObservation, setShowModal, editData, onSetObservatio
       recommendations: formRef.solution.value, 
       id: Math.random().toString()
     }
-    if(!editData){
+
+    if(!editData && !!onAddObservation){
       onAddObservation(currentObservation); 
     }else{
       onSetObservation({newObservation:currentObservation, id: editData.id})
@@ -72,50 +78,51 @@ const ModalOverlay = ({onAddObservation, setShowModal, editData, onSetObservatio
   }
   return(
     <form className={styles['form']} onSubmit={handlerSubmit}>
-        <label>
+        <label className={styles['textarea-label']}>
           Notes
-          <input onChange={onSetNotes} value={notes} type="text" name="notes" />
+          <textarea onChange={onSetNotes} value={notes} name="notes">{notes}</textarea>
         </label>
         <div className={styles['check-box']}>
+          {/* Create a function here */}
           <label>
             <input type="checkbox" name="visibility" defaultChecked={dataTest.includes("visibility")} />
-            Visibility of system status
+            <span>Visibility of system status</span>
           </label>
           <label>
             <input type="checkbox" name="match" defaultChecked={dataTest.includes("match")} />
-            Match between system and the real world
+            <span>Match between system and the real world</span>
           </label>
           <label>
-            <input type="checkbox" name="control" defaultChecked={dataTest.includes("control")} />
-            User control and freedom
+            <input algo="" type="checkbox" name="control" defaultChecked={dataTest.includes("control")} />
+            <span>User control and freedom</span>
           </label>
           <label>
             <input type="checkbox" name="consistency" defaultChecked={dataTest.includes("consistency")} />
-            Consistency and standards
+            <span>Consistency and standards</span>
           </label>
           <label>
             <input type="checkbox" name="error" defaultChecked={dataTest.includes("error")} />
-            Error prevention
+            <span>Error prevention</span>
           </label>
           <label>
             <input type="checkbox" name="recognition" defaultChecked={dataTest.includes("recognition")} />
-            Recognition rather than recall
+            <span>Recognition rather than recall</span>
           </label>
           <label>
             <input type="checkbox" name="scales" defaultChecked={dataTest.includes("scales")} />
-            Flexibility and efficiency of use
+            <span>Flexibility and efficiency of use</span>
           </label>
           <label>
             <input type="checkbox" name="flexibility" defaultChecked={dataTest.includes("flexibility")} />
-            Aesthetic and minimalist design
+            <span>Aesthetic and minimalist design</span>
           </label>
           <label>
             <input type="checkbox" name="recover" defaultChecked={dataTest.includes("recover")} />
-            Help recognize & recover from errors
+            <span>Help recognize & recover from errors</span>
           </label>
           <label>
             <input type="checkbox" name="documentation" defaultChecked={dataTest.includes("documentation")} />
-            Help and documentation
+            <span>Help and documentation</span>
           </label>
         </div>
 
@@ -135,23 +142,33 @@ const ModalOverlay = ({onAddObservation, setShowModal, editData, onSetObservatio
           </select>
         </label>
         
-        <label>
+        <label className={styles['textarea-label']}>
           Solution
-          <input onChange={onSetRecommendations} value={recommendations} name="solution" type="text" />
+          <textarea onChange={onSetRecommendations} value={recommendations} name="solution">{recommendations}</textarea>
         </label>
 
-        <button>{editData? 'Save Changes' : 'Create Observation'}</button>
+        <button className={`reset-btn ${styles['btn']}`}>{editData? 'Save Changes' : 'Create Observation'}</button>
       </form>
   ); 
 }
 
-const ObservationForm = ({onAddObservation, setShowModal, editData, onSetObservation}:{onAddObservation?: any, setShowModal: any, editData?: any, onSetObservation?: any}) => {
+
+
+interface ObservationFormInterface{
+  onAddObservation?: addObservation;
+  setShowModal:any ;
+  editData?:any;
+  onSetObservation?:any
+}; 
+
+const ObservationForm:React.FC<ObservationFormInterface>= (props) => {
+  const {setShowModal} = props; 
   const modalRoot = document.getElementById("modal-root") as HTMLElement;
   const backdrop = document.getElementById("backdrop-root") as HTMLElement;
   return (
     <Fragment>
       {ReactDOM.createPortal(<div onClick={() => setShowModal(false)} className={styles['form-wrapper']}></div>, backdrop)}
-      {ReactDOM.createPortal(<ModalOverlay onSetObservation={onSetObservation} editData={editData} setShowModal={setShowModal} onAddObservation={onAddObservation} />, modalRoot)}
+      {ReactDOM.createPortal(<ModalOverlay {...props} />, modalRoot)}
     </Fragment>
   )
 }

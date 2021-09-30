@@ -103,6 +103,7 @@ table tbody th {
   flex-grow: 1;
   min-height: 40vh;
   overflow-y: auto;
+  height: 100vh;
 }
 
 .table-container {

@@ -18,7 +18,7 @@ export type Severity= (
   | '4 Major'
 ); 
 
-export interface ObservationInterface {
+export type ObservationInterface = {
   index: number;
   notes: string;
   heuristics: Heuristics[];
@@ -28,3 +28,4 @@ export interface ObservationInterface {
   id: string; 
 }
 
+export type addObservation = (observation:ObservationInterface)=>void; 

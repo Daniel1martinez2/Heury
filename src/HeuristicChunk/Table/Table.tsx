@@ -13,6 +13,7 @@ export default function Table() {
   const onAddObservation = (observation:ObservationInterface) => {
     setDUMMY_OBSERVATIONS(prev => [...prev, observation ]); 
   }
+  // (observation:ObservationInterface)=>void
   // 🔥
   const onSetObservation = ({newObservation, id}:{newObservation:ObservationInterface, id: string}) => {
     const currentObservation = DUMMY_OBSERVATIONS.findIndex(elem => elem.id === id)

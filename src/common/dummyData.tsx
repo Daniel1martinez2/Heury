@@ -1,4 +1,5 @@
-export const heuristicData = [
+import {Heuristics} from './types'; 
+export const heuristicData:{value: string, heuristicData: Heuristics}[] = [
   {
     value: 'visibility',
     heuristicData: 'Visibility of system status',
@@ -8,7 +9,7 @@ export const heuristicData = [
     heuristicData: 'Match between system and the real world',
   },
   {
-    value: 'control,',
+    value: 'control',
     heuristicData: 'User control and freedom',
   },
   {
