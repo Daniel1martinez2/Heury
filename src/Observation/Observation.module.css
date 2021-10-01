@@ -76,3 +76,8 @@ table tr:hover .t-header .more{
   background-color: #4F5163;
 }
 
+.ul{
+  display: flex;
+  flex-direction: column;
+  gap: .3em;
+}

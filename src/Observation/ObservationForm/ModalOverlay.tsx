@@ -25,11 +25,9 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
   const onSetRecommendations:React.ChangeEventHandler<HTMLTextAreaElement> = (event) => setRecommendations(event.target.value); 
   const onSetSeverity:React.ChangeEventHandler<HTMLSelectElement> = (event) => setSeverity(event.target.value); 
   
-
   const onEditCheckBoxArray = (name: string) => {
     if(heuristicSelectedArray.includes(name)){
       setHeuristicSelectedArray(heuristicSelectedArray.filter((elem:string) => elem !== name)); 
-      console.log('BESOS');
       return
     }
     const currentCheckBox = heuristics.findIndex((elem:string) => elem === name);

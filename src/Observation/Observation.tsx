@@ -5,6 +5,7 @@ import ObservationForm from './ObservationForm/ObservationForm';
 import '../index.css';
 import {ObservationInterface} from '../common/types'; 
 import {severityColor} from '../common/commonData'; 
+import {normalizeText} from '../common/commonFunc'; 
 
 const Observation:React.FC<ObservationInterface> = ({observationData, onSetObservation, index,onDeleteObservation}) =>{
   const [actionsActive, setActionsActive] = useState(true); 
@@ -37,7 +38,9 @@ const Observation:React.FC<ObservationInterface> = ({observationData, onSetObser
           <p>{observationData.notes}</p>
         </td>
         <td>
-          {observationData.heuristics.map(elem => <p key={Math.random()} >{(elem.charAt(0).toUpperCase() + elem.slice(1).toLocaleLowerCase())}</p>)}
+          <ul className={styles['ul']}>
+            {observationData.heuristics.map(elem => <li key={Math.random()} >{normalizeText(elem)}</li>)}
+          </ul>
         </td>
         <td style={{backgroundColor: setSeverityColor(observationData.severity) }} className={styles["severity"]}>{observationData.severity}</td>
         <td>
@@ -52,5 +55,7 @@ const Observation:React.FC<ObservationInterface> = ({observationData, onSetObser
     </Fragment>
   ); 
 }; 
+
+
 
 export default Observation; 
