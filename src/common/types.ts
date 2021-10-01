@@ -30,8 +30,9 @@ export type ObservationType = {
 
 export interface ObservationInterface {
   observationData:ObservationType;
-  onSetObservation?: any;
-  index: number
+  onSetObservation: any;
+  onDeleteObservation: (id:string) => void; 
+  index: number;
 }
 
 export interface ObservationFormInterface{

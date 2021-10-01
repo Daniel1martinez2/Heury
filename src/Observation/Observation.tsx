@@ -6,7 +6,7 @@ import '../index.css';
 import {ObservationInterface} from '../common/types'; 
 import {severityColor} from '../common/commonData'; 
 
-const Observation:React.FC<ObservationInterface> = ({observationData, onSetObservation, index}) =>{
+const Observation:React.FC<ObservationInterface> = ({observationData, onSetObservation, index,onDeleteObservation}) =>{
   const [actionsActive, setActionsActive] = useState(true); 
   const [showModal, setShowModal] = useState(false); 
 
@@ -29,7 +29,7 @@ const Observation:React.FC<ObservationInterface> = ({observationData, onSetObser
             <ModalCard  className={`${styles['row-actions']} ${ actionsActive  && styles['hidden']}`}>
               <Fragment> 
                 <button onMouseDown={() => setShowModal(true)} className="reset-btn">Edit</button>
-                <button onMouseDown={() => console.log('Delete')} className="reset-btn">Delete</button>
+                <button onMouseDown={() => onDeleteObservation(observationData.id)} className="reset-btn">Delete</button>
               </Fragment>
             </ModalCard>
         </th>

@@ -13,16 +13,16 @@ export default function Table() {
   const onAddObservation = (observation:ObservationType) => {
     setDUMMY_OBSERVATIONS(prev => [...prev, observation ]); 
   }
-  
   const onSetObservation = ({newObservation, id}:{newObservation:ObservationType, id: string}) => {
     const currentObservation = DUMMY_OBSERVATIONS.findIndex(elem => elem.id === id)
-    console.log(currentObservation, '😡');
     const newDummyData = DUMMY_OBSERVATIONS; 
-
     newDummyData[currentObservation] = {...newObservation}; 
-    console.log(DUMMY_OBSERVATIONS.filter(elem => elem.id === id), '✨');
-    console.log(newObservation, '🌈');
     setDUMMY_OBSERVATIONS([...newDummyData]); 
+  }
+  const onDeleteObservation = (id:string) => {
+    console.log('delete');
+    console.log(DUMMY_OBSERVATIONS, id);
+    setDUMMY_OBSERVATIONS(DUMMY_OBSERVATIONS.filter(elem => elem.id !== id)); 
   }
 
   return (
@@ -48,7 +48,9 @@ export default function Table() {
             </thead>
             <tbody>
               {/* Observations */}
-              {DUMMY_OBSERVATIONS.map((elem, index) => <Observation index={index+1} onSetObservation={onSetObservation} key={Math.random()} observationData={elem}/>)}
+              {DUMMY_OBSERVATIONS.map((elem, index) => (
+                <Observation onDeleteObservation={onDeleteObservation} index={index+1} onSetObservation={onSetObservation} key={Math.random()} observationData={elem}/>
+              ))}
             </tbody>
           </table>
           <div className={styles["btn-container"]}>

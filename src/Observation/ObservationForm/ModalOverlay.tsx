@@ -46,7 +46,7 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
       severity:formRef.severity.value.split('-').join(' '),
       evidence: /http/.test(formRef.evidence.value)? formRef.evidence.value : defaultImage , 
       recommendations: formRef.solution.value, 
-      id: Math.random().toString()
+      id:editData? editData.id : Math.random().toString(),
     }
     if(!editData && !!onAddObservation){
       onAddObservation(currentObservation); 
