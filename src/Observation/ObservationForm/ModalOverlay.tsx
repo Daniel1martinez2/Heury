@@ -34,9 +34,20 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
     setHeuristicSelectedArray((prev:string[]) => [...prev, heuristics[currentCheckBox] ]); 
   }; 
 
-  const handlerSubmit:React.FormEventHandler<HTMLFormElement>  = (event:any) => {
+  interface FormElements extends HTMLFormControlsCollection {
+    notes: HTMLTextAreaElement;
+    severity: any; 
+    evidence: HTMLInputElement; 
+    solution: HTMLTextAreaElement;
+  }
+  interface Form extends HTMLFormElement {
+    readonly elements: FormElements;
+  }
+
+
+  const handlerSubmit:React.FormEventHandler<Form>  = (event) => {
     event.preventDefault();
-    const formRef = event.target;
+    const formRef = event.currentTarget.elements;
     const currentObservation:ObservationType = {
       index: 2,
       notes: formRef.notes.value,
@@ -78,7 +89,7 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
           Evidence
           <input name="evidence" type="text" />
         </label>
-          
+
         <label>
           Severity
             <Select severityData={severityData} severity={severity} onSetSeverity={onSetSeverity} />

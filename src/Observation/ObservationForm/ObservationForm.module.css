@@ -119,6 +119,10 @@
   font-family: inherit;
   
 }
+.form > * {
+  flex-shrink: 0;
+  
+}
 
 .btn{
   background-color: #FF7451;

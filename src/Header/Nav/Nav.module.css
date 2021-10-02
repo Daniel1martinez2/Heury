@@ -17,6 +17,27 @@
   border-radius: 4px;
 }
 
-.page-header__project:nth-child(1){
+.page-header__project input{
   color: #7F7D8E;
+  background: transparent;
+  border: none; 
+  font-size: 18px; 
+  cursor: pointer;
+  outline: none;
+}
+
+.container{
+  position: relative; 
+}
+.clickable{
+  cursor: pointer;
+  /* opacity: 0.4;
+  background-color: red;  */
+  position: absolute; 
+  width:100%; 
+  height:100%; 
+}
+
+.hidden{
+  display: none; 
 }

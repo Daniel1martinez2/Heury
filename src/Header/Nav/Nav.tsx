@@ -1,5 +1,30 @@
+import React, {useState, useRef} from 'react'
+
 import styles from './Nav.module.css'; 
 const Nav = () => {
+  const [disabled, setDisabled] = useState(false); 
+  const [text, setText] = useState('Untitled'); 
+
+  const currentInput = useRef<HTMLInputElement>(null); 
+  const handleFocus = () => {
+    if(currentInput && currentInput.current){
+      currentInput?.current?.focus()
+    }
+  }
+  const handleTextInput:React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    setText(event.target.value); 
+  }
+  const handleEnableInputDClick = () => {
+    setDisabled(true)
+    handleFocus(); 
+  }
+  const handleInputBlur = () => {
+    setDisabled(false); 
+    if(text.trim().length === 0){
+      setText('untitled'); 
+    }
+  }
+
   return(
     <div className={styles['page-header__project']}>
         <a href="/">
@@ -11,7 +36,17 @@ const Nav = () => {
           <h1>All Reports </h1>
         </a>
         <h1>/</h1>
-        <h1>Monday 2021 re...</h1>
+        {/* <h2 contentEditable dangerouslySetInnerHTML={{__html: 'algo'}} /> */} 
+        <div className={styles["container"]}>
+          <div onDoubleClick={handleEnableInputDClick} className={`${styles["clickable"]} ${disabled && styles['hidden']}`}/>
+          <input 
+            onBlur={handleInputBlur} 
+            ref={currentInput} 
+            onChange={handleTextInput} 
+            type="text" 
+            value={text}/>
+        </div>
+        
       </div>
   ); 
 }
