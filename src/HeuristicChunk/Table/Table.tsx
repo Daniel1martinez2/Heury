@@ -2,8 +2,10 @@ import React, {Fragment, useState} from 'react'
 
 import Observation from '../../Observation/Observation'; 
 import ObservationForm from '../../Observation/ObservationForm/ObservationForm'; 
+import TableActions from './TableActions/TableActions'
 import {ObservationType} from '../../common/types';
 import styles from './Table.module.css'; 
+
 
 export default function Table() {
 
@@ -29,8 +31,7 @@ export default function Table() {
     <Fragment>
       {showModal && <ObservationForm onAddObservation={onAddObservation} setShowModal={setShowModal} />}
       {/* Actions */}
-      <section className={styles["filter"]}>
-      </section>
+      <TableActions className={styles["filter"]}/>
       {/* Table */}
       <section className={styles["wrapper"]}>
         <div className={styles["table-container"]}>

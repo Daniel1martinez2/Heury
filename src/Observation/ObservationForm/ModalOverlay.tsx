@@ -44,7 +44,6 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
     readonly elements: FormElements;
   }
 
-
   const handlerSubmit:React.FormEventHandler<Form>  = (event) => {
     event.preventDefault();
     const formRef = event.currentTarget.elements;
@@ -52,7 +51,7 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
       index: 2,
       notes: formRef.notes.value,
       heuristics: heuristicSelectedArray.map((elem:string) => transformTypeToConstansCase(elem || '')),
-      severity:formRef.severity.value.split('-').join(' '),
+      severity: transformTypeToConstansCase(formRef.severity.value) ,
       evidence: /http/.test(formRef.evidence.value)? formRef.evidence.value : defaultImage , 
       recommendations: formRef.solution.value, 
       id:editData? editData.id : Math.random().toString(),
@@ -92,7 +91,7 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
 
         <label>
           Severity
-            <Select severityData={severityData} severity={severity} onSetSeverity={onSetSeverity} />
+            <Select selectData={severityData} severity={severity} name="severity" onSetSelected={onSetSeverity} />
         </label>
         
         <label className={styles['textarea-label']}>

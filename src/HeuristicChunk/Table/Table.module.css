@@ -99,7 +99,7 @@ table tbody th {
 
 .wrapper {
   /* background-color: yellow;  */
-  padding: 2em;
+  padding: 1em 2em ;
   flex-grow: 1;
   min-height: 40vh;
   overflow-y: auto;
@@ -144,4 +144,9 @@ table tbody th {
 .btn-container button:hover {
   background-color: #FF7451;
   color: white;
+}
+
+.filter{
+  /* background-color: red; */
+  padding: 1em 0 0 2em;
 }

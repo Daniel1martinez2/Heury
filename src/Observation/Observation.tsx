@@ -39,6 +39,7 @@ const Observation:React.FC<ObservationInterface> = ({observationData, onSetObser
         </td>
         <td>
           <ul className={styles['ul']}>
+            
             {observationData.heuristics.map(elem => <li key={Math.random()} >{normalizeText(elem)}</li>)}
           </ul>
         </td>

@@ -1,12 +1,19 @@
-.page-header h1{
+.page-header h1 {
   font-size: 18px;
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-.page-header{
+.page-header {
   width: 100%;
   border-bottom: 1px solid #434450;
-  color: white; 
-  padding:2em; 
+  color: white;
+  padding: 2em;
   display: flex;
   gap: 1em;
   justify-content: space-between;

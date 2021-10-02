@@ -1,0 +1,59 @@
+.btn{
+  display: flex;
+  gap: .8em; 
+  padding:.8em; 
+  border-radius: 8px; 
+}
+.btn:hover{
+  background-color: #262837;
+}
+
+.btn svg{
+  height: 18px; 
+  width: auto; 
+  /* background-color: red; */
+}
+.btn span{
+  color: #7F828F; 
+  font-weight: bold;
+}
+
+.active span{
+  color: #FF7451 !important; 
+}
+.active svg path{
+  fill: #FF7451; 
+}
+.container{
+  position: relative; 
+  width: fit-content; 
+  /* background-color: red; */
+}
+.filter-actions{
+  z-index: 10;
+  top: 100%; 
+  left: 0; 
+  position: absolute; 
+  background-color: #262837;
+  display: flex;
+  gap: 2em;
+  width: fit-content;
+  padding: 1em; 
+  border-radius: 8px; 
+  box-shadow: 18px 10px 56px 10px rgba(2, 2, 3, 0.9);
+  -webkit-box-shadow: 18px 10px 56px 10px rgba(16, 14, 27, 0.9);
+  -moz-box-shadow: 18px 10px 56px 10px rgba(0, 0, 0, 0.9);
+}
+
+.filter-actions label{
+  display: flex; 
+  flex-direction: column;
+  gap: .5em; 
+}
+.filter-actions label span{
+  color: #FAFAFE; 
+}
+
+.heuristic select{
+  width: 300px; 
+}

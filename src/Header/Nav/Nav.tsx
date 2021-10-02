@@ -21,7 +21,7 @@ const Nav = () => {
   const handleInputBlur = () => {
     setDisabled(false); 
     if(text.trim().length === 0){
-      setText('untitled'); 
+      setText('Untitled'); 
     }
   }
 
@@ -43,7 +43,8 @@ const Nav = () => {
             onBlur={handleInputBlur} 
             ref={currentInput} 
             onChange={handleTextInput} 
-            type="text" 
+            type="text"
+            autoComplete="off" 
             value={text}/>
         </div>
         

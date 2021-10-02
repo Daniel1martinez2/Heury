@@ -12,10 +12,10 @@ export const heuristics = [
 ]; 
 
 export const severityData = [
-  "1-Minor",
-  "2-Middle",
-  "3-High",
-  "4-Major",
+  "1Minor",
+  "2Middle",
+  "3High",
+  "4Major",
 ]; 
 
 export const severityColor =[

@@ -22,7 +22,7 @@ export type ObservationType = {
   index: number;
   notes: string;
   heuristics: string[];
-  severity: Severity;
+  severity: string;
   evidence: string; 
   recommendations: string; 
   id: string; 
