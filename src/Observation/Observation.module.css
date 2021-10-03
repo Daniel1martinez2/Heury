@@ -1,7 +1,7 @@
 .t-header .more{
   position: relative;
   vertical-align: sub;
-  background: #353748;
+  background-color: #353748;
 	color: inherit;
 	border: none;
 	padding: .3em 0;
@@ -13,11 +13,16 @@
   justify-content:center; 
   align-items: center; 
   margin-top: .5em;
+  -webkit-transition: background-color .3s ease-in-out;
+  -moz-transition: background-color .3s ease-in-out;
+  -o-transition: background-color .3s ease-in-out;
+  transition: background-color .3s ease-in-out;
 }
 
 .t-header .more svg{
   width: 20px;
   height: 100%;
+
 }
 
 .t-header .more:hover{

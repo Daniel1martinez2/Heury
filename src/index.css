@@ -22,3 +22,13 @@ body{
 .hidden{
  display: none;
 }
+
+::-moz-selection { /* Code for Firefox */
+  color: white;
+  background: #FF7451;
+}
+
+::selection {
+  color: white;
+  background: #FF7451;
+}

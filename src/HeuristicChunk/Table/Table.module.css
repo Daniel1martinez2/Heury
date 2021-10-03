@@ -12,6 +12,10 @@ table td,
 table th {
   border: 1px solid #434450;
   padding: 1.5rem .5rem;
+  -webkit-transition: background-color .3s ease-out;
+  -moz-transition: background-color .3s ease-out;
+  -o-transition: background-color .3s ease-out;
+  transition: background-color .3s ease-out;
 }
 
 table thead th {
@@ -33,23 +37,22 @@ table thead th:nth-child(1) {
 table tr:hover td {
   background: #262837;
 }
-
 table tr:hover th {
   background: #262837;
 }
 
-
-
 table td {
   font-size: 14px;
   color: #FAFAFE;
-  background: #1F1D2C;
+  background-color: #1F1D2C;
+  
   padding: 12px 24px;
   vertical-align: top;
   white-space: normal;
   min-width: 320px;
   word-wrap: break-word;
   width: 400px;
+  
 }
 
 table td img {
@@ -139,6 +142,14 @@ table tbody th {
   border: 1px solid #434450;
   font-size: 18px;
   font-weight: bold;
+  -webkit-transition: background-color .3s ease-out;
+  -moz-transition: background-color .3s ease-out;
+  -o-transition: background-color .3s ease-out;
+  transition: background-color .3s ease-out;
+  -webkit-transition: color .3s ease-out;
+  -moz-transition: color .3s ease-out;
+  -o-transition: color .3s ease-out;
+  transition: color .3s ease-out;
 }
 
 .btn-container button:hover {

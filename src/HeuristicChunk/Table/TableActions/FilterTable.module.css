@@ -44,6 +44,37 @@
   -webkit-box-shadow: 18px 10px 56px 10px rgba(16, 14, 27, 0.9);
   -moz-box-shadow: 18px 10px 56px 10px rgba(0, 0, 0, 0.9);
 }
+.filter-actions label select{
+  display: grid;
+  appearance: none;
+  background-color: #353748;
+  border: none;
+  padding: .5em;
+  border-radius: 4px;
+  margin: 0;
+  color: #FAFAFE;
+  width: fit-content;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  outline: none;
+  cursor: pointer;
+  background-image: url(../../../img/arrow-down.svg);
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+}
+.filter-actions label select option{
+    color: #FAFAFE !important;
+}
+
+.heuristic select{
+  width: 370px !important; 
+}
+
+.severity select{
+  width: 230px !important; 
+
+}
 
 .filter-actions label{
   display: flex; 
@@ -54,6 +85,3 @@
   color: #FAFAFE; 
 }
 
-.heuristic select{
-  width: 300px; 
-}

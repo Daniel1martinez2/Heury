@@ -130,3 +130,28 @@
   border-radius: 4px;
   font-weight: bold;
 }
+
+.select{
+  display: grid;
+  appearance: none;
+  padding: .5em;
+  border-radius: 4px;
+  margin: 0;
+  color: #FAFAFE;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  outline: none;
+  cursor: pointer;
+  background-image: url(../../img/arrow-down.svg);
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+
+  background-color: #262837;
+  border: 2px solid #4A4C5F;
+}
+
+.select option{
+  color: #FAFAFE !important;
+}

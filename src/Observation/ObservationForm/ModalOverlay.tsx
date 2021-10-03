@@ -91,7 +91,7 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
 
         <label>
           Severity
-            <Select selectData={severityData} severity={severity} name="severity" onSetSelected={onSetSeverity} />
+            <Select active={false} className={styles['select']} selectData={severityData} value={severity} name="severity" onSetSelected={onSetSeverity} />
         </label>
         
         <label className={styles['textarea-label']}>
