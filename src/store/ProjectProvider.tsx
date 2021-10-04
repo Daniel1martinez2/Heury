@@ -3,6 +3,7 @@ import {ObservationType} from '../common/types';
 import ProjectContext from "./project-context";
 
 const ProjectProvider = (props:any) => {
+  const [filters, setFilters] = useState({heuristic:'', severity: ''}); 
   const [observationsData, setObservationsData] = useState<ObservationType[]> ([
     // {
     //   index: 1,
@@ -30,12 +31,22 @@ const ProjectProvider = (props:any) => {
     setObservationsData(observationsData.filter(elem => elem.id !== id)); 
   }
 
+  const setHeuristicFilter:React.ChangeEventHandler<HTMLSelectElement> = (event) => {
+    setFilters(prev => ({...prev, heuristic: event.target.value})); 
+  }
+
+  const setSeverityFilter:React.ChangeEventHandler<HTMLSelectElement> = (event) => {
+    setFilters(prev => ({...prev, severity: event.target.value})); 
+  }
 
   const projectContextData = {
+    filterData: filters,
     observationArray:observationsData, 
     deleteObservation, 
     editObservation, 
     createObservation, 
+    setHeuristicFilter,
+    setSeverityFilter
   }; 
   return(
     <ProjectContext.Provider value={projectContextData}>

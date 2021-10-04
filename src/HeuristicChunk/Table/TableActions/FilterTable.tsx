@@ -1,4 +1,5 @@
-import React, {useState, useRef, useEffect} from 'react'; 
+import React, {useState, useRef, useEffect, useContext} from 'react'; 
+import ProjectContext from '../../../store/project-context'; 
 import '../../../index.css'; 
 import styles from './FilterTable.module.css'; 
 import Select from '../../../Observation/ObservationForm/Select'; 
@@ -10,24 +11,28 @@ interface FilterActionsInterface {
 }
 
 const FilterActions:React.FC<FilterActionsInterface> = ({setFilterActionVisible, setFilterApply}) => {  
+  const ctx = useContext(ProjectContext); 
+  const {filterData, setHeuristicFilter, setSeverityFilter} = ctx; 
+  
+
   const containerRef = useRef<HTMLInputElement>(null); 
-  const [severity, setSeverity] = useState(''); 
-  const [heuristic, setHeuristic] = useState(''); 
+  // const [severity, setSeverity] = useState(''); 
+  // const [heuristic, setHeuristic] = useState(''); 
   useEffect(()=>{
-    if(heuristic !== '' || severity !== ''){
+    if(filterData.heuristic !== '' || filterData.severity !== ''){
       setFilterApply(true)
     }else{
       setFilterApply(false)
     }; 
-  }, [heuristic, severity, setFilterApply]); 
+  }, [filterData.heuristic, filterData.severity, setFilterApply]); 
    
-  const onSetHeuristic:React.ChangeEventHandler<HTMLSelectElement> = (event) => {
-    setHeuristic(event.target.value); 
-   
-  }; 
-  const onSetSeverity:React.ChangeEventHandler<HTMLSelectElement> = (event) => {
-    setSeverity(event.target.value);
-  }; 
+  // const onSetHeuristic:React.ChangeEventHandler<HTMLSelectElement> = (event) => {
+  //   setHeuristic(event.target.value); 
+  // }; 
+
+  // const onSetSeverity:React.ChangeEventHandler<HTMLSelectElement> = (event) => {
+  //   setSeverity(event.target.value);
+  // }; 
   const handleClickOutside = (event:any) => {
     if(containerRef && containerRef.current && containerRef.current && !containerRef.current.contains(event.target)){
       setFilterActionVisible(false); 
@@ -45,11 +50,11 @@ const FilterActions:React.FC<FilterActionsInterface> = ({setFilterActionVisible,
     <div ref={containerRef} className={styles['filter-actions']}>
       <label  className={styles['heuristic']}>
         <span>Heuristic</span>
-        <Select active ={heuristic !== ''} name= "heuristicFilter" selectData={heuristics} value={heuristic} onSetSelected={onSetHeuristic} />
+        <Select active ={filterData.heuristic !== ''} name= "heuristicFilter" selectData={heuristics} value={filterData.heuristic} onSetSelected={setHeuristicFilter} />
       </label>
       <label className={styles['severity']}>
         <span>Severity</span>
-        <Select active ={severity !== ''} name="severityFilter" selectData={severityData} value={severity} onSetSelected={onSetSeverity} />
+        <Select active ={filterData.severity !== ''} name="severityFilter" selectData={severityData} value={filterData.severity} onSetSelected={setSeverityFilter} />
       </label>
     </div>
   );
