@@ -1,8 +1,11 @@
 import Project from '../Project/Project'; 
+import ProjectProvider from '../store/ProjectProvider'; 
 function App() {
   return (
     <div className="App">
-      <Project/>
+      <ProjectProvider>
+        <Project/>
+      </ProjectProvider>
     </div>
   );
 }
