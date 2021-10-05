@@ -19,7 +19,6 @@ export type Severity= (
 ); 
 
 export type ObservationType = {
-  index: number;
   notes: string;
   heuristics: string[];
   severity: string;

@@ -14,10 +14,8 @@ const FilterActions:React.FC<FilterActionsInterface> = ({setFilterActionVisible,
   const ctx = useContext(ProjectContext); 
   const {filterData, setHeuristicFilter, setSeverityFilter} = ctx; 
   
-
   const containerRef = useRef<HTMLInputElement>(null); 
-  // const [severity, setSeverity] = useState(''); 
-  // const [heuristic, setHeuristic] = useState(''); 
+  
   useEffect(()=>{
     if(filterData.heuristic !== '' || filterData.severity !== ''){
       setFilterApply(true)
@@ -26,13 +24,6 @@ const FilterActions:React.FC<FilterActionsInterface> = ({setFilterActionVisible,
     }; 
   }, [filterData.heuristic, filterData.severity, setFilterApply]); 
    
-  // const onSetHeuristic:React.ChangeEventHandler<HTMLSelectElement> = (event) => {
-  //   setHeuristic(event.target.value); 
-  // }; 
-
-  // const onSetSeverity:React.ChangeEventHandler<HTMLSelectElement> = (event) => {
-  //   setSeverity(event.target.value);
-  // }; 
   const handleClickOutside = (event:any) => {
     if(containerRef && containerRef.current && containerRef.current && !containerRef.current.contains(event.target)){
       setFilterActionVisible(false); 

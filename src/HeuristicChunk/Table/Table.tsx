@@ -5,14 +5,30 @@ import Observation from '../../Observation/Observation';
 import ObservationForm from '../../Observation/ObservationForm/ObservationForm'; 
 import TableActions from './TableActions/TableActions'
 import styles from './Table.module.css'; 
+import {transformTypeToConstansCase} from '../../common/commonFunc'; 
+import {ObservationType} from '../../common/types'; 
 
 
 export default function Table() {
   // 🔥
   const ctx = useContext(ProjectContext); 
-  const {observationArray, createObservation, editObservation, deleteObservation} = ctx; 
+  const {observationArray, createObservation, editObservation, deleteObservation, filterData} = ctx; 
   const [showModal, setShowModal] = useState(false); 
-  
+
+  const condition = (elem:ObservationType) => {
+    return (elem.severity === transformTypeToConstansCase(filterData.severity) && elem.severity !== '') || elem.heuristics.includes(transformTypeToConstansCase(filterData.heuristic)); 
+  };
+  let dataArrayObservation = observationArray; 
+  if(filterData.heuristic === '' && filterData.severity === ''){
+    dataArrayObservation = observationArray;
+  }else{
+    dataArrayObservation = observationArray.filter(elem => condition(elem)); 
+  }; 
+
+  const observationsComponent = dataArrayObservation.map((elem, index) => (
+    <Observation onDeleteObservation={deleteObservation} index={index+1} onSetObservation={editObservation} key={Math.random()} observationData={elem}/>
+  ));
+
   return (
     <Fragment>
       {showModal && <ObservationForm onAddObservation={createObservation} setShowModal={setShowModal} />}
@@ -35,9 +51,7 @@ export default function Table() {
             </thead>
             <tbody>
               {/* Observations */}
-              {observationArray.map((elem, index) => (
-                <Observation onDeleteObservation={deleteObservation} index={index+1} onSetObservation={editObservation} key={Math.random()} observationData={elem}/>
-              ))}
+              {observationsComponent}
             </tbody>
           </table>
           <div className={styles["btn-container"]}>

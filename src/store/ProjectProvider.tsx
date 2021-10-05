@@ -1,20 +1,11 @@
 import React, {useState} from 'react'
 import {ObservationType} from '../common/types'; 
+
 import ProjectContext from "./project-context";
 
 const ProjectProvider = (props:any) => {
   const [filters, setFilters] = useState({heuristic:'', severity: ''}); 
-  const [observationsData, setObservationsData] = useState<ObservationType[]> ([
-    // {
-    //   index: 1,
-    //   notes: 'alo',
-    //   heuristics: ['HelpRecognizeAndRecoverFromErrors'],
-    //   severity: '4Major',
-    //   evidence: '', 
-    //   recommendations: 'be You', 
-    //   id: '3290820840293', 
-    // }
-  ]); 
+  const [observationsData, setObservationsData] = useState<ObservationType[]> ([]); 
   
   const createObservation = (observation:ObservationType) => {
     setObservationsData(prev => [...prev, observation ]); 

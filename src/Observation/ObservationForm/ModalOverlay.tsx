@@ -48,7 +48,6 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
     event.preventDefault();
     const formRef = event.currentTarget.elements;
     const currentObservation:ObservationType = {
-      index: 2,
       notes: formRef.notes.value,
       heuristics: heuristicSelectedArray.map((elem:string) => transformTypeToConstansCase(elem || '')),
       severity: transformTypeToConstansCase(formRef.severity.value) ,
