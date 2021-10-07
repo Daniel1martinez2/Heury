@@ -55,4 +55,13 @@ export interface ModalOverlayInterface {
 }; 
 
 
+export interface FormElements extends HTMLFormControlsCollection {
+  notes: HTMLTextAreaElement;
+  severity: any; 
+  solution: HTMLTextAreaElement;
+}
+export interface Form extends HTMLFormElement {
+  readonly elements: FormElements;
+}
+
 export type addObservation = (observation:ObservationType)=>void; 

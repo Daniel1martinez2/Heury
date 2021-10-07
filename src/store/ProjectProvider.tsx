@@ -13,9 +13,9 @@ const ProjectProvider = (props:any) => {
 
   const editObservation = ({newObservation, id}:{newObservation:ObservationType, id: string}) => {
     const currentObservation = observationsData.findIndex(elem => elem.id === id)
-    const newDummyData = observationsData; 
+    const newDummyData = [...observationsData]; 
     newDummyData[currentObservation] = {...newObservation}; 
-    setObservationsData([...newDummyData]); 
+    setObservationsData(newDummyData); 
   }; 
 
   const deleteObservation = (id:string) => {

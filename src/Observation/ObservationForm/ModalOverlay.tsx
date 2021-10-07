@@ -7,19 +7,23 @@ import CheckInput from './CheckInput';
 import Select from './Select'; 
 
 import {transformTypeToConstansCase} from '../../common/commonFunc'; 
-import {ObservationType, ModalOverlayInterface} from '../../common/types'; 
+import {ObservationType, ModalOverlayInterface, Form} from '../../common/types'; 
 import {heuristics,severityData, defaultImage} from '../../common/commonData'; 
+import FileInput from './FileInput';
 
 const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShowModal, editData, onSetObservation}) => {
   const notesDefault = editData? editData.notes : '';
   const recommendationsDefault = editData? editData.recommendations : '';
   const heuristicSelectedArrayDefault = editData? editData.heuristics.map((elem:string) => elem.split(' ').join('')) : [];
   const severityDefault = editData? editData.severity : '';
+  const evidenceDefault = editData? editData.evidence : '';
 
   const [notes, setNotes] = useState(notesDefault); 
   const [recommendations, setRecommendations] = useState(recommendationsDefault); 
   const [heuristicSelectedArray, setHeuristicSelectedArray] = useState(heuristicSelectedArrayDefault); 
-  const [severity, setSeverity] = useState(severityDefault); 
+  const [severity, setSeverity] = useState<string>(severityDefault);
+  const [evidence, setEvidence] = useState<string>(evidenceDefault);
+  
 
   const onSetNotes:React.ChangeEventHandler<HTMLTextAreaElement> = (event) => setNotes(event.target.value); 
   const onSetRecommendations:React.ChangeEventHandler<HTMLTextAreaElement> = (event) => setRecommendations(event.target.value); 
@@ -34,15 +38,6 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
     setHeuristicSelectedArray((prev:string[]) => [...prev, heuristics[currentCheckBox] ]); 
   }; 
 
-  interface FormElements extends HTMLFormControlsCollection {
-    notes: HTMLTextAreaElement;
-    severity: any; 
-    evidence: HTMLInputElement; 
-    solution: HTMLTextAreaElement;
-  }
-  interface Form extends HTMLFormElement {
-    readonly elements: FormElements;
-  }
 
   const handlerSubmit:React.FormEventHandler<Form>  = (event) => {
     event.preventDefault();
@@ -51,7 +46,7 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
       notes: formRef.notes.value,
       heuristics: heuristicSelectedArray.map((elem:string) => transformTypeToConstansCase(elem || '')),
       severity: transformTypeToConstansCase(formRef.severity.value) ,
-      evidence: /http/.test(formRef.evidence.value)? formRef.evidence.value : defaultImage , 
+      evidence: evidence, 
       recommendations: formRef.solution.value, 
       id:editData? editData.id : Math.random().toString(),
     }
@@ -60,10 +55,14 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
       setShowModal(false); 
       return; 
     }
-    onSetObservation({newObservation:currentObservation, id: editData.id})
+    onSetObservation({newObservation:currentObservation, id: editData.id}); 
     // hide the modal
     setShowModal(false); 
-  }; 
+  };
+  
+  const onSetEvidence = (img:string) => {
+    setEvidence(img); 
+  }
 
   const observationHeuristics = heuristicSelectedArray.map((elem:string) => (elem.charAt(0).toUpperCase() + elem.slice(1)).split(' ').join('') )
   
@@ -83,16 +82,15 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
               />
             ))}
         </div>
-        <label>
-          Evidence
-          <input name="evidence" type="text" />
-        </label>
-
+        <label>Evidence</label>
+        <FileInput prevEvidence={evidence} onSetEvidence={onSetEvidence}/>
         <label>
           Severity
             <Select active={false} className={styles['select']} selectData={severityData} value={severity} name="severity" onSetSelected={onSetSeverity} />
         </label>
+
         
+
         <label className={styles['textarea-label']}>
           Solution
           <textarea onChange={onSetRecommendations} value={recommendations} name="solution">{recommendations}</textarea>

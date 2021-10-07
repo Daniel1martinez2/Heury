@@ -40,7 +40,9 @@
   height:100%; 
 }
 .clickable:hover{
-  border: 1px solid #37394b; 
+  outline-offset: 5px;
+  outline:1px solid #37394b;
+  border-radius: 2px;
 }
 
 .hidden{

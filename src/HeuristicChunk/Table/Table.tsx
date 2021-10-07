@@ -16,8 +16,15 @@ export default function Table() {
   const [showModal, setShowModal] = useState(false); 
 
   const condition = (elem:ObservationType) => {
-    return (elem.severity === transformTypeToConstansCase(filterData.severity) && elem.severity !== '') || elem.heuristics.includes(transformTypeToConstansCase(filterData.heuristic)); 
+    if (filterData.severity !== '' && filterData.heuristic !== ''){
+      return (elem.severity === transformTypeToConstansCase(filterData.severity) && elem.severity !== '') && elem.heuristics.includes(transformTypeToConstansCase(filterData.heuristic)); 
+    }else if(filterData.severity !== '' && filterData.heuristic === '' ){
+      return (elem.severity === transformTypeToConstansCase(filterData.severity) && elem.severity !== '');  
+    }else{
+      return elem.heuristics.includes(transformTypeToConstansCase(filterData.heuristic)); 
+    }
   };
+  
   let dataArrayObservation = observationArray; 
   if(filterData.heuristic === '' && filterData.severity === ''){
     dataArrayObservation = observationArray;

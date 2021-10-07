@@ -45,9 +45,10 @@ const Observation:React.FC<ObservationInterface> = ({observationData, onSetObser
         </td>
         <td style={{backgroundColor: setSeverityColor(observationData.severity) }} className={styles["severity"]}>{observationData.severity}</td>
         <td>
-          <img
+          {observationData.evidence && <img
             src={observationData.evidence}
-            alt="monkey"/>
+            alt="evidence"
+          />}
         </td>
         <td>
           <p>{observationData.recommendations}</p>
