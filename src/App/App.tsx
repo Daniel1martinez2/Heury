@@ -3,7 +3,7 @@ import ProjectProvider from '../store/ProjectProvider';
 function App() {
   return (
     <div className="App">
-      <ProjectProvider>
+      <ProjectProvider> 
         <Project/>
       </ProjectProvider>
     </div>

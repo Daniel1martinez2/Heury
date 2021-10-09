@@ -4,20 +4,30 @@
   width: 100%;  
   height: 39.5px;  
   overflow: hidden;
-  background-color: #262837;
-  border: 2px solid #4A4C5F;
+  /* background-color: #262837; */
+  /* border: 2px solid #4A4C5F; */
+  border: 1px solid #FAFAFE;
+  border-radius: 4px;
+}
+.btn-container:hover{
+  border: 1px solid #FF7451;
+  color: #FF7451; 
 }
 .btn-container span{
+
   pointer-events: none;
   position: absolute;
   top:50%; 
-  left:10px; 
-  transform:translate(0, -50%); 
+  left:50%; 
+  /* left:10px;  */
+  transform:translate(-50%, -50%); 
 }
 .file-input{
+  
   opacity: 0;
   width: 100%; 
   height: 100%; 
+  position: relative;
 }
 
 .thumb{
@@ -38,6 +48,10 @@
   position: absolute; 
   right: 0; 
 }
-.image-container svg path{
+.image-container svg:hover path{
+
   fill: #FF7451;
+}
+.image-container svg path{
+  fill: #FAFAFE;
 }

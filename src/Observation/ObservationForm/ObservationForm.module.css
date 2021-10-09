@@ -7,9 +7,12 @@
   height: 100vh;
   z-index: 20;
   background-color: rgba(22, 21, 32, 0.75);
+  animation: appear .2s ease-in-out;
   
 }
 .form{
+  animation: appear .3s ease-in-out;
+  animation: grow .3s ease;
   color: white; 
   display: flex;
   flex-direction: column;
@@ -24,10 +27,30 @@
   position: fixed;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform:  translate(-50%,-50%) scale(1);
   z-index: 30;
   max-height: 500px; 
   overflow: auto;
+  
+  
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform:  translate(-50%,-50%) scale(0.7);
+  }
+  100% {
+    transform:  translate(-50%,-50%) scale(1);
+  }
 }
 
 .form label:not(.textarea-label){
@@ -36,8 +59,6 @@
   gap: .5em; 
   /* margin-bottom: .5em; */
 }
-
-
 
 .form label input, textarea{
   border: none; 

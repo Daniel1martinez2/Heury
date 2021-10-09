@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, useContext} from 'react'; 
+import React, {useState, useRef, useEffect, useContext, useCallback} from 'react'; 
 import ProjectContext from '../../../store/project-context'; 
 import '../../../index.css'; 
 import styles from './FilterTable.module.css'; 
@@ -24,18 +24,18 @@ const FilterActions:React.FC<FilterActionsInterface> = ({setFilterActionVisible,
     }; 
   }, [filterData.heuristic, filterData.severity, setFilterApply]); 
    
-  const handleClickOutside = (event:any) => {
+  const handleClickOutside = useCallback ((event:any) => {
     if(containerRef && containerRef.current && containerRef.current && !containerRef.current.contains(event.target)){
       setFilterActionVisible(false); 
     }
-  }; 
+  }, [setFilterActionVisible]); 
 
   useEffect(()=>{
     document.addEventListener('click', handleClickOutside, true);
     return () => {
       document.removeEventListener('click', handleClickOutside, true);
     };
-  }, []);
+  }, [handleClickOutside]);
   
   return(
     <div ref={containerRef} className={styles['filter-actions']}>

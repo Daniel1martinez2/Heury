@@ -8,7 +8,7 @@ import Select from './Select';
 
 import {transformTypeToConstansCase} from '../../common/commonFunc'; 
 import {ObservationType, ModalOverlayInterface, Form} from '../../common/types'; 
-import {heuristics,severityData, defaultImage} from '../../common/commonData'; 
+import {heuristics,severityData} from '../../common/commonData'; 
 import FileInput from './FileInput';
 
 const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShowModal, editData, onSetObservation}) => {
@@ -24,7 +24,6 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
   const [severity, setSeverity] = useState<string>(severityDefault);
   const [evidence, setEvidence] = useState<string>(evidenceDefault);
   
-
   const onSetNotes:React.ChangeEventHandler<HTMLTextAreaElement> = (event) => setNotes(event.target.value); 
   const onSetRecommendations:React.ChangeEventHandler<HTMLTextAreaElement> = (event) => setRecommendations(event.target.value); 
   const onSetSeverity:React.ChangeEventHandler<HTMLSelectElement> = (event) => setSeverity(event.target.value); 
@@ -86,10 +85,8 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
         <FileInput prevEvidence={evidence} onSetEvidence={onSetEvidence}/>
         <label>
           Severity
-            <Select active={false} className={styles['select']} selectData={severityData} value={severity} name="severity" onSetSelected={onSetSeverity} />
+            <Select defaultValue="Select One" active={false} className={styles['select']} selectData={severityData} value={severity} name="severity" onSetSelected={onSetSeverity} />
         </label>
-
-        
 
         <label className={styles['textarea-label']}>
           Solution

@@ -8,13 +8,14 @@ export interface SelectInterface {
   name: string; 
   className?: string;
   active: boolean;
+  defaultValue?: string | null
 }
 
-const Select: React.FC<SelectInterface> = ({value,onSetSelected, selectData, name, className, active}) => {
+const Select: React.FC<SelectInterface> = ({value,onSetSelected, selectData, name, className, active, defaultValue}) => {
   
   return (
     <select style={{color: active ? '#FF7451' : '#FAFAFE'}} className={className || ''} onChange={onSetSelected} value={value.split(' ').join('')} name={name}>
-      <option value="">All</option>
+      <option value="">{defaultValue || 'All'}</option>
       {selectData.map(elem => <option key={Math.random().toString() } value={elem}>{transformTypeToConstansCase(elem)}</option>)}
     </select>
   )
