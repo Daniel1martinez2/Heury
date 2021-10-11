@@ -1,14 +1,17 @@
 import React from "react";
 
-import { ObservationType } from "../common/types";
+import { ObservationType, projectUserType } from "../common/types";
 
 type editObservationType = {
   newObservation: ObservationType;
   id: string;
 }
 
+
+
 type dataContext = {
   observationArray: ObservationType[];
+  projectUsers: projectUserType[];
   filterData: {heuristic: string, severity: string};
   createObservation: (observation: ObservationType) => void;
   editObservation: ({newObservation, id}:editObservationType ) => void;
@@ -18,6 +21,7 @@ type dataContext = {
 };
 
 const ProjectContext = React.createContext<dataContext>({
+  projectUsers:[],
   observationArray: [],
   filterData: {heuristic:'', severity: ''},
   deleteObservation: () => {},

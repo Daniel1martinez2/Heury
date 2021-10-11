@@ -37,7 +37,8 @@ const ProjectProvider = (props:any) => {
     editObservation, 
     createObservation, 
     setHeuristicFilter,
-    setSeverityFilter
+    setSeverityFilter,
+    projectUsers:[]
   }; 
   return(
     <ProjectContext.Provider value={projectContextData}>

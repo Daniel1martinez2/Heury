@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-
+import {motion} from 'framer-motion'; 
 import styles from './ObservationForm.module.css'; 
 import '../../index.css';
 
@@ -92,7 +92,13 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
           Solution
           <textarea onChange={onSetRecommendations} value={recommendations} name="solution">{recommendations}</textarea>
         </label>
-        <button className={`reset-btn ${styles['btn']}`}>{editData? 'Save Changes' : 'Create Observation'}</button>
+        <motion.button 
+          className={`reset-btn ${styles['btn']}`}
+          whileHover={{scale: 1.1}}
+          whileTap={{scale: 0.9}}
+        >
+          {editData? 'Save Changes' : 'Create Observation'}
+        </motion.button>
       </form>
   ); 
 }

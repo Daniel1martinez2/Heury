@@ -1,0 +1,33 @@
+.user-project-list-item{
+  cursor: pointer;
+  padding: .5em 1em ; 
+  display: flex;
+  align-items: center; 
+  min-width: 300px;
+  justify-content: space-between;
+  gap: 2em;
+}
+.user-project-list-item span{
+  color: #7F7D8E; 
+  font-size: 18px;
+}
+.user-project-list-item:hover{
+  background-color: #353748;
+}
+.user-project-list-item span{
+  font-size: 14px; 
+  text-transform: capitalize;
+}
+
+
+.user-project-list-item h1{
+  font-weight: 400;
+  font-size: 16px;
+  width: max-content;
+}
+
+.user-info{
+  gap: 1em;
+  display: flex;
+  align-items: center; 
+}

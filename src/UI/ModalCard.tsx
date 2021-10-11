@@ -1,7 +1,14 @@
-import React from 'react'
+import React from 'react'; 
 
 import styles from './ModalCard.module.css'; 
-const ModalCard = ({children, className}: {children: JSX.Element, className?: string}) => {
+
+interface ModalCardInterface {
+  children?: JSX.Element; 
+  className?: string; 
+
+}
+
+const ModalCard: React.FC<ModalCardInterface> = ({children, className}) => {
   return (
     <div  className={`${styles['modal-card']} ${className}`}>
       {children}

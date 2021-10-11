@@ -1,4 +1,17 @@
 .modal-card{
   border-radius: 8px;
   padding: 1em; 
+  animation: appear .2s ease-in-out;
+  overflow: hidden; 
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    scale: 0; 
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
 }

@@ -24,6 +24,7 @@
   font-size: 18px; 
   cursor: pointer;
   outline: none;
+  /* width: fit-content;  */
   /* background-color: rgba(255, 255, 0, 0.4); */
 }
 

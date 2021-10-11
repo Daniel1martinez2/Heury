@@ -2,6 +2,9 @@
   display: flex;
   gap: 12px;
 }
+.page-header__nav > *{
+  text-decoration: none;
+}
 
 .page-header__nav h1{
   font-weight: 400;

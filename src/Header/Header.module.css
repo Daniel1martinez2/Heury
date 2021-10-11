@@ -15,6 +15,7 @@
   color: white;
   padding: 2em;
   display: flex;
+  align-items: center;
   gap: 1em;
   justify-content: space-between;
   flex-grow: 1;

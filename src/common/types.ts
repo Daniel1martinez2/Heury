@@ -65,3 +65,9 @@ export interface Form extends HTMLFormElement {
 }
 
 export type addObservation = (observation:ObservationType)=>void; 
+
+export type projectUserType = {
+  role: 'owner' | 'collaborator';
+  profileImg?: string;
+  name: string;
+}

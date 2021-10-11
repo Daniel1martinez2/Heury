@@ -1,9 +1,12 @@
 import React, {Fragment} from 'react'
 import Table from './Table/Table'; 
+import { Route } from 'react-router-dom';
 export default function HeuristicChunk() {
   return (
     <Fragment>
-      <Table/>
+      <Route path="/table">
+        <Table/>
+      </Route>
     </Fragment>
   )
 }
