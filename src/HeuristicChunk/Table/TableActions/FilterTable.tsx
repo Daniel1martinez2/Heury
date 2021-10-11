@@ -3,7 +3,7 @@ import ProjectContext from '../../../store/project-context';
 import '../../../index.css'; 
 import styles from './FilterTable.module.css'; 
 import FilterActions from './FilterActions'; 
-import {motion, AnimatePresence} from 'framer-motion'; 
+import {AnimatePresence} from 'framer-motion'; 
 
 
 

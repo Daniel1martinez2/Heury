@@ -11,7 +11,6 @@
 .btn svg{
   height: 18px; 
   width: auto; 
-  /* background-color: red; */
 }
 .btn span{
   color: #7F828F; 
@@ -28,7 +27,6 @@
   position: relative; 
   width: fit-content; 
   
-  /* background-color: red; */
 }
 .filter-actions{
   

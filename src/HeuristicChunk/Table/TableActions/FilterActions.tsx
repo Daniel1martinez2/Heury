@@ -1,9 +1,10 @@
-import React, {useRef, useEffect, useContext, useCallback} from 'react'; 
+import React, {useContext} from 'react'; 
 import ProjectContext from '../../../store/project-context'; 
 import styles from './FilterTable.module.css'; 
 import Select from '../../../Observation/ObservationForm/Select'; 
-import {severityData,heuristics } from '../../../common/commonData';
-import {motion, AnimatePresence} from 'framer-motion'; 
+import {severityData,heuristics, dropIn} from '../../../common/commonData';
+import {motion} from 'framer-motion'; 
+import useClickOutside from '../../../hooks/use-clickOutside'; 
 
 interface FilterActionsInterface {
   setFilterActionVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,51 +13,8 @@ interface FilterActionsInterface {
 const FilterActions:React.FC<FilterActionsInterface> = ({setFilterActionVisible}) => {  
   const ctx = useContext(ProjectContext); 
   const {filterData, setHeuristicFilter, setSeverityFilter} = ctx; 
-  
-  const containerRef = useRef<HTMLDivElement>(null); 
-   
-  const handleClickOutside = useCallback((event) => {
-    if(containerRef && containerRef.current && containerRef.current && !containerRef.current.contains(event.target)){
-      setFilterActionVisible(false); 
-    }
-  }, [setFilterActionVisible]); 
+  const containerRef = useClickOutside(setFilterActionVisible); 
 
-  useEffect(()=>{
-    document.addEventListener('click', handleClickOutside, true);
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  }, [handleClickOutside]);
-
-  const dropIn = {
-    hidden: {
-      y: '-100%',
-      opacity: 0
-    }, 
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.2,
-        type: 'ease-in',
-        damping: 0,
-        stiffness: 0,
-      }
-    },
-
-    exit: {
-      y: '-100%',
-      opacity: 0,
-      transition: {
-        duration: 0.2,
-        type: 'ease-in',
-        damping: 0,
-        stiffness: 0,
-      }
-    }
-
-  }
-  
   return(
     <motion.div 
       ref={containerRef} 
