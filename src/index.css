@@ -7,6 +7,8 @@
 body{
   background: #1F1D2C;
   font-family: 'Lato', sans-serif;
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 .reset-btn{

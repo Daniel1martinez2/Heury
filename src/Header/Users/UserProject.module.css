@@ -23,23 +23,10 @@
   background-color: #262837;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 18px 10px 56px 10px rgba(2, 2, 3, 0.86);
-  -webkit-box-shadow: 18px 10px 56px 10px rgba(16, 14, 27, 0.86);
-  -moz-box-shadow: 18px 10px 56px 10px rgba(0, 0, 0, 0.86);
-  animation: appear .2s ease-in-out;
+  box-shadow: 18px 10px 56px 10px rgba(19, 19, 34, 0.86);
+  -webkit-box-shadow: 18px 10px 56px 10px rgba(19, 19, 34, 0.86);
+  -moz-box-shadow: 18px 10px 56px 10px rgba(19, 19, 34, 0.86);
 }
-
-@keyframes appear {
-  0% {
-    transform: translate(100%, 0);
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
-}
-
 
 .list{
   display: flex;

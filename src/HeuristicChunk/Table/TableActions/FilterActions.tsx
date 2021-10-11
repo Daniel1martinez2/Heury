@@ -3,6 +3,7 @@ import ProjectContext from '../../../store/project-context';
 import styles from './FilterTable.module.css'; 
 import Select from '../../../Observation/ObservationForm/Select'; 
 import {severityData,heuristics } from '../../../common/commonData';
+import {motion, AnimatePresence} from 'framer-motion'; 
 
 interface FilterActionsInterface {
   setFilterActionVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,9 +27,45 @@ const FilterActions:React.FC<FilterActionsInterface> = ({setFilterActionVisible}
       document.removeEventListener('click', handleClickOutside, true);
     };
   }, [handleClickOutside]);
+
+  const dropIn = {
+    hidden: {
+      y: '-100%',
+      opacity: 0
+    }, 
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.2,
+        type: 'ease-in',
+        damping: 0,
+        stiffness: 0,
+      }
+    },
+
+    exit: {
+      y: '-100%',
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+        type: 'ease-in',
+        damping: 0,
+        stiffness: 0,
+      }
+    }
+
+  }
   
   return(
-    <div ref={containerRef} className={styles['filter-actions']}>
+    <motion.div 
+      ref={containerRef} 
+      className={styles['filter-actions']}
+      variants={dropIn}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <label  className={styles['heuristic']}>
         <span>Heuristic</span>
         <Select active ={filterData.heuristic !== ''} name= "heuristicFilter" selectData={heuristics} value={filterData.heuristic} onSetSelected={setHeuristicFilter} />
@@ -37,7 +74,7 @@ const FilterActions:React.FC<FilterActionsInterface> = ({setFilterActionVisible}
         <span>Severity</span>
         <Select active ={filterData.severity !== ''} name="severityFilter" selectData={severityData} value={filterData.severity} onSetSelected={setSeverityFilter} />
       </label>
-    </div>
+    </motion.div>
   );
 }
 

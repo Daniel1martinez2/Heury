@@ -1,10 +1,10 @@
-import React, {useRef, useEffect, useContext, useCallback, useState} from 'react';
+import React, {useRef, useEffect, useCallback, useState} from 'react';
 import UserPP from '../../UI/UserPP';
 import styles from './UserProject.module.css';
 import '../../index.css'
 import {projectUserType} from '../../common/types'; 
 import UserProjectListItem from '../../HeuristicChunk/Table/TableActions/UserProjectListItem/UserProjectListItem';
-
+import {motion, AnimatePresence} from 'framer-motion'; 
 
 
 const testData:projectUserType[] = [
@@ -45,10 +45,43 @@ const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisibl
     };
   }, [handleClickOutside]);
 
+  const dropIn = {
+    hidden: {
+      x: '100%',
+      opacity: 0
+    }, 
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.2,
+        type: 'ease-in',
+        damping: 0,
+        stiffness: 0,
+      }
+    },
+
+    exit: {
+      x: '100%',
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+        type: 'ease-in',
+        damping: 0,
+        stiffness: 0,
+      }
+    }
+
+  }
+
   return(
-    <div 
+    <motion.div 
       className={styles['project-users-info']}
       ref={containerRef}
+      variants={dropIn}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
     >
       <React.Fragment>
         <div className={styles['list']}>
@@ -56,7 +89,7 @@ const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisibl
         </div>
         <button className={`reset-btn ${styles['btn']}`}>Invite Evaluators</button>
       </React.Fragment>
-    </div>
+    </motion.div>
   )
 }
 
@@ -71,7 +104,12 @@ const UsersProject = () => {
         <span>+2</span>
         <UserPP imgSource="https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9iMDVhNWNjMDY1M2FiNDNjNzU0NjY1ZmQxOWNmNzU3MT9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.AUtQ0KIK-lJbX9MAPyq_8rTlkO4_CiuhTGbmyvuJJ40"/>      
       </div>
-      {modalVisible && <UsersProjectModal setModalVisible={setModalVisible} />}
+      <AnimatePresence
+        initial={false}
+        exitBeforeEnter={true}
+      >
+        {modalVisible && <UsersProjectModal setModalVisible={setModalVisible} />}
+      </AnimatePresence>
     </div>
   )
 }

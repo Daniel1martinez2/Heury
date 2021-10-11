@@ -31,7 +31,7 @@
   /* background-color: red; */
 }
 .filter-actions{
-  animation: appear .2s ease-in-out;
+  
   z-index: 10;
   top: 100%; 
   left: 0; 
@@ -46,16 +46,7 @@
   -webkit-box-shadow: 18px 10px 56px 10px rgba(16, 14, 27, 0.9);
   -moz-box-shadow: 18px 10px 56px 10px rgba(0, 0, 0, 0.9);
 }
-@keyframes appear {
-  0% {
-    transform: translate(0, -100%);
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
-}
+
 .filter-actions label select{
   display: grid;
   appearance: none;

@@ -3,7 +3,7 @@ import ProjectContext from '../../../store/project-context';
 import '../../../index.css'; 
 import styles from './FilterTable.module.css'; 
 import FilterActions from './FilterActions'; 
-
+import {motion, AnimatePresence} from 'framer-motion'; 
 
 
 
@@ -24,7 +24,12 @@ const FilterTable = () => {
         </svg>
         <span>Filters</span>
       </button>
-      {filterActionVisible && <FilterActions  setFilterActionVisible={setFilterActionVisible}  />}
+      <AnimatePresence
+        initial={false}
+        exitBeforeEnter={true}
+      >
+        {filterActionVisible && <FilterActions  setFilterActionVisible={setFilterActionVisible}  />}
+      </AnimatePresence>
     </div>
   )
 }
