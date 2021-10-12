@@ -4,19 +4,23 @@ import ModalCard from '../UI/ModalCard';
 import ObservationForm from './ObservationForm/ObservationForm'; 
 import '../index.css';
 import {ObservationInterface} from '../common/types'; 
-import {severityColor} from '../common/commonData'; 
-import {normalizeText} from '../common/commonFunc'; 
+
+import {normalizeText, setSeverityColor} from '../common/commonFunc'; 
+import {AnimatePresence} from 'framer-motion'; 
 
 const Observation:React.FC<ObservationInterface> = ({observationData, onSetObservation, index,onDeleteObservation}) =>{
   const [actionsActive, setActionsActive] = useState(true); 
   const [showModal, setShowModal] = useState(false); 
 
-  const setSeverityColor = (severity:string) => {
-    return severityColor[parseInt(severity.split(' ')[0])-1]; 
-  }
+ 
   return (
     <Fragment>
-      {showModal && <ObservationForm onSetObservation={onSetObservation} editData={observationData} setShowModal={setShowModal} />}
+      <AnimatePresence
+        initial={false}
+        exitBeforeEnter={true}
+      >
+        {showModal && <ObservationForm onSetObservation={onSetObservation} editData={observationData} setShowModal={setShowModal} />}
+      </AnimatePresence>
       <tr>
         <th className={styles["t-header"]} >
           <h3>{index}</h3>

@@ -7,8 +7,6 @@ import UserProjectListItem from '../../HeuristicChunk/Table/TableActions/UserPro
 import {motion, AnimatePresence} from 'framer-motion'; 
 import useClickOutside from '../../hooks/use-clickOutside'; 
 
-
-
 interface UsersProjectModalInterface {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }

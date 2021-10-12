@@ -7,6 +7,7 @@ import TableActions from './TableActions/TableActions'
 import styles from './Table.module.css'; 
 import {transformTypeToConstansCase} from '../../common/commonFunc'; 
 import {ObservationType} from '../../common/types'; 
+import {AnimatePresence} from 'framer-motion'; 
 
 
 export default function Table() {
@@ -38,7 +39,12 @@ export default function Table() {
 
   return (
     <Fragment>
-      {showModal && <ObservationForm onAddObservation={createObservation} setShowModal={setShowModal} />}
+      <AnimatePresence
+        initial={false}
+        exitBeforeEnter={true}
+      >
+        {showModal && <ObservationForm onAddObservation={createObservation} setShowModal={setShowModal} />}
+      </AnimatePresence>
       {/* Actions */}
       <TableActions className={styles["filter"]}/>
       {/* Table */}

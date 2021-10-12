@@ -8,7 +8,7 @@ import Select from './Select';
 
 import {transformTypeToConstansCase} from '../../common/commonFunc'; 
 import {ObservationType, ModalOverlayInterface, Form} from '../../common/types'; 
-import {heuristics,severityData} from '../../common/commonData'; 
+import {heuristics,severityData, appear} from '../../common/commonData'; 
 import FileInput from './FileInput';
 
 const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShowModal, editData, onSetObservation}) => {
@@ -66,40 +66,47 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
   const observationHeuristics = heuristicSelectedArray.map((elem:string) => (elem.charAt(0).toUpperCase() + elem.slice(1)).split(' ').join('') )
   
   return(
-    <form className={styles['form']} onSubmit={handlerSubmit}>
-        <label className={styles['textarea-label']}>
-          Notes
-          <textarea onChange={onSetNotes} value={notes} name="notes">{notes}</textarea>
-        </label>
-        <div className={styles['check-box']}>
-          {heuristics.map(checkBoxElem => (
-            <CheckInput 
-              key={Math.random().toString()} 
-              onEditCheckBoxArray={onEditCheckBoxArray}
-              validation={observationHeuristics.includes(checkBoxElem)}
-              name={checkBoxElem} 
-              />
-            ))}
-        </div>
-        <label>Evidence</label>
-        <FileInput prevEvidence={evidence} onSetEvidence={onSetEvidence}/>
-        <label>
-          Severity
-            <Select defaultValue="Select One" active={false} className={styles['select']} selectData={severityData} value={severity} name="severity" onSetSelected={onSetSeverity} />
-        </label>
+    <motion.form 
+      className={styles['form']} 
+      onSubmit={handlerSubmit}
+      variants={appear}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
+      <label className={styles['textarea-label']}>
+        Notes
+        <textarea onChange={onSetNotes} value={notes} name="notes">{notes}</textarea>
+      </label>
+      <div className={styles['check-box']}>
+        {heuristics.map(checkBoxElem => (
+          <CheckInput 
+            key={Math.random().toString()} 
+            onEditCheckBoxArray={onEditCheckBoxArray}
+            validation={observationHeuristics.includes(checkBoxElem)}
+            name={checkBoxElem} 
+            />
+          ))}
+      </div>
+      <label>Evidence</label>
+      <FileInput prevEvidence={evidence} onSetEvidence={onSetEvidence}/>
+      <label>
+        Severity
+          <Select defaultValue="Select One" active={false} className={styles['select']} selectData={severityData} value={severity} name="severity" onSetSelected={onSetSeverity} />
+      </label>
 
-        <label className={styles['textarea-label']}>
-          Solution
-          <textarea onChange={onSetRecommendations} value={recommendations} name="solution">{recommendations}</textarea>
-        </label>
-        <motion.button 
-          className={`reset-btn ${styles['btn']}`}
-          whileHover={{scale: 1.1}}
-          whileTap={{scale: 0.9}}
-        >
-          {editData? 'Save Changes' : 'Create Observation'}
-        </motion.button>
-      </form>
+      <label className={styles['textarea-label']}>
+        Solution
+        <textarea onChange={onSetRecommendations} value={recommendations} name="solution">{recommendations}</textarea>
+      </label>
+      <motion.button 
+        className={`reset-btn ${styles['btn']}`}
+        whileHover={{scale: 1.1}}
+        whileTap={{scale: 0.9}}
+      >
+        {editData? 'Save Changes' : 'Create Observation'}
+      </motion.button>
+    </motion.form>
   ); 
 }
 export default ModalOverlay

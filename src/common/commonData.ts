@@ -102,5 +102,29 @@ export const dropIn = {
       stiffness: 0,
     }
   }
+}
 
+export const appear = {
+  hidden: {
+    opacity: 0
+  }, 
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      type: 'ease-in-out',
+      damping: 0,
+      stiffness: 0,
+    }
+  },
+
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+      type: 'ease-in-out',
+      damping: 0,
+      stiffness: 0,
+    }
+  }
 }

@@ -7,12 +7,12 @@
   height: 100vh;
   z-index: 20;
   background-color: rgba(22, 21, 32, 0.75);
-  animation: appear .2s ease-in-out;
+  /* animation: appear .2s ease-in-out; */
   
 }
 .form{
-  animation: appear .3s ease-in-out;
-  animation: grow .3s ease;
+  /* animation: appear .3s ease-in-out; */
+  /* animation: grow .3s ease; */
   color: white; 
   display: flex;
   flex-direction: column;
