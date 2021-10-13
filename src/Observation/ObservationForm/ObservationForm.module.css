@@ -35,15 +35,6 @@
   
 }
 
-@keyframes appear {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 @keyframes grow {
   0% {
     transform:  translate(-50%,-50%) scale(0.7);
@@ -153,6 +144,7 @@
   padding:.5em;
   border-radius: 4px;
   font-weight: bold;
+  margin-top: 1em;
 }
 
 .select{

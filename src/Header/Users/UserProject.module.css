@@ -23,9 +23,9 @@
   background-color: #262837;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 18px 10px 56px 10px rgba(19, 19, 34, 0.86);
-  -webkit-box-shadow: 18px 10px 56px 10px rgba(19, 19, 34, 0.86);
-  -moz-box-shadow: 18px 10px 56px 10px rgba(19, 19, 34, 0.86);
+  box-shadow: 18px 10px 56px 10px rgba(2, 2, 3, 0.7);
+  -webkit-box-shadow: 18px 10px 56px 10px rgba(16, 14, 27, 0.7);
+  -moz-box-shadow: 18px 10px 56px 10px rgba(0, 0, 0, 0.7);
 }
 
 .list{

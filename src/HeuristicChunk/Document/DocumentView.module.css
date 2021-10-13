@@ -67,6 +67,9 @@
 
 .heuristic-container{
   padding-left: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: .3em; 
 }
 
 .image{
