@@ -10,7 +10,7 @@ const DocumentArea = () => {
   return (
     <div className={styles['area']}>
       {observationArray.length === 0 && <EmptyDocument/>}
-      {observationArray.map((observation, index) => <DocumentView observationData={observation} index={index}/>)}
+      {observationArray.map((observation, index) => <DocumentView key={observation.id} observationData={observation} index={index}/>)}
     </div>
   )
 }

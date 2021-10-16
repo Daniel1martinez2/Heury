@@ -5,17 +5,16 @@ interface FileInputInterface {
   prevEvidence: string | null; 
 }; 
 
-
-
 const FileInput:React.FC<FileInputInterface> = ({onSetEvidence, prevEvidence}) => {
 
-  const handleFileInput:React.ChangeEventHandler<HTMLInputElement> = (event:any) => {
-    let file = event.currentTarget.files[0]; 
+  const handleFileInput:React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const file: File = (event as any).currentTarget.files[0]; 
     console.log(file, '🔥');
-    let reader = new FileReader();
+    const reader = new FileReader();
     reader.readAsDataURL(file)
-    reader.onload = (e:any) => {
-      onSetEvidence(e.target.result)
+
+    reader.onload = (e) => {
+      onSetEvidence((e as any).target.result)
     }
   }; 
 

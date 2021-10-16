@@ -1,7 +1,11 @@
 .container{
   cursor: pointer;
-  
   position: relative;
+}
+
+.container img:nth-child(2){
+  width: 20px;
+  height: 20px;
 }
 
 .container-main{

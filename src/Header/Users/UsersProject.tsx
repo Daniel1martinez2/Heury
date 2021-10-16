@@ -1,17 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import ProjectContext from '../../store/project-context';
 import UserPP from '../../UI/UserPP';
 import styles from './UserProject.module.css';
 import '../../index.css'
-import {slideIn, testUsers} from '../../common/commonData'; 
+import {slideIn} from '../../common/commonData'; 
 import UserProjectListItem from '../../HeuristicChunk/Table/TableActions/UserProjectListItem/UserProjectListItem';
 import {motion, AnimatePresence} from 'framer-motion'; 
 import useClickOutside from '../../hooks/use-clickOutside'; 
+import { projectUserType } from '../../common/types';
 
 interface UsersProjectModalInterface {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  usersArray: projectUserType[];
 }
 
-const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisible}) => {
+const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisible, usersArray}) => {
   const containerRef = useClickOutside(setModalVisible); 
   
   return(
@@ -25,7 +28,7 @@ const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisibl
     >
       <React.Fragment>
         <div className={styles['list']}>
-          {testUsers.map(elem => <UserProjectListItem key={Math.random()} data={elem}/> )}
+          {usersArray.map(elem => <UserProjectListItem key={elem.id} data={elem}/> )}
         </div>
         <button className={`reset-btn ${styles['btn']}`}>Invite Evaluators</button>
       </React.Fragment>
@@ -34,21 +37,23 @@ const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisibl
 }
 
 const UsersProject = () => {
-  const [modalVisible, setModalVisible] = useState<boolean>(false); 
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const {projectUsers} = useContext(ProjectContext); 
+  
   return (
     <div className={styles['container']}>
       <div 
         className={styles['container-main']}
         onClick={() => setModalVisible(true)}
       >
-        <span>+2</span>
+        {projectUsers.length !== 0 && <span>+{projectUsers.length-1}</span>}
         <UserPP imgSource="https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9iMDVhNWNjMDY1M2FiNDNjNzU0NjY1ZmQxOWNmNzU3MT9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.AUtQ0KIK-lJbX9MAPyq_8rTlkO4_CiuhTGbmyvuJJ40"/>      
       </div>
       <AnimatePresence
         initial={false}
         exitBeforeEnter={true}
       >
-        {modalVisible && <UsersProjectModal setModalVisible={setModalVisible} />}
+        {modalVisible && <UsersProjectModal usersArray={projectUsers} setModalVisible={setModalVisible} />}
       </AnimatePresence>
     </div>
   )

@@ -9,6 +9,7 @@
 .page-header__nav h1{
   font-weight: 400;
   color: #7F828F; 
+  font-size: 16px;
 }
 .page-header__nav > *{
   display: flex;

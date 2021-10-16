@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {ObservationType} from '../common/types'; 
-
+import {testUsers} from '../common/commonData'; 
 import ProjectContext from "./project-context";
 
 const ProjectProvider = (props:any) => {
@@ -38,7 +38,7 @@ const ProjectProvider = (props:any) => {
     createObservation, 
     setHeuristicFilter,
     setSeverityFilter,
-    projectUsers:[]
+    projectUsers: testUsers
   }; 
   return(
     <ProjectContext.Provider value={projectContextData}>

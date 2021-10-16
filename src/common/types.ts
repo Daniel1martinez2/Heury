@@ -70,4 +70,5 @@ export type projectUserType = {
   role: 'owner' | 'collaborator';
   profileImg?: string;
   name: string;
+  id: string;
 }

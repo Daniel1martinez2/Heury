@@ -9,7 +9,6 @@ const Header = () => {
       <div className={styles['page-header']}>
         <Nav/>
         <Visualization/>
-        {/* <h1>+2</h1> */}
         <UsersProject/>
       </div>
   ); 
