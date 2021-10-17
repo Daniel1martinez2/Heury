@@ -1,4 +1,4 @@
-import {projectUserType} from './types'; 
+import {ProjectUserType} from './types'; 
 export const heuristics = [
   'VisibilityOfSystemStatus',
   'MatchBetweenSystemAndTheRealWorld',
@@ -28,7 +28,7 @@ export const severityColor =[
 
 export const defaultImage = 'https://daniel1martinez2.github.io/heuristic_example/UX%20Check%20Results%20664902979aa943b9b76c765bff7dde7a/Untitled%209.png'; 
 
-export const testUsers:projectUserType[] = [
+export const testUsers:ProjectUserType[] = [
   {
     role: 'owner',
     profileImg: 'https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9iMDVhNWNjMDY1M2FiNDNjNzU0NjY1ZmQxOWNmNzU3MT9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.AUtQ0KIK-lJbX9MAPyq_8rTlkO4_CiuhTGbmyvuJJ40',

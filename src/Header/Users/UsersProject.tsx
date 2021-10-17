@@ -3,38 +3,8 @@ import ProjectContext from '../../store/project-context';
 import UserPP from '../../UI/UserPP';
 import styles from './UserProject.module.css';
 import '../../index.css'
-import {slideIn} from '../../common/commonData'; 
-import UserProjectListItem from '../../HeuristicChunk/Table/TableActions/UserProjectListItem/UserProjectListItem';
-import {motion, AnimatePresence} from 'framer-motion'; 
-import useClickOutside from '../../hooks/use-clickOutside'; 
-import { projectUserType } from '../../common/types';
-
-interface UsersProjectModalInterface {
-  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  usersArray: projectUserType[];
-}
-
-const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisible, usersArray}) => {
-  const containerRef = useClickOutside(setModalVisible); 
-  
-  return(
-    <motion.div 
-      className={styles['project-users-info']}
-      ref={containerRef}
-      variants={slideIn}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-    >
-      <React.Fragment>
-        <div className={styles['list']}>
-          {usersArray.map(elem => <UserProjectListItem key={elem.id} data={elem}/> )}
-        </div>
-        <button className={`reset-btn ${styles['btn']}`}>Invite Evaluators</button>
-      </React.Fragment>
-    </motion.div>
-  )
-}
+import {AnimatePresence} from 'framer-motion'; 
+import UsersProjectModal from './UsersProjectModal/UsersProjectModal'; 
 
 const UsersProject = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);

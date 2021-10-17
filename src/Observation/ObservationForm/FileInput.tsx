@@ -9,7 +9,6 @@ const FileInput:React.FC<FileInputInterface> = ({onSetEvidence, prevEvidence}) =
 
   const handleFileInput:React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const file: File = (event as any).currentTarget.files[0]; 
-    console.log(file, '🔥');
     const reader = new FileReader();
     reader.readAsDataURL(file)
 

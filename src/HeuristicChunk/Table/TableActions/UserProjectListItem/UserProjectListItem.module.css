@@ -6,17 +6,23 @@
   min-width: 300px;
   justify-content: space-between;
   gap: 2em;
+  min-width: 350px;
+
 }
 .user-project-list-item span{
   color: #7F7D8E; 
   font-size: 18px;
 }
 .user-project-list-item:hover{
-  background-color: #353748;
+  background-color: #4F5163;
+  
 }
 .user-project-list-item span{
   font-size: 14px; 
   text-transform: capitalize;
+}
+.user-project-list-item .active:hover{
+  color: #FF7451; 
 }
 
 
