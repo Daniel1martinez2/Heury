@@ -4,7 +4,7 @@
 }
 
 
-.container img:nth-child(2){
+.container .main-pp{
   width: 20px;
   height: 20px;
 }

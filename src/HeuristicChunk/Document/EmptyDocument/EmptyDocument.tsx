@@ -2,21 +2,19 @@ import React from 'react'
 import styles from './EmptyDocument.module.css'; 
 import svgEmpty from '../../../img/frameEmpty.svg'; 
 import '../../../index.css'; 
-import { useHistory } from "react-router-dom";
+import {Link } from "react-router-dom";
 
 const EmptyDocument = () => {
-  const history = useHistory(); 
-  const handleClick = () => history.push('/table'); 
   return (
     <div className={styles['container']}>
       <div className={styles['info-area']}>
        <img src={svgEmpty} alt="" />
         <div className={styles['info']}>
           <h1>Start by creating an observation</h1>
-          <p>You can create an observation in the table view, by pressing the button “New Observation”, and then adding the info in the form</p>
-          <button 
-            className="reset-btn"
-            onClick={handleClick}
+          <p>You can create an observation in the table view, by pressing the button <span>New Observation</span> and then adding the info in the form</p>
+          <Link 
+            className={styles['link']}
+            to="/table"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -25,7 +23,7 @@ const EmptyDocument = () => {
             </svg>
             <span>Table</span>
             
-          </button>
+          </Link>
         </div>
       </div>
     </div>
