@@ -40,7 +40,14 @@ const InviteUsers: React.FC<InviteUsersInterface> = ({searchUser, usersArray, se
     setView('projectUsersList')
   }
   return(
-    <div className={styles['data-container']}>
+    <motion.div 
+      className={styles['data-container']}
+      variants={appear}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      
+    >
       <h1>Invite Evaluators To This Project</h1>
       <div className={styles['actions-container']}>
         <input 
@@ -58,7 +65,7 @@ const InviteUsers: React.FC<InviteUsersInterface> = ({searchUser, usersArray, se
         cancelFunction={handleCancel}
         rightBtnFunction={() => null}
       /> 
-    </div>
+    </motion.div>
   );
 }
 

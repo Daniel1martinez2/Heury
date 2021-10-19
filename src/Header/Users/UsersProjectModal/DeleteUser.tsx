@@ -3,6 +3,8 @@ import ProjectContext from '../../../store/project-context';
 import UnderBtnActions from './UnderBtnActions'; 
 import styles from './UsersProjectModal.module.css';
 import { ProjectUserType } from '../../../common/types';
+import { appear } from '../../../common/commonData';
+import {motion, AnimateSharedLayout} from 'framer-motion'; 
 
 interface DeleteUserInterface {
   setView: (value: React.SetStateAction<string>) => void;
@@ -17,15 +19,24 @@ const DeleteUser: React.FC<DeleteUserInterface> = ({setView, deleteUser}) => {
     setView('projectUsersList'); 
   }
   return (
-    <div className={styles['data-container']}>
-      <h1>Removing Evaluator</h1>
-      <p className={styles['message']}>Are you sure you want to remove <span>{deleteUser.name}</span> from this project? </p>
-      <UnderBtnActions
-        rightBtnValue="Remove"
-        cancelFunction={() => setView('projectUsersList')}
-        rightBtnFunction={handleDeleteUser}
-      />
-    </div>
+    <AnimateSharedLayout>  
+      <motion.div 
+        className={styles['data-container']}
+        variants={appear}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        
+        >
+        <h1>Removing Evaluator</h1>
+        <p className={styles['message']}>Are you sure you want to remove <span>{deleteUser.name}</span> from this project? </p>
+        <UnderBtnActions
+          rightBtnValue="Remove"
+          cancelFunction={() => setView('projectUsersList')}
+          rightBtnFunction={handleDeleteUser}
+        />
+      </motion.div>
+    </AnimateSharedLayout>
   )
 }
 

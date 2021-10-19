@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {slideIn,} from '../../../common/commonData'; 
-import {motion} from 'framer-motion'; 
+import {motion, AnimatePresence, AnimateSharedLayout} from 'framer-motion'; 
 import useClickOutside from '../../../hooks/use-clickOutside'; 
 import { ProjectUserType } from '../../../common/types';
 import styles from './UsersProjectModal.module.css'; 
@@ -47,16 +47,23 @@ const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisibl
   }; 
   
   return(
-    <motion.div 
-      className={styles['project-users-info']}
-      ref={containerRef}
-      variants={slideIn}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-    >
-      {setViewModal()}
-    </motion.div>
+    <AnimateSharedLayout>
+      <motion.div 
+        className={styles['project-users-info']}
+        ref={containerRef}
+        variants={slideIn}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
+        <motion.div 
+          layout
+          className={styles['view-container']}
+        >
+          {setViewModal()}
+        </motion.div>
+      </motion.div>
+    </AnimateSharedLayout>
   )
 }
 

@@ -8,12 +8,14 @@
   position: absolute;
   top: 35px;
   right: 0;
-  background-color: #262837;
-  border-radius: 8px;
-  /* overflow: hidden;  */
-  box-shadow: 18px 10px 56px 10px rgba(2, 2, 3, 0.7);
-  -webkit-box-shadow: 18px 10px 56px 10px rgba(16, 14, 27, 0.7);
-  -moz-box-shadow: 18px 10px 56px 10px rgba(0, 0, 0, 0.7);
+  /* background-color: #262837; */
+  
+}
+
+.list-container{
+  display: flex;
+  flex-direction: column; 
+  gap: 2em; 
 }
 
 .list{
@@ -26,6 +28,15 @@
   padding: .5em;
   background-color: #FF7451;
   border-radius: 0 0 8px 8px; 
+}
+/* 🔥 */
+.view-container{
+  padding: 1em 0 0 0;
+  background-color: #262837;
+  border-radius: 8px;
+  box-shadow: 18px 10px 56px 10px rgba(2, 2, 3, 0.7);
+  -webkit-box-shadow: 18px 10px 56px 10px rgba(16, 14, 27, 0.7);
+  -moz-box-shadow: 18px 10px 56px 10px rgba(0, 0, 0, 0.7);
 }
 
 .data-container{
@@ -40,6 +51,7 @@
 .message{
   text-align: center;
 }
+
 .message span{
   color: #FF7451; 
   font-weight: bold;

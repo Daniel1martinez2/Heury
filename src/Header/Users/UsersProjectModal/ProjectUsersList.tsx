@@ -1,7 +1,9 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import  {ProjectUserType} from '../../../common/types'; 
+import  {appear} from '../../../common/commonData'; 
 import UserProjectListItem from '../../../HeuristicChunk/Table/TableActions/UserProjectListItem/UserProjectListItem';
-import styles from './UsersProjectModal.module.css'; 
+import styles from './UsersProjectModal.module.css';
+import {motion} from 'framer-motion'; 
 
 interface ProjectUsersListInterface {
   usersArray:  ProjectUserType[];
@@ -12,7 +14,13 @@ interface ProjectUsersListInterface {
 const ProjectUsersList:React.FC<ProjectUsersListInterface> = ({usersArray, setView, onDelete}) => {
 
   return (
-    <Fragment>
+    <motion.div 
+      className={styles['list-container']}
+      variants={appear}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
         <div className={styles['list']}>
           {usersArray.map(elem => <UserProjectListItem onClick={onDelete} type="list" key={elem.id} data={elem}/> )}
         </div>
@@ -22,7 +30,7 @@ const ProjectUsersList:React.FC<ProjectUsersListInterface> = ({usersArray, setVi
         >
           Invite Evaluators
         </button> 
-      </Fragment>
+      </motion.div>
   )
 }
 
