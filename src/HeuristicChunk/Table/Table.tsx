@@ -10,7 +10,7 @@ import {ObservationType} from '../../common/types';
 import {AnimatePresence} from 'framer-motion'; 
 
 
-export default function Table() {
+const Table = () => {
   // 🔥
   const ctx = useContext(ProjectContext); 
   const {observationArray, createObservation, editObservation, deleteObservation, filterData} = ctx; 
@@ -34,7 +34,13 @@ export default function Table() {
   }; 
 
   const observationsComponent = dataArrayObservation.map((elem, index) => (
-    <Observation onDeleteObservation={deleteObservation} index={index+1} onSetObservation={editObservation} key={Math.random()} observationData={elem}/>
+    <Observation 
+      onDeleteObservation={deleteObservation} 
+      index={index+1} 
+      onSetObservation={editObservation} 
+      key={Math.random()} 
+      observationData={elem}
+    />
   ));
 
   return (
@@ -75,3 +81,5 @@ export default function Table() {
     </Fragment>
   )
 }
+
+export default Table; 

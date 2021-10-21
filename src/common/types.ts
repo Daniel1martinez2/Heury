@@ -17,6 +17,9 @@ export type Severity= (
   | '3 High'
   | '4 Major'
 ); 
+export type ProjectParams = {
+  projectId: string; 
+}
 
 export type ObservationType = {
   notes: string;

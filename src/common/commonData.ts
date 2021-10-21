@@ -67,6 +67,47 @@ export const testUsers:ProjectUserType[] = [
   },
 ]
 
+// Example
+
+
+//  const users =  [
+//     {
+//       id: '',
+//       name: 'daniel', 
+//       profilePic: 'https://',
+//       projects:[
+//         {
+//           id: '',
+//           projectName: 'test1', 
+//           projectUsers: [
+//             {
+//               userName: 'daniel',
+//               role: 'owner',
+//               id: ''
+//             },
+//             {
+//               userName: 'sofia',
+//               role: 'collaborator',
+//               id: ''
+//             }
+//           ], 
+//           observations:[
+//             {
+//               id: '', 
+//               notes: '',
+//               heuristics: [ 'HelpRecognizeAndRecoverFromErrors','HelpAndDocumentation'],
+//               evidence: '', 
+//               severity: '',
+//               recommendations: ''
+//             }
+//           ],
+//         }
+//       ]
+//     }
+//   ]
+
+
+
 //Animations
 
 export const slideIn = {

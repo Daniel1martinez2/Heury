@@ -1,21 +1,26 @@
-import React, {Fragment} from 'react'
-import Table from './Table/Table'; 
-import { Route } from 'react-router-dom';
-import  DocumentArea from './Document/DocumentArea'; 
-import EmptyDocument from './Document/EmptyDocument/EmptyDocument'; 
+import React, {Fragment, lazy, Suspense} from 'react'
+import { Route, useParams } from 'react-router-dom';
+import {ProjectParams} from '../common/types'; 
+// import EmptyDocument from './Document/EmptyDocument/EmptyDocument'; 
+
+const  DocumentArea = lazy(() => import('./Document/DocumentArea')); 
+const Table = lazy(() => import('./Table/Table'));
 
 export default function HeuristicChunk() {
+  const params = useParams<ProjectParams>(); 
+  const {projectId} = params; 
   return (
     <Fragment>
-      <Route path="/" exact>
-        <EmptyDocument/>
-      </Route>
-      <Route path="/table">
-        <Table/>
-      </Route>
-      <Route path="/document">
-        <DocumentArea/>
-      </Route>
+        <Suspense fallback={<h1>loading 🔥</h1>}>
+          <Route path={`/project/${projectId}/table`}>
+            <Table/>
+          </Route>
+        </Suspense>
+      <Suspense fallback={<h1>loading 🔥</h1>}>
+        <Route path={`/project/${projectId}/document`}>
+          <DocumentArea/>
+        </Route>
+      </Suspense>
     </Fragment>
   )
 }

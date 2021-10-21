@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {slideIn,} from '../../../common/commonData'; 
+import {slideIn} from '../../../common/commonData'; 
 import {motion, AnimatePresence, AnimateSharedLayout} from 'framer-motion'; 
 import useClickOutside from '../../../hooks/use-clickOutside'; 
 import { ProjectUserType } from '../../../common/types';
@@ -7,13 +7,15 @@ import styles from './UsersProjectModal.module.css';
 import ProjectUsersList from './ProjectUsersList';
 import DeleteUser from './DeleteUser' ;
 import InviteUsers from './InviteUsers'; 
+import UserActions from './UserActions/UserActions';
 
 interface UsersProjectModalInterface {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   usersArray: ProjectUserType[];
+  type: 'home' | 'project'
 }
 
-const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisible, usersArray}) => {
+const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisible, usersArray, type}) => {
   const containerRef = useClickOutside(setModalVisible); 
   const [view, setView] = useState('projectUsersList'); 
   const [searchUser, setSearchUser ] = useState(''); 
@@ -44,7 +46,16 @@ const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisibl
             deleteUser={deleteUser}/>; 
         }
     }
-  }; 
+  };
+  
+  const renderContent = () => {
+    switch (type) {
+      case 'home': 
+        return <UserActions />; 
+      case 'project': 
+        return setViewModal(); 
+    }
+  }
   
   return(
     <AnimateSharedLayout>
@@ -60,7 +71,9 @@ const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisibl
           layout
           className={styles['view-container']}
         >
-          {setViewModal()}
+          <AnimatePresence>
+            {renderContent()}
+          </AnimatePresence> 
         </motion.div>
       </motion.div>
     </AnimateSharedLayout>

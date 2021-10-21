@@ -14,7 +14,7 @@ const EmptyDocument = () => {
           <p>You can create an observation in the table view, by pressing the button <span>New Observation</span> and then adding the info in the form</p>
           <Link 
             className={styles['link']}
-            to="/table"
+            to="/project/table"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path

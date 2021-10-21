@@ -1,0 +1,14 @@
+.user-actions-container{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1em;
+}
+
+.user-actions-container button{
+  width: 150px; 
+  padding: .5em;
+} 
+
+.user-actions-container button:hover{
+  background-color: #353748;
+}

@@ -9,6 +9,10 @@
   user-select: none;
 }
 
+.logo{
+  padding:6px; 
+}
+
 .page-header {
   width: 100%;
   border-bottom: 1px solid #434450;
