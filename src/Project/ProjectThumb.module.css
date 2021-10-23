@@ -1,0 +1,37 @@
+.thumb-container{
+  border-radius: 8px;
+  overflow: hidden;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  width: 228px;
+  
+  text-decoration: none;
+  box-shadow: 11px 10px 56px 10px rgba(2, 2, 3, 0.7);
+  -webkit-box-shadow: 18px 10px 56px 10px rgba(16, 14, 27, 0.7);
+  -moz-box-shadow: 18px 10px 56px 10px rgba(0, 0, 0, 0.7);
+}
+
+
+.thumb-container img{
+  height: 106px; 
+  width: 100%; 
+  object-fit: cover;
+}
+
+
+.title-container{
+  padding: 1em;
+  background-color: #262837;
+  
+}
+
+.title-container span{
+  color: #FAFAFE; 
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}

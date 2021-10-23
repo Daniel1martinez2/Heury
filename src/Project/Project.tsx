@@ -1,7 +1,8 @@
 import Header from '../Header/Header'; 
 import HeuristicChunk from '../HeuristicChunk/HeuristicChunk'; 
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import styles from './Project.module.css'; 
+import ProjectThumb from './ProjectThumb';
 
 const Project = () => {
   return(
@@ -12,7 +13,16 @@ const Project = () => {
     </Route>
     <Route path="/" exact>
       <Header type="home"/>
-      <Link to="/project/alooooo/table">EFE</Link>
+      <div className={styles['projects-container']}>
+        <div className={styles['projects-title']}>
+          <h1>All Reports</h1>
+          <span>(1)</span>
+        </div>
+        <div className={styles['thumb-container']}>
+          <ProjectThumb/>
+        </div>
+      </div>
+      {/* <Link to="/project/alooooo/table">EFE</Link> */}
     </Route>
     </div>
   ); 

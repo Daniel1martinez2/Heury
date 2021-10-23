@@ -16,8 +16,8 @@ const UserActions: React.FC<UserActionsInterface> = ({classes}) => {
       animate="visible"
       exit="exit"
       >
-        <button className="reset-btn">Log Out</button>
         <button className="reset-btn">Settings</button>
+        <button className="reset-btn">Sign Out</button>
     </motion.div>
   )
 }

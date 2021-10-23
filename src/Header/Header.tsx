@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import styles from './Header.module.css'; 
-
+import plusSvg from '../img/plus.svg'; 
 import Nav from './Nav/Nav'; 
 import UsersProject from './Users/UsersProject';
 import Visualization from './Visualization/Visualization'; 
@@ -25,7 +25,13 @@ const Header: React.FC<HeaderInterface> = ({type}) => {
         return (
           <Fragment>
             <h1 className={styles['logo']}>Heury</h1>
-            <UsersProject type="home"/>
+            <div className={styles['right-content']}>
+              <button className={`reset-btn ${styles['button']}`}>
+                <img src={plusSvg} alt="sss" />
+                New Report
+              </button>
+              <UsersProject type="home"/>
+            </div>
           </Fragment>
         ); 
     }

@@ -5,3 +5,32 @@
   max-height: 100vh; 
   position: relative;
 }
+.projects-container{
+  height: 100vh; 
+  padding: 24px 2em; 
+}
+
+.projects-container h1{
+  color: #FAFAFE; 
+  font-size: 20px; 
+  
+}
+
+.thumb-container{
+  display: flex ; 
+  justify-content: last baseline;
+  flex-wrap: wrap;
+  width: 100%;
+  
+}
+
+.projects-title{
+  display: flex; 
+  align-items: center; 
+  margin-bottom: 1em; 
+  width: fit-content;
+  gap: 1em;  
+}
+.projects-title span{
+  color: #7F828F; 
+}

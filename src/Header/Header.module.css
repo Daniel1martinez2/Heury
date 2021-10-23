@@ -9,6 +9,12 @@
   user-select: none;
 }
 
+.right-content{
+  display: flex;
+  align-items: center;
+  gap: 1em; 
+}
+
 .logo{
   padding:6px; 
 }
@@ -23,4 +29,14 @@
   gap: 1em;
   justify-content: space-between;
   flex-grow: 1;
+  
+}
+
+.button{
+  background-color: #FF7451;
+  padding: .5em; 
+  font-size: 14px;
+  border-radius:5px; 
+  display: flex;
+  gap: .5em; 
 }

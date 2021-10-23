@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ObservationType, ProjectUserType } from "../common/types";
+import { ObservationType, ProjectUserType, User, ProjectType } from "../common/types";
 
 type editObservationType = {
   newObservation: ObservationType;
@@ -8,8 +8,9 @@ type editObservationType = {
 }
 
 
-
 type dataContext = {
+  user: User; 
+  userProjects: ProjectType[];
   observationArray: ObservationType[];
   projectUsers: ProjectUserType[];
   filterData: {heuristic: string, severity: string};
@@ -19,9 +20,12 @@ type dataContext = {
   setHeuristicFilter: (event: React.ChangeEvent<HTMLSelectElement>) => void; 
   setSeverityFilter: (event: React.ChangeEvent<HTMLSelectElement>) => void; 
   deleteProjectUsers: (id:string)=>void; 
+
 };
 
 const ProjectContext = React.createContext<dataContext>({
+  user: {name: '', id: '', profileImg: ''},
+  userProjects: [],
   projectUsers:[],
   deleteProjectUsers: () => {},
   observationArray: [],

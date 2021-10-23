@@ -30,6 +30,13 @@ export type ObservationType = {
   id: string; 
 }
 
+export type ProjectType = {
+  name: string;
+  id: string;
+  users: ProjectUserType[]; 
+  observations: ObservationType[]; 
+}
+
 export interface ObservationInterface {
   observationData:ObservationType;
   onSetObservation: any;
@@ -69,9 +76,12 @@ export interface Form extends HTMLFormElement {
 
 export type addObservation = (observation:ObservationType)=>void; 
 
-export type ProjectUserType = {
-  role: 'owner' | 'collaborator';
+export type User = {
   profileImg?: string;
   name: string;
   id: string;
+}
+
+export type ProjectUserType  = User & {
+  role: 'owner' | 'collaborator';
 }

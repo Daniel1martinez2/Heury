@@ -6,7 +6,8 @@
 
 .user-actions-container button{
   width: 150px; 
-  padding: .5em;
+  padding: .5em 1.5em;
+  text-align: start;
 } 
 
 .user-actions-container button:hover{

@@ -8,6 +8,7 @@ import ProjectUsersList from './ProjectUsersList';
 import DeleteUser from './DeleteUser' ;
 import InviteUsers from './InviteUsers'; 
 import UserActions from './UserActions/UserActions';
+import triangle from '../../../img/trianglePoint.svg'; 
 
 interface UsersProjectModalInterface {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;

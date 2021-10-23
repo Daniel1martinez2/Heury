@@ -37,7 +37,6 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
     setHeuristicSelectedArray((prev:string[]) => [...prev, heuristics[currentCheckBox] ]); 
   }; 
 
-
   const handlerSubmit:React.FormEventHandler<Form>  = (event) => {
     event.preventDefault();
     const formRef = event.currentTarget.elements;
