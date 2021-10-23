@@ -1,3 +1,4 @@
+import React from 'react'; 
 import Header from '../Header/Header'; 
 import HeuristicChunk from '../HeuristicChunk/HeuristicChunk'; 
 import { Route } from 'react-router-dom';

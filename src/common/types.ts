@@ -44,11 +44,9 @@ export interface ObservationInterface {
   index: number;
 }
 
-export interface ObservationFormInterface{
-  onAddObservation?: addObservation;
+export interface ModalScreenInterface{
   setShowModal:any ;
-  editData?:any;
-  onSetObservation?:any
+  children: React.ReactNode;
 }; 
 
 export interface CheckInputInterface{

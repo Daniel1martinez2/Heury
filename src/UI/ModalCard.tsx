@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './ModalCard.module.css'; 
 
 interface ModalCardInterface {
-  children?: JSX.Element; 
+  children?: React.ReactNode; 
   className?: string; 
 
 }

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {motion} from 'framer-motion'; 
-import styles from './ObservationForm.module.css'; 
+import styles from './ModalOverlay.module.css'; 
 import '../../index.css';
 
 import CheckInput from './CheckInput'; 

@@ -2,12 +2,13 @@ import React, {Fragment, useState, useContext} from 'react';
 import ProjectContext from '../../store/project-context';
 
 import Observation from '../../Observation/Observation'; 
-import ObservationForm from '../../Observation/ObservationForm/ObservationForm'; 
+import ModalScreen from '../../UI/ModalScreen/ModalScreen'; 
 import TableActions from './TableActions/TableActions'
 import styles from './Table.module.css'; 
 import {transformTypeToConstansCase} from '../../common/commonFunc'; 
 import {ObservationType} from '../../common/types'; 
 import {AnimatePresence} from 'framer-motion'; 
+import ModalOverlay from '../../Observation/ObservationForm/ModalOverlay';
 
 
 const Table = () => {
@@ -49,7 +50,11 @@ const Table = () => {
         initial={false}
         exitBeforeEnter={true}
       >
-        {showModal && <ObservationForm onAddObservation={createObservation} setShowModal={setShowModal} />}
+        {showModal && (
+          <ModalScreen setShowModal={setShowModal}>
+            <ModalOverlay onAddObservation={createObservation} setShowModal={setShowModal} />
+          </ModalScreen>
+        )}
       </AnimatePresence>
       {/* Actions */}
       <TableActions className={styles["filter"]}/>

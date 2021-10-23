@@ -1,25 +1,29 @@
 import React, {Fragment, useState} from 'react'
 import styles from './Observation.module.css'; 
 import ModalCard from '../UI/ModalCard'; 
-import ObservationForm from './ObservationForm/ObservationForm'; 
+import ObservationForm from '../UI/ModalScreen/ModalScreen'; 
 import '../index.css';
 import {ObservationInterface} from '../common/types'; 
 
 import {normalizeText, setSeverityColor} from '../common/commonFunc'; 
 import {AnimatePresence} from 'framer-motion'; 
+import ModalOverlay from './ObservationForm/ModalOverlay';
 
 const Observation:React.FC<ObservationInterface> = ({observationData, onSetObservation, index,onDeleteObservation}) =>{
   const [actionsActive, setActionsActive] = useState(true); 
   const [showModal, setShowModal] = useState(false); 
 
- 
-  return (
+ return (
     <Fragment>
       <AnimatePresence
         initial={false}
         exitBeforeEnter={true}
       >
-        {showModal && <ObservationForm onSetObservation={onSetObservation} editData={observationData} setShowModal={setShowModal} />}
+        {showModal && (
+          <ObservationForm setShowModal={setShowModal}>
+            <ModalOverlay onSetObservation={onSetObservation} editData={observationData} setShowModal={setShowModal} />
+          </ObservationForm>
+        )}
       </AnimatePresence>
       <tr>
         <th className={styles["t-header"]} >
