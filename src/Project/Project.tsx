@@ -21,6 +21,12 @@ const Project = () => {
         </div>
         <div className={styles['thumb-container']}>
           <ProjectThumb/>
+          <ProjectThumb/>
+          <ProjectThumb/>
+          <ProjectThumb/>
+          <ProjectThumb/>
+          <ProjectThumb/>
+          <ProjectThumb/>
         </div>
       </div>
       {/* <Link to="/project/alooooo/table">EFE</Link> */}

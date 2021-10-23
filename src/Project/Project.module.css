@@ -7,7 +7,7 @@
 }
 .projects-container{
   height: 100vh; 
-  padding: 24px 2em; 
+  padding: 3em; 
 }
 
 .projects-container h1{
@@ -17,9 +17,13 @@
 }
 
 .thumb-container{
-  display: flex ; 
+  /* display: flex ; 
   justify-content: last baseline;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
+  display: grid;
+  gap: 2em; 
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
   width: 100%;
   
 }
