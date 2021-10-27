@@ -28,7 +28,7 @@ const Header: React.FC<HeaderInterface> = ({type}) => {
             <div className={styles['right-content']}>
               <button className={`reset-btn ${styles['button']}`}>
                 <img src={plusSvg} alt="sss" />
-                New Report
+                Report
               </button>
               <UsersProject type="home"/>
             </div>

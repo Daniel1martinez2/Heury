@@ -34,9 +34,9 @@
 
 .button{
   background-color: #FF7451;
-  padding: .5em; 
+  padding: .5em 1em; 
   font-size: 14px;
   border-radius:5px; 
   display: flex;
-  gap: .5em; 
+  gap: .5em;  
 }

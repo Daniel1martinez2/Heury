@@ -13,19 +13,25 @@
 .projects-container h1{
   color: #FAFAFE; 
   font-size: 20px; 
+}
+
+.rive-animation{
+  display: flex;
   
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%); 
+  width: fit-content;
+  height: 80vh;
+  z-index: -1;
 }
 
 .thumb-container{
-  /* display: flex ; 
-  justify-content: last baseline;
-  flex-wrap: wrap; */
   display: grid;
   gap: 2em; 
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
   width: 100%;
-  
 }
 
 .projects-title{
@@ -37,4 +43,13 @@
 }
 .projects-title span{
   color: #7F828F; 
+}
+
+.register-container{
+  padding: 3em; 
+  display: flex; 
+  flex-direction: column;
+  justify-content: center; 
+  height: 100vh; 
+  
 }
