@@ -2,9 +2,10 @@ import React from 'react'
 import user from '../../library/img/user.svg'; 
 import mail from '../../library/img/mail.svg'; 
 import lock from '../../library/img/lock.svg'; 
-import styles from './SignUp.module.css'; 
+import styles from './Auth.module.css'; 
 import {motion} from 'framer-motion'; 
 import {appear} from '../../library/common/commonData'; 
+import AuthInput from '../AuthInput/AuthInput'; 
 
 interface RegisterInterface {
   setMode: React.Dispatch<React.SetStateAction<string>>; 
@@ -19,34 +20,12 @@ const Register:React.FC<RegisterInterface> = ({setMode}) => {
       animate="visible"
       exit="exit"
     >
-        <label>
-          <span>Name</span>
-          <div className={styles['input-container']}>
-            <img src={user} alt="" />
-            <input type="text" placeholder="name" />
-          </div>
-        </label>
-      <label >
-        <span>Mail</span>
-        <div className={styles['input-container']}>
-          <img src={mail} alt="" />
-          <input type="text" placeholder="user@mail.com" />
-        </div>
-      </label>
-      <label >
-        <span>Password</span>
-        <div className={styles['input-container']}>
-          <img src={lock} alt="" />
-          <input type="password" placeholder="6 characters" />
-        </div>
-      </label>
-        <label >
-          <span>Confirm Password</span>
-          <div className={styles['input-container']}>
-            <img src={lock} alt="" />
-            <input type="password" placeholder="6 characters" />
-          </div>
-        </label>
+
+      <AuthInput label="Name" placeholder="name" icon={user} type={'text'} />
+      <AuthInput label="Mail" placeholder="user@mail.com" icon={mail} type={'text'} />
+      <AuthInput label="Password" placeholder="6 characters" icon={lock} type={'password'} />
+      <AuthInput label="Confirm Password" placeholder="6 characters" icon={lock} type={'password'} />
+
       <div className={styles['bottom-actions']}>
         <button type="submit" className={['reset-btn', styles['submit']].join(' ')}>Register</button>
         <span className={styles['bottom-mss']}>

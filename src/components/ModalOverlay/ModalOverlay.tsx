@@ -3,13 +3,13 @@ import {motion} from 'framer-motion';
 import styles from './ModalOverlay.module.css'; 
 import '../../index.css';
 
-import CheckInput from './CheckInput'; 
-import Select from './Select'; 
+import CheckInput from '../CheckInput/CheckInput'; 
+import Select from '../Select/Select'; 
 
 import {transformTypeToConstansCase} from '../../library/common/commonFunc'; 
 import {ObservationType, ModalOverlayInterface, Form} from '../../library/common/types'; 
 import {heuristics,severityData, appear} from '../../library/common/commonData'; 
-import FileInput from './FileInput';
+import FileInput from '../FileInput/FileInput';
 
 const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShowModal, editData, onSetObservation}) => {
   const notesDefault = editData? editData.notes : '';

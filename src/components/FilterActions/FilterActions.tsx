@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'; 
 import ProjectContext from '../../store/project-context'; 
 import styles from './FilterActions.module.css'; 
-import Select from '../../Observation/ObservationForm/Select'; 
+import Select from '../Select/Select'; 
 import {severityData,heuristics, dropIn} from '../../library/common/commonData';
 import {motion} from 'framer-motion'; 
 import useClickOutside from '../../hooks/use-clickOutside'; 

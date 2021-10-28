@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react'; 
 import {CheckInputInterface} from '../../library/common/types'; 
 import {transformTypeToConstansCase,normalizeText} from '../../library/common/commonFunc'; 
 

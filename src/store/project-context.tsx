@@ -7,7 +7,6 @@ type editObservationType = {
   id: string;
 }
 
-
 type dataContext = {
   user: User; 
   userProjects: ProjectType[];
@@ -20,7 +19,6 @@ type dataContext = {
   setHeuristicFilter: (event: React.ChangeEvent<HTMLSelectElement>) => void; 
   setSeverityFilter: (event: React.ChangeEvent<HTMLSelectElement>) => void; 
   deleteProjectUsers: (id:string)=>void; 
-
 };
 
 const ProjectContext = React.createContext<dataContext>({

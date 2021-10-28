@@ -1,13 +1,12 @@
 import React, {Fragment, useState} from 'react'
 import styles from './Observation.module.css'; 
-import ModalCard from '../UI/ModalCard'; 
-import ObservationForm from '../UI/ModalScreen/ModalScreen'; 
-import '../index.css';
-import {ObservationInterface} from '../library/common/types'; 
+import ModalCard from '../../UI/ModalCard'; 
+import ObservationForm from '../../UI/ModalScreen/ModalScreen'; 
+import {ObservationInterface} from '../../library/common/types'; 
 
-import {normalizeText, setSeverityColor} from '../library/common/commonFunc'; 
+import {normalizeText, setSeverityColor} from '../../library/common/commonFunc'; 
 import {AnimatePresence} from 'framer-motion'; 
-import ModalOverlay from './ObservationForm/ModalOverlay';
+import ModalOverlay from '../ModalOverlay/ModalOverlay';
 
 const Observation:React.FC<ObservationInterface> = ({observationData, onSetObservation, index,onDeleteObservation}) =>{
   const [actionsActive, setActionsActive] = useState(true); 

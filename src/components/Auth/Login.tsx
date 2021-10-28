@@ -1,9 +1,10 @@
 import React from 'react'; 
 import mail from '../../library/img/mail.svg'; 
 import lock from '../../library/img/lock.svg'; 
-import styles from './SignUp.module.css'; 
+import styles from './Auth.module.css'; 
 import {motion} from 'framer-motion'; 
 import {appear} from '../../library/common/commonData'; 
+import AuthInput from '../AuthInput/AuthInput'; 
 
 interface LoginInterface {
   setMode: React.Dispatch<React.SetStateAction<string>>; 
@@ -18,20 +19,9 @@ const Login: React.FC<LoginInterface> = ({setMode}) => {
       animate="visible"
       exit="exit"
     >
-      <label >
-        <span>Mail</span>
-        <div className={styles['input-container']}>
-          <img src={mail} alt="" />
-          <input type="text" placeholder="user@mail.com" />
-        </div>
-      </label>
-      <label >
-        <span>Password</span>
-        <div className={styles['input-container']}>
-          <img src={lock} alt="" />
-          <input type="password" placeholder="6 characters" />
-        </div>
-      </label>
+      <AuthInput label="Mail" placeholder="user@mail.com" icon={mail} type={'text'} />
+      <AuthInput label="Password" placeholder="6 characters" icon={lock} type={'password'} />
+      
       <div className={styles['bottom-actions']}>
         <button className={['reset-btn', styles['submit']].join(' ')}>Login</button>
         <span className={styles['bottom-mss']}>

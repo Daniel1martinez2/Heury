@@ -65,23 +65,6 @@
   color: #878aa3; 
 }
 
-.form .input-container input:focus {
-  border: 2px solid #b0b2c5;
-
-}
-
-.input-container{
-  position: relative;
-}
-.input-container img{
-  position: absolute;
-  top: 50%; 
-  left: .5em; 
-  transform: translate(0, -50%); 
-  /* background-color: red; */
-  height: 45%; 
-}
-
 .submit{
   
   border-radius: 8px;

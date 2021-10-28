@@ -1,10 +1,10 @@
 import React from 'react'; 
-import Header from '../components/Header/Header'; 
-import HeuristicChunk from '../HeuristicChunk/HeuristicChunk'; 
+import Header from '../Header/Header'; 
+import HeuristicChunk from '../../HeuristicChunk/HeuristicChunk'; 
 import { Route } from 'react-router-dom';
 import styles from './Project.module.css'; 
-import ProjectThumb from './ProjectThumb';
-import SignUp from '../UI/SignUp/SignUp';
+import ProjectThumb from '../ProjectThumb/ProjectThumb';
+import SignUp from '../Auth/Auth';
 import Rive from 'rive-react'; 
 //I had force this, because the library Rive is kinda new
 // @ts-ignore
@@ -40,7 +40,6 @@ const Project = () => {
             <ProjectThumb/>
           </div>
         </div>
-        {/* <Link to="/project/alooooo/table">EFE</Link> */}
       </Route>
     </div>
   ); 

@@ -1,13 +1,13 @@
 import React, {Fragment, useState, useContext} from 'react'; 
 import ProjectContext from '../../store/project-context';
 
-import Observation from '../../Observation/Observation'; 
+import Observation from '../Observation/Observation'; 
 import ModalScreen from '../../UI/ModalScreen/ModalScreen'; 
 import styles from './Table.module.css'; 
 import {transformTypeToConstansCase} from '../../library/common/commonFunc'; 
 import {ObservationType} from '../../library/common/types'; 
 import {AnimatePresence} from 'framer-motion'; 
-import ModalOverlay from '../../Observation/ObservationForm/ModalOverlay';
+import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import FIlterTable from '../TableActions/FilterTable'; 
 
 const Table = () => {
