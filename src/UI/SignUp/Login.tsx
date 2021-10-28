@@ -1,9 +1,9 @@
 import React from 'react'; 
-import mail from '../../img/mail.svg'; 
-import lock from '../../img/lock.svg'; 
+import mail from '../../library/img/mail.svg'; 
+import lock from '../../library/img/lock.svg'; 
 import styles from './SignUp.module.css'; 
 import {motion} from 'framer-motion'; 
-import {appear} from '../../common/commonData'; 
+import {appear} from '../../library/common/commonData'; 
 
 interface LoginInterface {
   setMode: React.Dispatch<React.SetStateAction<string>>; 

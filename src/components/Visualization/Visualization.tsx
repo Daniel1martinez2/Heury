@@ -1,7 +1,7 @@
 import React from 'react'
 import {NavLink, useParams} from 'react-router-dom'; 
 import styles from './Visualization.module.css'; 
-import {ProjectParams} from '../../common/types';
+import {ProjectParams} from '../../library/common/types';
 
 
 const Visualization = () => {

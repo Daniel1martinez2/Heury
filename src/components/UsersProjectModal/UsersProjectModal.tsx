@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-import {slideIn} from '../../common/commonData'; 
+import {slideIn} from '../../library/common/commonData'; 
 import {motion, AnimatePresence, AnimateSharedLayout} from 'framer-motion'; 
 import useClickOutside from '../../hooks/use-clickOutside'; 
-import { ProjectUserType } from '../../common/types';
+import { ProjectUserType } from '../../library/common/types';
 import styles from './UsersProjectModal.module.css'; 
 import ProjectUsersList from '../ProjectUsersList/ProjectUsersList';
 import DeleteUser from '../DeleteUser/DeleteUser' ;

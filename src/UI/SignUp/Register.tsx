@@ -1,10 +1,10 @@
 import React from 'react'
-import user from '../../img/user.svg'; 
-import mail from '../../img/mail.svg'; 
-import lock from '../../img/lock.svg'; 
+import user from '../../library/img/user.svg'; 
+import mail from '../../library/img/mail.svg'; 
+import lock from '../../library/img/lock.svg'; 
 import styles from './SignUp.module.css'; 
 import {motion} from 'framer-motion'; 
-import {appear} from '../../common/commonData'; 
+import {appear} from '../../library/common/commonData'; 
 
 interface RegisterInterface {
   setMode: React.Dispatch<React.SetStateAction<string>>; 

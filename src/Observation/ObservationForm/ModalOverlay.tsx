@@ -6,9 +6,9 @@ import '../../index.css';
 import CheckInput from './CheckInput'; 
 import Select from './Select'; 
 
-import {transformTypeToConstansCase} from '../../common/commonFunc'; 
-import {ObservationType, ModalOverlayInterface, Form} from '../../common/types'; 
-import {heuristics,severityData, appear} from '../../common/commonData'; 
+import {transformTypeToConstansCase} from '../../library/common/commonFunc'; 
+import {ObservationType, ModalOverlayInterface, Form} from '../../library/common/types'; 
+import {heuristics,severityData, appear} from '../../library/common/commonData'; 
 import FileInput from './FileInput';
 
 const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShowModal, editData, onSetObservation}) => {

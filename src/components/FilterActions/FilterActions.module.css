@@ -29,7 +29,7 @@
   line-height: inherit;
   outline: none;
   cursor: pointer;
-  background-image: url(../../img/arrow-down.svg);
+  background-image: url(../../library/img/arrow-down.svg);
   background-repeat: no-repeat;
   background-position: right 10px top 50%;
 }

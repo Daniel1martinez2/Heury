@@ -1,7 +1,6 @@
 import React, {Fragment, lazy, Suspense} from 'react'
 import { Route, useParams } from 'react-router-dom';
-import {ProjectParams} from '../common/types'; 
-// import EmptyDocument from './Document/EmptyDocument/EmptyDocument'; 
+import {ProjectParams} from '../library/common/types'; 
 
 const  DocumentArea = lazy(() => import('../components/DocumentArea/DocumentArea')); 
 const Table = lazy(() => import('../components/Table/Table'));

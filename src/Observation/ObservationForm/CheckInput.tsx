@@ -1,6 +1,6 @@
 import React from 'react'
-import {CheckInputInterface} from '../../common/types'; 
-import {transformTypeToConstansCase,normalizeText} from '../../common/commonFunc'; 
+import {CheckInputInterface} from '../../library/common/types'; 
+import {transformTypeToConstansCase,normalizeText} from '../../library/common/commonFunc'; 
 
 const CheckInput: React.FC<CheckInputInterface> = ({name, validation, onEditCheckBoxArray}) => {
   const toggleCheckboxChange:React.ChangeEventHandler<HTMLInputElement> = () => onEditCheckBoxArray(name); 

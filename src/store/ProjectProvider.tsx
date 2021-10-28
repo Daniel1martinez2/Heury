@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {ObservationType, ProjectUserType, ProjectType } from '../common/types'; 
-import {testUsers} from '../common/commonData'; 
+import {ObservationType, ProjectUserType, ProjectType } from '../library/common/types'; 
+import {testUsers} from '../library/common/commonData'; 
 import ProjectContext from "./project-context";
 
 const ProjectProvider = (props:any) => {

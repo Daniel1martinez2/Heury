@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './DocumentView.module.css'; 
-import {ObservationType} from '../../common/types'; 
-import { normalizeText } from '../../common/commonFunc';
-import {setSeverityColor} from '../../common/commonFunc'; 
+import {ObservationType} from '../../library/common/types'; 
+import { normalizeText } from '../../library/common/commonFunc';
+import {setSeverityColor} from '../../library/common/commonFunc'; 
 interface DocumentViewInterface {
   observationData: ObservationType;
   index: number

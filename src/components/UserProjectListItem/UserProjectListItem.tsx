@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {ProjectUserType} from '../../common/types'; 
+import {ProjectUserType} from '../../library/common/types'; 
 import UserPP from '../../UI/UserPP';
 import styles from './UserProjectListItem.module.css';
 

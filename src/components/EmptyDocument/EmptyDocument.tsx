@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './EmptyDocument.module.css'; 
-import svgEmpty from '../../img/frameEmpty.svg'; 
+import svgEmpty from '../../library/img/frameEmpty.svg'; 
 import {Link } from "react-router-dom";
 
 const EmptyDocument = () => {

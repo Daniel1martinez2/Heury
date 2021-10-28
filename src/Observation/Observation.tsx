@@ -3,9 +3,9 @@ import styles from './Observation.module.css';
 import ModalCard from '../UI/ModalCard'; 
 import ObservationForm from '../UI/ModalScreen/ModalScreen'; 
 import '../index.css';
-import {ObservationInterface} from '../common/types'; 
+import {ObservationInterface} from '../library/common/types'; 
 
-import {normalizeText, setSeverityColor} from '../common/commonFunc'; 
+import {normalizeText, setSeverityColor} from '../library/common/commonFunc'; 
 import {AnimatePresence} from 'framer-motion'; 
 import ModalOverlay from './ObservationForm/ModalOverlay';
 

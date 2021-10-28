@@ -62,7 +62,7 @@
 
 .check-box input + span:before {
   content: "";
-  background-image: url("../../img/noCheck.svg");
+  background-image: url("../../library/img/noCheck.svg");
   background-repeat: no-repeat;
   display: inline-block;
   width: 16pt;
@@ -72,7 +72,7 @@
 
 .check-box input:checked + span:before {
   content: '';
-  background-image: url("../../img/check.svg");
+  background-image: url("../../library/img/check.svg");
 }
 .check-box input:checked + span{
   color: #FF7451; 
@@ -85,7 +85,7 @@
 
 .check-box span:before{
   content: ""; 
-  background-image: url("../../img/noCheck.svg");
+  background-image: url("../../library/img/noCheck.svg");
   background-size: contain;
   background-position: center;
   width: 12px; 
@@ -129,7 +129,7 @@
   line-height: inherit;
   outline: none;
   cursor: pointer;
-  background-image: url(../../img/arrow-down.svg);
+  background-image: url(../../library/img/arrow-down.svg);
   background-repeat: no-repeat;
   background-position: right 10px top 50%;
 

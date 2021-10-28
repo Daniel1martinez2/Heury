@@ -2,8 +2,8 @@ import React, {useContext} from 'react';
 import ProjectContext from '../../store/project-context';
 import UnderBtnActions from '../UnderBtnActions/UnderBtnActions'; 
 import styles from './DeleteUser.module.css';
-import { ProjectUserType } from '../../common/types';
-import { appear } from '../../common/commonData';
+import { ProjectUserType } from '../../library/common/types';
+import { appear } from '../../library/common/commonData';
 import {motion, AnimateSharedLayout} from 'framer-motion'; 
 
 interface DeleteUserInterface {

@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react'; 
 import ReactDOM from 'react-dom';
-import { ModalScreenInterface} from '../../common/types'; 
-import {appear} from '../../common/commonData'; 
+import { ModalScreenInterface} from '../../library/common/types'; 
+import {appear} from '../../library/common/commonData'; 
 import styles from './ModalScreen.module.css';
 import {motion} from 'framer-motion'; 
 

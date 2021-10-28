@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import styles from './Header.module.css'; 
-import plusSvg from '../../img/plus.svg'; 
+import plusSvg from '../../library/img/plus.svg'; 
 import Nav from '../Nav/Nav'; 
 import UsersProject from '../Users/UsersProject';
 import Visualization from '../Visualization/Visualization'; 

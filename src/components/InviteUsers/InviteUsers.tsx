@@ -1,9 +1,9 @@
 import React from 'react'; 
 import {motion} from 'framer-motion';
 import UserProjectListItem from '../UserProjectListItem/UserProjectListItem';
-import {appear} from '../../common/commonData'; 
+import {appear} from '../../library/common/commonData'; 
 import styles from './InviteUsers.module.css'; 
-import {ProjectUserType} from '../../common/types'; 
+import {ProjectUserType} from '../../library/common/types'; 
 import UnderBtnActions from '../UnderBtnActions/UnderBtnActions';
 
 interface InviteUsersInterface {

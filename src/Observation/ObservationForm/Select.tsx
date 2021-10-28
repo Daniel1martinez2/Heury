@@ -1,5 +1,5 @@
 import React from 'react'
-import {transformTypeToConstansCase} from '../../common/commonFunc'; 
+import {transformTypeToConstansCase} from '../../library/common/commonFunc'; 
 
 export interface SelectInterface {
   value: string;

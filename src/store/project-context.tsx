@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ObservationType, ProjectUserType, User, ProjectType } from "../common/types";
+import { ObservationType, ProjectUserType, User, ProjectType } from "../library/common/types";
 
 type editObservationType = {
   newObservation: ObservationType;
