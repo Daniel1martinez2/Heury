@@ -1,0 +1,31 @@
+.btn{
+  display: flex;
+  gap: .8em; 
+  padding:.8em; 
+  border-radius: 8px; 
+}
+.btn:hover{
+  background-color: #262837;
+}
+
+.btn svg{
+  height: 18px; 
+  width: auto; 
+}
+.btn span{
+  color: #7F828F; 
+  font-weight: bold;
+}
+
+.active span{
+  color: #FF7451 !important; 
+}
+.active svg path{
+  fill: #FF7451; 
+}
+.container{
+  position: relative; 
+  width: fit-content; 
+  
+}
+

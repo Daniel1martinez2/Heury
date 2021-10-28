@@ -2,11 +2,22 @@ import React from 'react';
 import mail from '../../img/mail.svg'; 
 import lock from '../../img/lock.svg'; 
 import styles from './SignUp.module.css'; 
-import { Link} from 'react-router-dom';
+import {motion} from 'framer-motion'; 
+import {appear} from '../../common/commonData'; 
 
-const Login = () => {
+interface LoginInterface {
+  setMode: React.Dispatch<React.SetStateAction<string>>; 
+}
+
+const Login: React.FC<LoginInterface> = ({setMode}) => {
   return (
-    <form className={styles['form']}>
+    <motion.form 
+      className={styles['form']}
+      variants={appear}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <label >
         <span>Mail</span>
         <div className={styles['input-container']}>
@@ -25,10 +36,15 @@ const Login = () => {
         <button className={['reset-btn', styles['submit']].join(' ')}>Login</button>
         <span className={styles['bottom-mss']}>
           Not have an account?
-          <Link to="/session/register" className={styles['link']}>Register</Link>
+          <span 
+            onClick={() => setMode('register')}
+            className={styles['link']}
+          >
+            Register
+          </span>
         </span>
       </div>
-    </form>
+    </motion.form>
   )
 }
 

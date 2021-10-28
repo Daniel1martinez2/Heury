@@ -3,8 +3,8 @@ import { Route, useParams } from 'react-router-dom';
 import {ProjectParams} from '../common/types'; 
 // import EmptyDocument from './Document/EmptyDocument/EmptyDocument'; 
 
-const  DocumentArea = lazy(() => import('./Document/DocumentArea')); 
-const Table = lazy(() => import('./Table/Table'));
+const  DocumentArea = lazy(() => import('../components/DocumentArea/DocumentArea')); 
+const Table = lazy(() => import('../components/Table/Table'));
 
 export default function HeuristicChunk() {
   const params = useParams<ProjectParams>(); 

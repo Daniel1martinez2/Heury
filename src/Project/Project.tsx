@@ -1,5 +1,5 @@
 import React from 'react'; 
-import Header from '../Header/Header'; 
+import Header from '../components/Header/Header'; 
 import HeuristicChunk from '../HeuristicChunk/HeuristicChunk'; 
 import { Route } from 'react-router-dom';
 import styles from './Project.module.css'; 

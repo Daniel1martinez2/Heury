@@ -3,11 +3,22 @@ import user from '../../img/user.svg';
 import mail from '../../img/mail.svg'; 
 import lock from '../../img/lock.svg'; 
 import styles from './SignUp.module.css'; 
-import { Link} from 'react-router-dom';
+import {motion} from 'framer-motion'; 
+import {appear} from '../../common/commonData'; 
 
-const Register = () => {
+interface RegisterInterface {
+  setMode: React.Dispatch<React.SetStateAction<string>>; 
+}
+
+const Register:React.FC<RegisterInterface> = ({setMode}) => {
   return (
-    <form className={styles['form']}>
+    <motion.form 
+      className={styles['form']}
+      variants={appear}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
         <label>
           <span>Name</span>
           <div className={styles['input-container']}>
@@ -37,13 +48,18 @@ const Register = () => {
           </div>
         </label>
       <div className={styles['bottom-actions']}>
-        <button className={['reset-btn', styles['submit']].join(' ')}>Sign up</button>
+        <button type="submit" className={['reset-btn', styles['submit']].join(' ')}>Register</button>
         <span className={styles['bottom-mss']}>
           Already have an account?
-          <Link to="/session/login" className={styles['link']}>Sign Up</Link>
+          <span 
+            onClick = {() => setMode('login')}
+            className={styles['link']}
+          >
+            Sign Up
+          </span>
         </span>
       </div>
-    </form>
+    </motion.form>
   )
 }
 
