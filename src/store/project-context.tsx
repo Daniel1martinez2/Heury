@@ -19,6 +19,7 @@ type dataContext = {
   setHeuristicFilter: (event: React.ChangeEvent<HTMLSelectElement>) => void; 
   setSeverityFilter: (event: React.ChangeEvent<HTMLSelectElement>) => void; 
   deleteProjectUsers: (id:string)=>void; 
+  createProject: (project:ProjectType) => void;
 };
 
 const ProjectContext = React.createContext<dataContext>({
@@ -33,6 +34,7 @@ const ProjectContext = React.createContext<dataContext>({
   createObservation: () => {},
   setHeuristicFilter: () => {},
   setSeverityFilter: () => {},
+  createProject: () => {}
 });
 
 export default ProjectContext;

@@ -46,7 +46,7 @@ const ProjectProvider = (props:any) => {
   
   const projectContextData = {
     user: {name: 'Daniel', id: 'asdsad', profileImg: 'https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9iMDVhNWNjMDY1M2FiNDNjNzU0NjY1ZmQxOWNmNzU3MT9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.AUtQ0KIK-lJbX9MAPyq_8rTlkO4_CiuhTGbmyvuJJ40'},
-    userProjects: [],
+    userProjects: projects,
     filterData: filters,
     observationArray:observationsData, 
     deleteObservation, 
@@ -55,7 +55,8 @@ const ProjectProvider = (props:any) => {
     setHeuristicFilter,
     setSeverityFilter,
     projectUsers, 
-    deleteProjectUsers
+    deleteProjectUsers,
+    createProject
   }; 
   return(
     <ProjectContext.Provider value={projectContextData}>
