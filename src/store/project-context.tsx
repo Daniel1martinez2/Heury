@@ -5,17 +5,18 @@ import { ObservationType, ProjectUserType, User, ProjectType } from "../library/
 type editObservationType = {
   newObservation: ObservationType;
   id: string;
+  projectId: string;
 }
 
 type dataContext = {
   user: User; 
   userProjects: ProjectType[];
-  observationArray: ObservationType[];
+  // observationArray: ObservationType[];
   projectUsers: ProjectUserType[];
   filterData: {heuristic: string, severity: string};
-  createObservation: (observation: ObservationType) => void;
-  editObservation: ({newObservation, id}:editObservationType ) => void;
-  deleteObservation: (id: string) => void;
+  createObservation: (observation: ObservationType, projectId: string) => void;
+  editObservation: ({newObservation, id, projectId}:editObservationType ) => void;
+  deleteObservation: (id: string, projectId: string) => void;
   setHeuristicFilter: (event: React.ChangeEvent<HTMLSelectElement>) => void; 
   setSeverityFilter: (event: React.ChangeEvent<HTMLSelectElement>) => void; 
   deleteProjectUsers: (id:string)=>void; 
@@ -27,7 +28,7 @@ const ProjectContext = React.createContext<dataContext>({
   userProjects: [],
   projectUsers:[],
   deleteProjectUsers: () => {},
-  observationArray: [],
+  // observationArray: [],
   filterData: {heuristic:'', severity: ''},
   deleteObservation: () => {},
   editObservation: () => {},

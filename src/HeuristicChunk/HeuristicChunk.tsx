@@ -12,12 +12,12 @@ export default function HeuristicChunk() {
     <Fragment>
         <Suspense fallback={<h1>loading 🔥</h1>}>
           <Route path={`/project/${projectId}/table`}>
-            <Table/>
+            <Table id={projectId}/>
           </Route>
         </Suspense>
       <Suspense fallback={<h1>loading 🔥</h1>}>
         <Route path={`/project/${projectId}/document`}>
-          <DocumentArea/>
+          <DocumentArea id={projectId}/>
         </Route>
       </Suspense>
     </Fragment>

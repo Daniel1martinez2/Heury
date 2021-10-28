@@ -1,4 +1,5 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useContext} from 'react'
+import ProjectContext from '../../store/project-context'; 
 import styles from './Observation.module.css'; 
 import ModalCard from '../../UI/ModalCard'; 
 import ObservationForm from '../../UI/ModalScreen/ModalScreen'; 
@@ -8,9 +9,11 @@ import {normalizeText, setSeverityColor} from '../../library/common/commonFunc';
 import {AnimatePresence} from 'framer-motion'; 
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 
-const Observation:React.FC<ObservationInterface> = ({observationData, onSetObservation, index,onDeleteObservation}) =>{
+const Observation:React.FC<ObservationInterface> = ({observationData, index, projectId}) =>{
   const [actionsActive, setActionsActive] = useState(true); 
   const [showModal, setShowModal] = useState(false); 
+  const ctx = useContext(ProjectContext); 
+  const{deleteObservation} = ctx; 
 
  return (
     <Fragment>
@@ -20,7 +23,7 @@ const Observation:React.FC<ObservationInterface> = ({observationData, onSetObser
       >
         {showModal && (
           <ObservationForm setShowModal={setShowModal}>
-            <ModalOverlay onSetObservation={onSetObservation} editData={observationData} setShowModal={setShowModal} />
+            <ModalOverlay projectId={projectId} editData={observationData} setShowModal={setShowModal} />
           </ObservationForm>
         )}
       </AnimatePresence>
@@ -39,7 +42,7 @@ const Observation:React.FC<ObservationInterface> = ({observationData, onSetObser
             <ModalCard  className={`${styles['row-actions']} ${ actionsActive  && styles['hidden']}`}>
               <Fragment> 
                 <button onMouseDown={() => setShowModal(true)} className="reset-btn">Edit</button>
-                <button onMouseDown={() => onDeleteObservation(observationData.id)} className="reset-btn">Delete</button>
+                <button onMouseDown={() => deleteObservation(observationData.id, projectId)} className="reset-btn">Delete</button>
               </Fragment>
             </ModalCard>
         </th>

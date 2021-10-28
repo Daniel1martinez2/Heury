@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import ProjectContext from '../../store/project-context'; 
 import {motion} from 'framer-motion'; 
 import styles from './ModalOverlay.module.css'; 
 import '../../index.css';
@@ -11,7 +12,10 @@ import {ObservationType, ModalOverlayInterface, Form} from '../../library/common
 import {heuristics,severityData, appear} from '../../library/common/commonData'; 
 import FileInput from '../FileInput/FileInput';
 
-const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShowModal, editData, onSetObservation}) => {
+const ModalOverlay:React.FC<ModalOverlayInterface> = ({setShowModal, editData, projectId}) => {
+  const ctx = useContext(ProjectContext);
+  const {createObservation, editObservation} = ctx; 
+
   const notesDefault = editData? editData.notes : '';
   const recommendationsDefault = editData? editData.recommendations : '';
   const heuristicSelectedArrayDefault = editData? editData.heuristics.map((elem:string) => elem.split(' ').join('')) : [];
@@ -48,12 +52,14 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({onAddObservation, setShow
       recommendations: formRef.solution.value, 
       id:editData? editData.id : Math.random().toString(),
     }
-    if(!editData && !!onAddObservation){
-      onAddObservation(currentObservation); 
+    if(!editData){
+      createObservation(currentObservation, projectId); 
+
       setShowModal(false); 
       return; 
     }
-    onSetObservation({newObservation:currentObservation, id: editData.id}); 
+    // onSetObservation({newObservation:currentObservation, id: editData.id}); 
+    editObservation({newObservation:currentObservation, id: editData.id, projectId})
     // hide the modal
     setShowModal(false); 
   };

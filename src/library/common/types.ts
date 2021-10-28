@@ -39,9 +39,8 @@ export type ProjectType = {
 
 export interface ObservationInterface {
   observationData:ObservationType;
-  onSetObservation: any;
-  onDeleteObservation: (id:string) => void; 
   index: number;
+  projectId: string; 
 }
 
 export interface ModalScreenInterface{
@@ -56,10 +55,10 @@ export interface CheckInputInterface{
 }; 
 
 export interface ModalOverlayInterface {
-  onAddObservation?: addObservation;
   setShowModal: any;
   editData?: any;
-  onSetObservation?: any
+  projectId: string; 
+  
 }; 
 
 

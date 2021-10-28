@@ -9,12 +9,24 @@ import {ObservationType} from '../../library/common/types';
 import {AnimatePresence} from 'framer-motion'; 
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import FIlterTable from '../TableActions/FilterTable'; 
+import { Redirect } from 'react-router-dom';
 
-const Table = () => {
+interface TableInterface {
+  id: string; 
+}
+
+const Table: React.FC <TableInterface> = ({id}) => {
   // 🔥
   const ctx = useContext(ProjectContext); 
-  const {observationArray, createObservation, editObservation, deleteObservation, filterData} = ctx; 
+  const {userProjects, createObservation, deleteObservation, filterData} = ctx; 
   const [showModal, setShowModal] = useState(false); 
+
+  const currentProject = userProjects.find(project => project.id === id); 
+  if(!currentProject){
+    return <Redirect to="/"/>
+  }
+  const {observations} = currentProject;
+
 
   const condition = (elem:ObservationType) => {
     if (filterData.severity !== '' && filterData.heuristic !== ''){
@@ -26,18 +38,17 @@ const Table = () => {
     }
   };
   
-  let dataArrayObservation = observationArray; 
+  let dataArrayObservation = observations; 
   if(filterData.heuristic === '' && filterData.severity === ''){
-    dataArrayObservation = observationArray;
+    dataArrayObservation = observations;
   }else{
-    dataArrayObservation = observationArray.filter(elem => condition(elem)); 
+    dataArrayObservation = observations.filter(elem => condition(elem)); 
   }; 
 
   const observationsComponent = dataArrayObservation.map((elem, index) => (
     <Observation 
-      onDeleteObservation={deleteObservation} 
+      projectId={id}
       index={index+1} 
-      onSetObservation={editObservation} 
       key={Math.random()} 
       observationData={elem}
     />
@@ -51,7 +62,7 @@ const Table = () => {
       >
         {showModal && (
           <ModalScreen setShowModal={setShowModal}>
-            <ModalOverlay onAddObservation={createObservation} setShowModal={setShowModal} />
+            <ModalOverlay projectId={id} setShowModal={setShowModal} />
           </ModalScreen>
         )}
       </AnimatePresence>
