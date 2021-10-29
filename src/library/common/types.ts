@@ -82,3 +82,5 @@ export type User = {
 export type ProjectUserType  = User & {
   role: 'owner' | 'collaborator';
 }
+
+export type VisualizationType = 'table' | 'document' | 'stats'; 

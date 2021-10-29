@@ -17,7 +17,6 @@ const InviteUsers: React.FC<InviteUsersInterface> = ({searchUser, usersArray, se
   
   const handleSearchUser:React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setSearchUser(e.target.value); 
-    console.log(e.target.value); 
   }
 
   const recommendUserListActive = () => {

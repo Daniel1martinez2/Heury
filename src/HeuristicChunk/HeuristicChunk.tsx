@@ -1,25 +1,34 @@
-import React, {Fragment, lazy, Suspense} from 'react'
-import { Route, useParams } from 'react-router-dom';
-import {ProjectParams} from '../library/common/types'; 
+import React, {Fragment, useContext} from 'react'
+import { Redirect, useParams } from 'react-router-dom';
+import DocumentView from '../components/DocumentView/DocumentView';
+import Table from '../components/Table/Table';
+import {ProjectParams, VisualizationType} from '../library/common/types'; 
+import ProjectContext from '../store/project-context';
+import styles from './HeuristicChunk.module.css'; 
 
-const  DocumentArea = lazy(() => import('../components/DocumentArea/DocumentArea')); 
-const Table = lazy(() => import('../components/Table/Table'));
+interface HeuristicChunkInterface {
+  mode: VisualizationType; 
+}
 
-export default function HeuristicChunk() {
-  const params = useParams<ProjectParams>(); 
-  const {projectId} = params; 
+const HeuristicChunk:React.FC <HeuristicChunkInterface>  = ({mode}) => {
+  const ctx = useContext(ProjectContext); 
+  const {userProjects, filterData} = ctx; 
+  const params = useParams<ProjectParams>();
+  const {projectId} = params;  
+  const currentProject = userProjects.find(project => project.id === projectId); 
+  if(!currentProject) return <Redirect to="/"/>
+  const {observations} = currentProject;
+
   return (
     <Fragment>
-        <Suspense fallback={<h1>loading 🔥</h1>}>
-          <Route path={`/project/${projectId}/table`}>
-            <Table id={projectId}/>
-          </Route>
-        </Suspense>
-      <Suspense fallback={<h1>loading 🔥</h1>}>
-        <Route path={`/project/${projectId}/document`}>
-          <DocumentArea id={projectId}/>
-        </Route>
-      </Suspense>
+      {mode === 'document' && 
+        <div className={styles['area']}>
+          {observations.map((observation, index) => <DocumentView key={observation.id} observationData={observation} index={index}/>)}
+        </div>
+      }
+      {mode === 'table' && <Table id={projectId} filterData={filterData} observations={observations} />}
     </Fragment>
   )
 }
+
+export default HeuristicChunk; 

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'; 
+import React, {useContext, useState} from 'react'; 
 import Header from '../Header/Header'; 
 import HeuristicChunk from '../../HeuristicChunk/HeuristicChunk'; 
 import { Route } from 'react-router-dom';
@@ -10,19 +10,21 @@ import Rive from 'rive-react';
 //I had force this, because the library Rive is kinda new
 // @ts-ignore
 import anima from '../animations/anima.riv'; 
+import { VisualizationType } from '../../library/common/types';
+
 
 const Project = () => {
   const ctx = useContext(ProjectContext);
   const {userProjects} = ctx; 
+  const [visualizationMode, setVisualizationMode] = useState<VisualizationType>('table'); 
   return(
     <div className={styles['app']}>
       <Route path="/project/:projectId">
-        <Header type="project"/>
-        <HeuristicChunk/>
+        <Header visualizationMode={visualizationMode} type="project" setVisualizationMode={setVisualizationMode}/>
+        <HeuristicChunk mode={visualizationMode}/>
       </Route>
       <Route path="/session">
         <div className={styles['register-container']}>  
-          {/* <Rive className={styles['rive-animation']} src={anima}/> */}
           <SignUp/>
         </div>
       </Route>

@@ -5,14 +5,16 @@ import Nav from '../Nav/Nav';
 import UsersProject from '../Users/UsersProject';
 import Visualization from '../Visualization/Visualization'; 
 import ProjectContext from '../../store/project-context'; 
-import { ProjectType } from '../../library/common/types';
+import { ProjectType, VisualizationType } from '../../library/common/types';
 import {useHistory} from 'react-router-dom'; 
 
 interface HeaderInterface {
-  type: 'project' | 'home'
+  type: 'project' | 'home'; 
+  setVisualizationMode?: React.Dispatch<React.SetStateAction<VisualizationType>>;
+  visualizationMode?: VisualizationType; 
 }
 
-const Header: React.FC<HeaderInterface> = ({type}) => {
+const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualizationMode}) => {
   const history = useHistory(); 
   const ctx = useContext(ProjectContext); 
   const {createProject, user} = ctx; 
@@ -34,8 +36,8 @@ const Header: React.FC<HeaderInterface> = ({type}) => {
       case 'project':
         return (
           <Fragment>
-            <Nav/>
-            <Visualization/>
+            {setVisualizationMode && <Nav setVisualizationMode={setVisualizationMode}/>}
+            {setVisualizationMode && visualizationMode && <Visualization visualizationMode={visualizationMode} setVisualizationMode={setVisualizationMode}/>}
             <UsersProject type="project"/>
           </Fragment>
         ); 
@@ -56,9 +58,7 @@ const Header: React.FC<HeaderInterface> = ({type}) => {
           </Fragment>
         ); 
     }
-  
   }
-
   return(
       <div className={styles['page-header']}>
         {renderNav()}

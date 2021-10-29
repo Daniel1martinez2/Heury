@@ -1,6 +1,4 @@
-import React, {Fragment, useState, useContext} from 'react'; 
-import ProjectContext from '../../store/project-context';
-
+import React, {Fragment, useState} from 'react'; 
 import Observation from '../Observation/Observation'; 
 import ModalScreen from '../../UI/ModalScreen/ModalScreen'; 
 import styles from './Table.module.css'; 
@@ -9,25 +7,19 @@ import {ObservationType} from '../../library/common/types';
 import {AnimatePresence} from 'framer-motion'; 
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import FIlterTable from '../TableActions/FilterTable'; 
-import { Redirect } from 'react-router-dom';
 
 interface TableInterface {
-  id: string; 
+  id: string;
+  filterData: {
+    heuristic: string;
+    severity: string;
+  }; 
+  observations: ObservationType[]; 
 }
 
-const Table: React.FC <TableInterface> = ({id}) => {
-  // 🔥
-  const ctx = useContext(ProjectContext); 
-  const {userProjects, createObservation, deleteObservation, filterData} = ctx; 
+const Table: React.FC <TableInterface> = ({id, filterData, observations}) => {
+  
   const [showModal, setShowModal] = useState(false); 
-
-  const currentProject = userProjects.find(project => project.id === id); 
-  if(!currentProject){
-    return <Redirect to="/"/>
-  }
-  const {observations} = currentProject;
-
-
   const condition = (elem:ObservationType) => {
     if (filterData.severity !== '' && filterData.heuristic !== ''){
       return (elem.severity === transformTypeToConstansCase(filterData.severity) && elem.severity !== '') && elem.heuristics.includes(transformTypeToConstansCase(filterData.heuristic)); 
