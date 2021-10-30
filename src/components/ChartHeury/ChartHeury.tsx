@@ -42,13 +42,44 @@ const ChartHeury: React.FC<ChartHeuryInterface> = ({data}) => {
                   'rgba(153, 102, 255, 1)',
                   'rgba(255, 159, 64, 1)'
               ],
+
               borderWidth: 1
           }]
         }}
         height={400}
         width={600}
         options={{
-            indexAxis: 'y',
+          indexAxis: 'y',
+          responsive: true,
+          color: 'white',
+          plugins:{
+          },
+          scales: {
+            xAxes:{
+              ticks:{
+                color: '#7F828F',
+                font: {
+                  family: 'lato'
+                }
+              },
+              grid:{
+                color: '#434450'
+              },
+            },
+            yAxes:{
+              grid:{
+                color: '#434450',
+              },
+              ticks:{
+                color: '#7F828F',
+                font: {
+                  family: 'lato'
+                }
+              },
+            },
+              
+          }
+          
         }}
       />
     </div>
