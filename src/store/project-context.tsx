@@ -11,10 +11,10 @@ type editObservationType = {
 type dataContext = {
   user: User; 
   userProjects: ProjectType[];
-  // observationArray: ObservationType[];
   projectUsers: ProjectUserType[];
   filterData: {heuristic: string, severity: string};
   createObservation: (observation: ObservationType, projectId: string) => void;
+  setProjectName: (projectId: string, name: string) => void;
   editObservation: ({newObservation, id, projectId}:editObservationType ) => void;
   deleteObservation: (id: string, projectId: string) => void;
   setHeuristicFilter: (event: React.ChangeEvent<HTMLSelectElement>) => void; 
@@ -27,8 +27,8 @@ const ProjectContext = React.createContext<dataContext>({
   user: {name: '', id: '', profileImg: ''},
   userProjects: [],
   projectUsers:[],
+  setProjectName: ()=>{},
   deleteProjectUsers: () => {},
-  // observationArray: [],
   filterData: {heuristic:'', severity: ''},
   deleteObservation: () => {},
   editObservation: () => {},

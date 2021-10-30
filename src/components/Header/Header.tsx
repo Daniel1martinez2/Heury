@@ -22,7 +22,7 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
   const handleNewProject = () => {
     const id = Math.random().toString(); 
     const newProject:ProjectType = {
-      name: 'prueba',
+      name: 'Untitled',
       id,
       users: [{...user, role: 'owner'}],
       observations:[],

@@ -1,31 +1,45 @@
-import React, {useState, useRef} from 'react'
-import { Link } from 'react-router-dom';
-import { VisualizationType } from '../../library/common/types';
+import React, {useState, useRef, useContext} from 'react'
+import { Link, useParams } from 'react-router-dom';
+import { ProjectParams, VisualizationType } from '../../library/common/types';
 import styles from './Nav.module.css'; 
+import ProjectContext from '../../store/project-context'; 
+
+
 interface NavInterface {
-  setVisualizationMode: React.Dispatch<React.SetStateAction<VisualizationType>>
+  setVisualizationMode: React.Dispatch<React.SetStateAction<VisualizationType>>;
 }
 const Nav: React.FC<NavInterface> = ({setVisualizationMode}) => {
   const [disabled, setDisabled] = useState(false); 
-  const [text, setText] = useState('Untitled'); 
+  const ctx = useContext(ProjectContext); 
+  const {setProjectName, userProjects} = ctx;
+  const params = useParams<ProjectParams>();
+  const {projectId} = params; 
+  const currentInput = useRef<HTMLInputElement>(null);   
+  const currentProject = userProjects.find(project => project.id === projectId); 
+  const [text, setText] = useState(!!currentProject? currentProject.name : ''); 
 
-  const currentInput = useRef<HTMLInputElement>(null); 
   const handleFocus = () => {
-    if(currentInput && currentInput.current){
+    if(!!currentInput && currentInput.current){
       currentInput?.current?.focus()
     }
   }
   const handleTextInput:React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setText(event.target.value); 
+    setProjectName(projectId, event.target.value);
+    // console.log(event.target.select());
   }
   const handleEnableInputDClick = () => {
+    if(!!currentInput && !!currentInput.current){
+      currentInput?.current?.select()
+    }
     setDisabled(true)
     handleFocus(); 
   }
   const handleInputBlur = () => {
     setDisabled(false); 
     if(text.trim().length === 0){
-      setText('Untitled'); 
+      setText('Untitled');
+      setProjectName(projectId, 'Untitled')
     }
   }
 
