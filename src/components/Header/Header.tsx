@@ -38,6 +38,7 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
           <Fragment>
             {setVisualizationMode && <Nav setVisualizationMode={setVisualizationMode}/>}
             {setVisualizationMode && visualizationMode && <Visualization visualizationMode={visualizationMode} setVisualizationMode={setVisualizationMode}/>}
+            
             <UsersProject type="project"/>
           </Fragment>
         ); 

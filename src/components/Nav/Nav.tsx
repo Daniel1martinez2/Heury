@@ -26,7 +26,6 @@ const Nav: React.FC<NavInterface> = ({setVisualizationMode}) => {
   const handleTextInput:React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setText(event.target.value); 
     setProjectName(projectId, event.target.value);
-    // console.log(event.target.select());
   }
   const handleEnableInputDClick = () => {
     if(!!currentInput && !!currentInput.current){
@@ -54,7 +53,6 @@ const Nav: React.FC<NavInterface> = ({setVisualizationMode}) => {
           <h1>All Reports </h1>
         </Link>
         <h1>/</h1>
-        {/* <h2 contentEditable dangerouslySetInnerHTML={{__html: 'algo'}} /> */} 
         <div className={styles["container"]}>
           <div onDoubleClick={handleEnableInputDClick} className={`${styles["clickable"]} ${disabled && styles['hidden']}`}/>
           <input 

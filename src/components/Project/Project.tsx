@@ -6,10 +6,10 @@ import styles from './Project.module.css';
 import ProjectThumb from '../ProjectThumb/ProjectThumb';
 import SignUp from '../Auth/Auth';
 import ProjectContext from '../../store/project-context'; 
-import Rive from 'rive-react'; 
+// import Rive from 'rive-react'; 
 //I had force this, because the library Rive is kinda new
 // @ts-ignore
-import anima from '../animations/anima.riv'; 
+// import anima from '../animations/anima.riv'; 
 import { VisualizationType } from '../../library/common/types';
 
 

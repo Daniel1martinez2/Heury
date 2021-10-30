@@ -1,5 +1,6 @@
 import React, {Fragment, useContext} from 'react'
 import { Redirect, useParams } from 'react-router-dom';
+import ChartHeury from '../components/ChartHeury/ChartHeury';
 import DocumentView from '../components/DocumentView/DocumentView';
 import Table from '../components/Table/Table';
 import {ProjectParams, VisualizationType} from '../library/common/types'; 
@@ -27,6 +28,7 @@ const HeuristicChunk:React.FC <HeuristicChunkInterface>  = ({mode}) => {
         </div>
       }
       {mode === 'table' && <Table id={projectId} filterData={filterData} observations={observations} />}
+      {mode === 'stats' && <ChartHeury data={observations}/>}
     </Fragment>
   )
 }

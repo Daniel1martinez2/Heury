@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import google from '../../library/img/google.svg'; 
 import git from '../../library/img/git.svg'; 
 import styles from './Auth.module.css'; 
-import { Route, useHistory } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import {motion, AnimateSharedLayout} from 'framer-motion'; 

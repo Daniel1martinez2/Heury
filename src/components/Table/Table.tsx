@@ -21,6 +21,7 @@ const Table: React.FC <TableInterface> = ({id, filterData, observations}) => {
   
   const [showModal, setShowModal] = useState(false); 
   const condition = (elem:ObservationType) => {
+    //improve 👀
     if (filterData.severity !== '' && filterData.heuristic !== ''){
       return (elem.severity === transformTypeToConstansCase(filterData.severity) && elem.severity !== '') && elem.heuristics.includes(transformTypeToConstansCase(filterData.heuristic)); 
     }else if(filterData.severity !== '' && filterData.heuristic === '' ){
@@ -30,12 +31,7 @@ const Table: React.FC <TableInterface> = ({id, filterData, observations}) => {
     }
   };
   
-  let dataArrayObservation = observations; 
-  if(filterData.heuristic === '' && filterData.severity === ''){
-    dataArrayObservation = observations;
-  }else{
-    dataArrayObservation = observations.filter(elem => condition(elem)); 
-  }; 
+  const dataArrayObservation = filterData.heuristic === '' && filterData.severity === ''? observations : observations.filter(elem => condition(elem));  
 
   const observationsComponent = dataArrayObservation.map((elem, index) => (
     <Observation 
