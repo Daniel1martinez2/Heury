@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react'
 import ProjectContext from '../../store/project-context'; 
 import {motion} from 'framer-motion'; 
 import styles from './ModalOverlay.module.css'; 
+import { nanoid } from 'nanoid'; 
 import '../../index.css';
 
 import CheckInput from '../CheckInput/CheckInput'; 
@@ -50,7 +51,7 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({setShowModal, editData, p
       severity: transformTypeToConstansCase(formRef.severity.value) ,
       evidence: evidence, 
       recommendations: formRef.solution.value, 
-      id:editData? editData.id : Math.random().toString(),
+      id:editData? editData.id : nanoid(),
     }
     if(!editData){
       createObservation(currentObservation, projectId); 
@@ -86,7 +87,7 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({setShowModal, editData, p
       <div className={styles['check-box']}>
         {heuristics.map(checkBoxElem => (
           <CheckInput 
-            key={Math.random().toString()} 
+            key={nanoid()} 
             onEditCheckBoxArray={onEditCheckBoxArray}
             validation={observationHeuristics.includes(checkBoxElem)}
             name={checkBoxElem} 

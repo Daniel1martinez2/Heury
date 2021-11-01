@@ -18,7 +18,7 @@ const UsersProject: React.FC<UsersProjectInterface> = ({type}) => {
       case 'project':
         return (
           <Fragment>
-            {projectUsers.length !== 1 && <span>+{projectUsers.length-1}</span>}
+            {projectUsers.length !== 1 && <span className={styles['users-length']}>+{projectUsers.length-1}</span>}
             <UserPP className={styles['main-pp']} imgSource={user.profileImg? user.profileImg : ''}/>      
           </Fragment>
         );

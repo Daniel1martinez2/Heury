@@ -28,7 +28,13 @@ const HeuristicChunk:React.FC <HeuristicChunkInterface>  = ({mode}) => {
         </div>
       }
       {mode === 'table' && <Table id={projectId} filterData={filterData} observations={observations} />}
-      {mode === 'stats' && <ChartHeury data={observations}/>}
+      {mode === 'stats' && (
+        <div className={styles['chart-area']}>
+          <div className={styles['chart-container']}>
+            <ChartHeury data={observations}/>
+          </div>
+        </div>
+      )}
     </Fragment>
   )
 }

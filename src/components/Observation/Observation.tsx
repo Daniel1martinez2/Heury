@@ -4,6 +4,7 @@ import styles from './Observation.module.css';
 import ModalCard from '../../UI/ModalCard'; 
 import ObservationForm from '../../UI/ModalScreen/ModalScreen'; 
 import {ObservationInterface} from '../../library/common/types'; 
+import { nanoid } from 'nanoid'; 
 
 import {normalizeText, setSeverityColor} from '../../library/common/commonFunc'; 
 import {AnimatePresence} from 'framer-motion'; 
@@ -51,7 +52,7 @@ const Observation:React.FC<ObservationInterface> = ({observationData, index, pro
         </td>
         <td>
           <ul className={styles['ul']}>
-            {observationData.heuristics.map(elem => <li key={Math.random()} >{normalizeText(elem)}</li>)}
+            {observationData.heuristics.map(elem => <li key={nanoid()} >{normalizeText(elem)}</li>)}
           </ul>
         </td>
         <td style={{backgroundColor: setSeverityColor(observationData.severity) }} className={styles["severity"]}>{observationData.severity}</td>

@@ -7,6 +7,7 @@ import {ObservationType} from '../../library/common/types';
 import {AnimatePresence} from 'framer-motion'; 
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import FIlterTable from '../TableActions/FilterTable'; 
+import { nanoid } from 'nanoid'; 
 
 interface TableInterface {
   id: string;
@@ -37,7 +38,7 @@ const Table: React.FC <TableInterface> = ({id, filterData, observations}) => {
     <Observation 
       projectId={id}
       index={index+1} 
-      key={Math.random()} 
+      key={nanoid()} 
       observationData={elem}
     />
   ));

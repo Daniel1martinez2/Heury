@@ -9,6 +9,7 @@ interface ChartHeuryInterface {
 }
 
 const ChartHeury: React.FC<ChartHeuryInterface> = ({data}) => {
+  // improve 
   const dataArray = Array.from({length: heuristics.length}); 
   const chunkData = data.map(e => e.heuristics).map(heury => heury.map(a => a.split(' ').join('') )); 
   let mergedData: string[] = [];
@@ -18,6 +19,24 @@ const ChartHeury: React.FC<ChartHeuryInterface> = ({data}) => {
   console.log(mergedData);
   dataArray.forEach((e, index) => dataArray[index] = mergedData.filter(h => h === heuristics[index]).length); 
   console.log(dataArray);
+
+  const barColors: string[] = [
+    '0, 201, 167',
+    '255, 140, 0',
+    '255, 0, 128',
+    '142, 45, 226',
+    '247, 227, 51',
+    '41, 72, 255',
+    '252, 103, 250',
+    '254, 180, 123',
+    '248, 80, 50',
+    '168, 224, 99'
+  ];
+
+  const setColor = (type: 'back' | 'border') => {
+    return barColors.map(color => type === 'back'? `rgba(${color}, 0.2)`: `rgba(${color}, 1)`)
+  }
+
   return (
     <div>
       <Bar
@@ -26,22 +45,8 @@ const ChartHeury: React.FC<ChartHeuryInterface> = ({data}) => {
           datasets: [{
               label: '# of Heuristic',
               data: dataArray,
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
+              backgroundColor: setColor('back'),
+              borderColor: setColor('border'),
 
               borderWidth: 1
           }]

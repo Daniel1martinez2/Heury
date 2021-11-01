@@ -1,12 +1,15 @@
-import React, {Fragment, useContext} from 'react'
+import React, {Fragment, useContext, useState} from 'react'; 
+import { nanoid } from 'nanoid'; 
 import styles from './Header.module.css'; 
 import plusSvg from '../../library/img/plus.svg'; 
+import settings from '../../library/img/settings.svg'; 
 import Nav from '../Nav/Nav'; 
 import UsersProject from '../Users/UsersProject';
 import Visualization from '../Visualization/Visualization'; 
 import ProjectContext from '../../store/project-context'; 
 import { ProjectType, VisualizationType } from '../../library/common/types';
 import {useHistory} from 'react-router-dom'; 
+import ModalScreen from '../../UI/ModalScreen/ModalScreen'; 
 
 interface HeaderInterface {
   type: 'project' | 'home'; 
@@ -18,9 +21,10 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
   const history = useHistory(); 
   const ctx = useContext(ProjectContext); 
   const {createProject, user} = ctx; 
+  const [modalView, setModalView] = useState<boolean>(false); 
 
   const handleNewProject = () => {
-    const id = Math.random().toString(); 
+    const id = nanoid(); 
     const newProject:ProjectType = {
       name: 'Untitled',
       id,
@@ -38,8 +42,15 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
           <Fragment>
             {setVisualizationMode && <Nav setVisualizationMode={setVisualizationMode}/>}
             {setVisualizationMode && visualizationMode && <Visualization visualizationMode={visualizationMode} setVisualizationMode={setVisualizationMode}/>}
-            
-            <UsersProject type="project"/>
+            <div className={styles['aside-actions']}>
+              <UsersProject type="project"/>
+              <button 
+                className={['reset-btn', styles['settings']].join(' ')}
+                onClick={() => setModalView(true)}
+              >
+                <img src={settings} alt="settings" />
+              </button>
+            </div>
           </Fragment>
         ); 
       case 'home':
@@ -63,6 +74,11 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
   return(
       <div className={styles['page-header']}>
         {renderNav()}
+        {modalView &&
+          (<ModalScreen setShowModal={setModalView}>
+            <h1>Settings Modal</h1>
+          </ModalScreen>)
+        }
       </div>
   ); 
 }

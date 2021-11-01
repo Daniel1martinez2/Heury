@@ -3,6 +3,7 @@ import styles from './DocumentView.module.css';
 import {ObservationType} from '../../library/common/types'; 
 import { normalizeText } from '../../library/common/commonFunc';
 import {setSeverityColor} from '../../library/common/commonFunc'; 
+import { nanoid } from 'nanoid'; 
 interface DocumentViewInterface {
   observationData: ObservationType;
   index: number
@@ -46,7 +47,7 @@ const DocumentView: React.FC<DocumentViewInterface>= ({observationData, index}) 
             <div className={styles['card']}>
               <h1>Heuristics</h1>
               <ul className={styles['heuristic-container']}>
-              {heuristics.map(elem => <li key={Math.random()} >{normalizeText(elem)}</li>)}
+              {heuristics.map(elem => <li key={nanoid()} >{normalizeText(elem)}</li>)}
               </ul>
             </div>
           </div>

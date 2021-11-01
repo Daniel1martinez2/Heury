@@ -3,6 +3,10 @@
   position: relative;
 }
 
+.users-length{
+  font-size: 14px; 
+  font-weight: bold; 
+}
 
 .container .main-pp{
   width: 20px;

@@ -1,5 +1,5 @@
 .page-header h1 {
-  font-size: 18px;
+  font-size: 14px;
   pointer-events: none;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -7,6 +7,25 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.aside-actions{
+  display: flex;
+  gap: 1em; 
+  justify-content: center;
+}
+
+.settings{
+  padding: 0 .5em; 
+  border-radius: 4px;
+}
+.settings:hover{
+  background-color: #262837;
+}
+
+.settings img{
+  display: block;
+  width: 90%;
 }
 
 .right-content{
