@@ -190,3 +190,7 @@ export const appear = {
     }
   }
 }
+
+export const appearOpacity = {
+  ...appear, visible:{ opacity: .7}
+}

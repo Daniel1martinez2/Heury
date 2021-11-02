@@ -20,11 +20,13 @@ type dataContext = {
   setHeuristicFilter: (event: React.ChangeEvent<HTMLSelectElement>) => void; 
   setSeverityFilter: (event: React.ChangeEvent<HTMLSelectElement>) => void; 
   deleteProjectUsers: (id:string)=>void; 
+  deleteProject: (projectId: string) => void; 
   createProject: (project:ProjectType) => void;
 };
 
 const ProjectContext = React.createContext<dataContext>({
   user: {name: '', id: '', profileImg: ''},
+  deleteProject: () => {},
   userProjects: [],
   projectUsers:[],
   setProjectName: ()=>{},

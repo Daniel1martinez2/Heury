@@ -54,6 +54,10 @@ const ProjectProvider = (props:any) => {
     }
   }
 
+  const deleteProject = (projectId: string) => {
+    setProjects(prev => prev.filter(project => project.id !== projectId)); 
+  }
+
   const deleteProjectUsers = (id: string) => {
     setProjectUsers([...projectUsers].filter(elem => elem.id !== id));
   }
@@ -71,7 +75,6 @@ const ProjectProvider = (props:any) => {
     user: {name: 'Daniel', id: 'asdsad', profileImg: 'https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9iMDVhNWNjMDY1M2FiNDNjNzU0NjY1ZmQxOWNmNzU3MT9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.AUtQ0KIK-lJbX9MAPyq_8rTlkO4_CiuhTGbmyvuJJ40'},
     userProjects: projects,
     filterData: filters,
-
     deleteObservation, 
     editObservation, 
     setProjectName,
@@ -80,6 +83,7 @@ const ProjectProvider = (props:any) => {
     setSeverityFilter,
     projectUsers, 
     deleteProjectUsers,
+    deleteProject,
     createProject
   }; 
   return(

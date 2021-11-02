@@ -9,9 +9,10 @@ interface ThumbMoreActionsInterface {
   className: string;
   optionsActive: (efe: boolean) => void;
   setOptionsVisibility: React.Dispatch<React.SetStateAction<boolean>>; 
+  handleDeleteProject: () => void; 
 }
 
-const ThumbMoreActions:React.FC<ThumbMoreActionsInterface> = ({className, optionsActive, setOptionsVisibility}) => {
+const ThumbMoreActions:React.FC<ThumbMoreActionsInterface> = ({className, optionsActive, setOptionsVisibility, handleDeleteProject}) => {
   const [visibility, setVisibility] = useState<boolean>(false);
   const optionsRef = useClickOutside(setVisibility, ()=>setOptionsVisibility(false));
   
@@ -38,13 +39,24 @@ const ThumbMoreActions:React.FC<ThumbMoreActionsInterface> = ({className, option
           exit="exit"
         >
           <button className={['reset-btn', styles['btn']].join(' ')}>Share</button>
-          <button className={['reset-btn', styles['btn']].join(' ')}>Delete</button>
+          <button 
+            className={['reset-btn', styles['btn']].join(' ')}
+            onClick={handleDeleteProject}
+          >
+            Delete
+          </button>
         </motion.div>
     );
   }
 
   return (
-    <div className={styles['btn-container']}>
+    <motion.div 
+      className={styles['btn-container']}
+      variants={appear}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <button 
         className={['reset-btn', styles['more'], className].join(' ')}
         onClick={handleOptionsClick}
@@ -58,7 +70,7 @@ const ThumbMoreActions:React.FC<ThumbMoreActionsInterface> = ({className, option
         {visibility && optionsDiv()}
       </AnimatePresence>
 
-    </div>
+    </motion.div>
   )
 }
 
