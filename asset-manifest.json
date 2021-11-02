@@ -1,29 +1,30 @@
 {
   "files": {
-    "main.css": "/Heury/static/css/main.ab97a554.chunk.css",
-    "main.js": "/Heury/static/js/main.8ca6533f.chunk.js",
-    "main.js.map": "/Heury/static/js/main.8ca6533f.chunk.js.map",
+    "main.css": "/Heury/static/css/main.06e9fd9f.chunk.css",
+    "main.js": "/Heury/static/js/main.de1b1e27.chunk.js",
+    "main.js.map": "/Heury/static/js/main.de1b1e27.chunk.js.map",
     "runtime-main.js": "/Heury/static/js/runtime-main.9f76a91a.js",
     "runtime-main.js.map": "/Heury/static/js/runtime-main.9f76a91a.js.map",
-    "static/js/2.76314313.chunk.js": "/Heury/static/js/2.76314313.chunk.js",
-    "static/js/2.76314313.chunk.js.map": "/Heury/static/js/2.76314313.chunk.js.map",
+    "static/js/2.32442408.chunk.js": "/Heury/static/js/2.32442408.chunk.js",
+    "static/js/2.32442408.chunk.js.map": "/Heury/static/js/2.32442408.chunk.js.map",
     "index.html": "/Heury/index.html",
-    "static/css/main.ab97a554.chunk.css.map": "/Heury/static/css/main.ab97a554.chunk.css.map",
-    "static/js/2.76314313.chunk.js.LICENSE.txt": "/Heury/static/js/2.76314313.chunk.js.LICENSE.txt",
+    "static/css/main.06e9fd9f.chunk.css.map": "/Heury/static/css/main.06e9fd9f.chunk.css.map",
+    "static/js/2.32442408.chunk.js.LICENSE.txt": "/Heury/static/js/2.32442408.chunk.js.LICENSE.txt",
     "static/media/FilterActions.module.css": "/Heury/static/media/arrow-down.416676d2.svg",
     "static/media/ModalOverlay.module.css": "/Heury/static/media/noCheck.277b2a24.svg",
     "static/media/git.d561aa2c.svg": "/Heury/static/media/git.d561aa2c.svg",
     "static/media/google.9ed16233.svg": "/Heury/static/media/google.9ed16233.svg",
     "static/media/lock.d35a333a.svg": "/Heury/static/media/lock.d35a333a.svg",
     "static/media/mail.8e2c3fb9.svg": "/Heury/static/media/mail.8e2c3fb9.svg",
+    "static/media/more.a703f652.svg": "/Heury/static/media/more.a703f652.svg",
     "static/media/plus.5a82668c.svg": "/Heury/static/media/plus.5a82668c.svg",
     "static/media/settings.348592bc.svg": "/Heury/static/media/settings.348592bc.svg",
     "static/media/user.256b62fa.svg": "/Heury/static/media/user.256b62fa.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.9f76a91a.js",
-    "static/js/2.76314313.chunk.js",
-    "static/css/main.ab97a554.chunk.css",
-    "static/js/main.8ca6533f.chunk.js"
+    "static/js/2.32442408.chunk.js",
+    "static/css/main.06e9fd9f.chunk.css",
+    "static/js/main.de1b1e27.chunk.js"
   ]
 }
