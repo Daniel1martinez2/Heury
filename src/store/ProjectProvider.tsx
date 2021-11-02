@@ -7,7 +7,7 @@ const ProjectProvider = (props:any) => {
   const [filters, setFilters] = useState({heuristic:'', severity: ''}); 
   const [projectUsers, setProjectUsers] = useState<ProjectUserType[]>(testUsers);
   const [projects, setProjects] = useState<ProjectType[]>([]); 
-
+  
   const checkProjectCurrent = (projectId: string) => {
     const projectsCopy = [...projects];
     const currentProject = projectsCopy.find( project => project.id === projectId); 
