@@ -194,3 +194,31 @@ export const appear = {
 export const appearOpacity = {
   ...appear, visible:{ opacity: .7}
 }
+
+export const dropDown = {
+  hidden: {
+    opacity: 0,
+    height:0,
+  }, 
+  visible: {
+    opacity: 1,
+    height: 'auto',
+    transition: {
+      duration: 0.25,
+      type: 'ease-in-out',
+      damping: 0,
+      stiffness: 0,
+    }
+  },
+
+  exit: {
+    opacity: 0,
+    height:0,
+    transition: {
+      duration: 0.25,
+      type: 'ease-in-out',
+      damping: 0,
+      stiffness: 0,
+    }
+  }
+}

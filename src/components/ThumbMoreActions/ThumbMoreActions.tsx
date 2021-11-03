@@ -3,7 +3,7 @@ import styles from './ThumbMoreActions.module.css';
 import more from '../../library/img/more.svg'; 
 import { motion, AnimatePresence } from 'framer-motion';
 import useClickOutside from '../../hooks/use-clickOutside';
-import {appear} from '../../library/common/commonData'; 
+import {appear, dropDown} from '../../library/common/commonData'; 
 
 interface ThumbMoreActionsInterface {
   className: string;
@@ -33,7 +33,7 @@ const ThumbMoreActions:React.FC<ThumbMoreActionsInterface> = ({className, option
       <motion.div 
           className={[styles['options']].join(' ')}
           ref={optionsRef}
-          variants={appear}
+          variants={dropDown}
           initial="hidden"
           animate="visible"
           exit="exit"

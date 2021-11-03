@@ -10,6 +10,8 @@ import ProjectContext from '../../store/project-context';
 import { ProjectType, VisualizationType } from '../../library/common/types';
 import {useHistory} from 'react-router-dom'; 
 import ModalScreen from '../../UI/ModalScreen/ModalScreen'; 
+import { AnimatePresence, motion } from 'framer-motion';
+import { appear } from '../../library/common/commonData';
 
 interface HeaderInterface {
   type: 'project' | 'home'; 
@@ -74,11 +76,23 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
   return(
       <div className={styles['page-header']}>
         {renderNav()}
-        {modalView &&
-          (<ModalScreen setShowModal={setModalView}>
-            <h1>Settings Modal</h1>
-          </ModalScreen>)
-        }
+        <AnimatePresence
+          initial={true}
+          exitBeforeEnter={true}
+        >
+          {modalView &&
+            (<ModalScreen setShowModal={setModalView}>
+              <motion.div
+                variants={appear}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <button>aaaa</button>
+              </motion.div>
+            </ModalScreen>)
+          }
+        </AnimatePresence>
       </div>
   ); 
 }

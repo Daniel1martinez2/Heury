@@ -10,6 +10,7 @@ interface UsersProjectInterface {
 }
 
 const UsersProject: React.FC<UsersProjectInterface> = ({type}) => {
+ 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const {projectUsers, user} = useContext(ProjectContext); 
   
