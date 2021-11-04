@@ -9,13 +9,14 @@ import {motion, AnimateSharedLayout} from 'framer-motion';
 interface DeleteUserInterface {
   setView: (value: React.SetStateAction<string>) => void;
   deleteUser: ProjectUserType;
+  projectId: string;
 }
 
-const DeleteUser: React.FC<DeleteUserInterface> = ({setView, deleteUser}) => {
+const DeleteUser: React.FC<DeleteUserInterface> = ({setView, deleteUser, projectId}) => {
   const ctx = useContext(ProjectContext); 
   const {deleteProjectUsers} = ctx; 
   const handleDeleteUser = () => {
-    deleteProjectUsers(deleteUser.id);
+    deleteProjectUsers(deleteUser.id, projectId);
     setView('projectUsersList'); 
   }
   return (

@@ -11,11 +11,12 @@ import UserActions from '../UserActions/UserActions';
 
 interface UsersProjectModalInterface {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  usersArray: ProjectUserType[];
-  type: 'home' | 'project'
+  usersArray?: ProjectUserType[];
+  type: 'home' | 'project';
+  projectId: string;
 }
 
-const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisible, usersArray, type}) => {
+const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisible, usersArray, type, projectId}) => {
   const containerRef = useClickOutside(setModalVisible); 
   const [view, setView] = useState('projectUsersList'); 
   const [searchUser, setSearchUser ] = useState(''); 
@@ -23,10 +24,10 @@ const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisibl
 
   const setCurrentUserToDelete = (id: string) => {
     setView('deleteUser')
-    setDeleteUser(usersArray.find(user => user.id === id))
+    if(!!usersArray) setDeleteUser(usersArray.find(user => user.id === id))
   }; 
   
-  const setViewModal = () => {
+  const setViewModal = (usersArray:ProjectUserType[]) => {
     switch(view){
       case 'projectUsersList':
         return <ProjectUsersList 
@@ -43,7 +44,9 @@ const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisibl
         if (deleteUser){
           return <DeleteUser 
             setView={setView} 
-            deleteUser={deleteUser}/>; 
+            deleteUser={deleteUser}
+            projectId={projectId}
+            />
         }
     }
   };
@@ -53,7 +56,7 @@ const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisibl
       case 'home': 
         return <UserActions />; 
       case 'project': 
-        return setViewModal(); 
+        return !!usersArray? setViewModal(usersArray): <h1>s</h1>; 
     }
   }
   

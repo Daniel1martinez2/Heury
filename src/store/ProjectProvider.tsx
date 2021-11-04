@@ -3,10 +3,12 @@ import {ObservationType, ProjectUserType, ProjectType } from '../library/common/
 import {testUsers} from '../library/common/commonData'; 
 import ProjectContext from "./project-context";
 
+// ProjectUserType[]
+
 const ProjectProvider = (props:any) => {
   const [filters, setFilters] = useState({heuristic:'', severity: ''}); 
-  const [projectUsers, setProjectUsers] = useState<ProjectUserType[]>(testUsers);
-  const [projects, setProjects] = useState<ProjectType[]>([]); 
+  // const [projectUsers, setProjectUsers] = useState<ProjectUserType[]>(testUsers);
+  const [projects, setProjects] = useState<ProjectType[]>([]);
   
   const checkProjectCurrent = (projectId: string) => {
     const projectsCopy = [...projects];
@@ -58,8 +60,13 @@ const ProjectProvider = (props:any) => {
     setProjects(prev => prev.filter(project => project.id !== projectId)); 
   }
 
-  const deleteProjectUsers = (id: string) => {
-    setProjectUsers([...projectUsers].filter(elem => elem.id !== id));
+  const deleteProjectUsers = (userId: string, projectId: string) => {
+    const {currentProject, projectsCopy} = checkProjectCurrent(projectId); 
+    if (!!currentProject){
+      const {users} = currentProject; 
+      currentProject.users = users.filter(elem => elem.id !== userId); 
+      setProjects(projectsCopy);
+    }
   }
 
   //Other
@@ -81,7 +88,6 @@ const ProjectProvider = (props:any) => {
     createObservation, 
     setHeuristicFilter,
     setSeverityFilter,
-    projectUsers, 
     deleteProjectUsers,
     deleteProject,
     createProject

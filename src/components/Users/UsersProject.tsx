@@ -4,22 +4,29 @@ import UserPP from '../../UI/UserPP';
 import styles from './UserProject.module.css';
 import {AnimatePresence} from 'framer-motion'; 
 import UsersProjectModal from '../UsersProjectModal/UsersProjectModal'; 
+import { Redirect, useParams } from 'react-router';
+import { ProjectParams } from '../../library/common/types';
 
 interface UsersProjectInterface {
-  type: 'project' | 'home'
+  type: 'project' | 'home';
 }
 
 const UsersProject: React.FC<UsersProjectInterface> = ({type}) => {
- 
+  const params = useParams<ProjectParams>();
+  const {projectId} = params; 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const {projectUsers, user} = useContext(ProjectContext); 
+  const {userProjects, user} = useContext(ProjectContext); 
+  const currentProject = userProjects.find(project => project.id === projectId); 
   
+
   const renderUserProject = () => {
     switch (type){
       case 'project':
+        if(!currentProject) return <Redirect to="/"/>;
+        const {users} = currentProject; 
         return (
           <Fragment>
-            {projectUsers.length !== 1 && <span className={styles['users-length']}>+{projectUsers.length-1}</span>}
+            {users.length !== 1 && <span className={styles['users-length']}>+{users.length-1}</span>}
             <UserPP className={styles['main-pp']} imgSource={user.profileImg? user.profileImg : ''}/>      
           </Fragment>
         );
@@ -31,6 +38,27 @@ const UsersProject: React.FC<UsersProjectInterface> = ({type}) => {
             </Fragment>
           ); 
     }
+  }
+
+  const renderUsesProjectModal = () => {
+    if(!currentProject){
+      return (
+        <UsersProjectModal 
+        type={type} 
+        setModalVisible={setModalVisible} 
+        projectId={projectId}
+      />
+      )
+    };
+    const {users} = currentProject; 
+    return (
+      <UsersProjectModal 
+        type={type} 
+        usersArray={users} 
+        setModalVisible={setModalVisible} 
+        projectId={projectId}
+      />
+    )
   }
 
   return (
@@ -45,7 +73,7 @@ const UsersProject: React.FC<UsersProjectInterface> = ({type}) => {
         initial={false}
         exitBeforeEnter={true}
       >
-        {modalVisible && <UsersProjectModal type={type} usersArray={projectUsers} setModalVisible={setModalVisible} />}
+        {modalVisible && renderUsesProjectModal()}
       </AnimatePresence>
     </div>
   )

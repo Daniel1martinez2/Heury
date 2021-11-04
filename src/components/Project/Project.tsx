@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'; 
 import Header from '../Header/Header'; 
 import HeuristicChunk from '../../HeuristicChunk/HeuristicChunk'; 
-import { Route } from 'react-router-dom';
+import { Route} from 'react-router-dom';
 import styles from './Project.module.css'; 
 import ProjectThumb from '../ProjectThumb/ProjectThumb';
 import SignUp from '../Auth/Auth';
@@ -20,7 +20,11 @@ const Project = () => {
   return(
     <div className={styles['app']}>
       <Route path="/project/:projectId">
-        <Header visualizationMode={visualizationMode} type="project" setVisualizationMode={setVisualizationMode}/>
+        <Header 
+          visualizationMode={visualizationMode} 
+          type="project" 
+          setVisualizationMode={setVisualizationMode}
+        />
         <HeuristicChunk mode={visualizationMode}/>
       </Route>
       <Route path="/session">

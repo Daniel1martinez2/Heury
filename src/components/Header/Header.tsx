@@ -11,7 +11,7 @@ import { ProjectType, VisualizationType } from '../../library/common/types';
 import {useHistory} from 'react-router-dom'; 
 import ModalScreen from '../../UI/ModalScreen/ModalScreen'; 
 import { AnimatePresence, motion } from 'framer-motion';
-import { appear } from '../../library/common/commonData';
+import { appear, testUsers } from '../../library/common/commonData';
 
 interface HeaderInterface {
   type: 'project' | 'home'; 
@@ -30,7 +30,8 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
     const newProject:ProjectType = {
       name: 'Untitled',
       id,
-      users: [{...user, role: 'owner'}],
+      // users: [{...user, role: 'owner'}],
+      users: [{...user, role: 'owner'}, ...testUsers],
       observations:[],
     }
     createProject(newProject);
@@ -88,7 +89,7 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
                 animate="visible"
                 exit="exit"
               >
-                <button>aaaa</button>
+                <h1>Project Settings 🔥</h1>
               </motion.div>
             </ModalScreen>)
           }
