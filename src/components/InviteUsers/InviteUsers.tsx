@@ -5,6 +5,7 @@ import {appear, testUsers} from '../../library/common/commonData';
 import styles from './InviteUsers.module.css'; 
 import {ProjectUserType} from '../../library/common/types'; 
 import UnderBtnActions from '../UnderBtnActions/UnderBtnActions';
+import InvitedUser from '../InvitedUser/InvitedUser';
 
 interface InviteUsersInterface {
   searchUser: string;
@@ -62,7 +63,14 @@ const InviteUsers: React.FC<InviteUsersInterface> = ({searchUser, usersArray, se
           type="text" 
         />
         {recommendUserListActive()}
-        {false && <div className={styles['users-selected']}></div>}
+        {true && (
+          <div className={styles['users-selected']}>
+            <InvitedUser name="Daniel Martinez"/>
+            <InvitedUser name="Sofia"/>
+            <InvitedUser name="Pepito Perez"/>
+            <InvitedUser name="Ejemplo nu 2"/>
+          </div>
+        )}
       </div>
       <UnderBtnActions
         rightBtnValue="Invite Evaluators"

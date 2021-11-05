@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react'; 
 import ProjectContext from '../../store/project-context';
-import {useParams} from 'react-router-dom'; 
+import {useParams, useHistory} from 'react-router-dom'; 
 import { motion } from 'framer-motion';
 import { appear } from '../../library/common/commonData';
 import styles from './ProjectSettings.module.css'; 
@@ -13,8 +13,9 @@ interface ProjectSettingsInterface {
 }
 
 const ProjectSettings: React.FC<ProjectSettingsInterface> = ({onCloseSettings}) => {
+  const history = useHistory(); 
   const ctx = useContext(ProjectContext); 
-  const {setProjectCover, userProjects, setProjectName} = ctx; 
+  const {setProjectCover, userProjects, setProjectName, deleteProject} = ctx; 
   const params = useParams<ProjectParams>(); 
   const {projectId} = params; 
   const currentProject = userProjects.find(project => project.id === projectId); 
@@ -26,11 +27,15 @@ const ProjectSettings: React.FC<ProjectSettingsInterface> = ({onCloseSettings}) 
   const handleSubmit:React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault(); 
     setProjectCover(projectId, image); 
-    setProjectName(projectId, input); 
+    setProjectName(projectId, input.trim() === '' ? 'Untitled' : input); 
     onCloseSettings(); 
   };
   const handleInput:React.ChangeEventHandler<HTMLInputElement>  = (e) =>{
     setInput(e.target.value); 
+  }
+  const handleDeleteProject = () => {
+    deleteProject(projectId); 
+    history.push('/'); 
   }
   return (
     <motion.div
@@ -62,6 +67,7 @@ const ProjectSettings: React.FC<ProjectSettingsInterface> = ({onCloseSettings}) 
               <button 
                 type="button" 
                 className={[styles['delete'], 'reset-btn'].join(' ')}
+                onClick={handleDeleteProject}
               > 
                 Delete Project
               </button>

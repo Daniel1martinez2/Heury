@@ -21,7 +21,7 @@
 .form-data{
   border-radius: 8px; 
   overflow: hidden; 
-  border: 1px solid #7F8191;
+  border: 2px solid #4A4C5F;
   background-color: #262837;
   display: flex;
 }
@@ -40,7 +40,7 @@
   gap: .5em; 
   padding: 1em; 
   width: 40%; 
-  border-right: 1px solid #7F8191;
+  border-right: 2px solid #4A4C5F;
 }
 .set-image img{
   height: 230px !important;
@@ -76,9 +76,7 @@
   border-radius: 4px;
   color: #FAFAFE; 
 }
-.input div{
 
-}
 .delete-container{
   padding: 1em; 
   border: 1px solid #f85149; 

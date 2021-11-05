@@ -10,8 +10,8 @@ import ProjectContext from '../../store/project-context';
 import { ProjectType, VisualizationType } from '../../library/common/types';
 import {useHistory} from 'react-router-dom'; 
 import ModalScreen from '../../UI/ModalScreen/ModalScreen'; 
-import { AnimatePresence, motion } from 'framer-motion';
-import { appear, testUsers } from '../../library/common/commonData';
+import { AnimatePresence } from 'framer-motion';
+import { testUsers } from '../../library/common/commonData';
 import ProjectSettings from '../ProjectSettings/ProjectSettings';
 
 interface HeaderInterface {

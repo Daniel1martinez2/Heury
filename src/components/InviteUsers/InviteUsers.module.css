@@ -27,6 +27,9 @@
 }
 
 .users-selected{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5em; 
   width: 100%;
 }
 

@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
-import {ObservationType, ProjectUserType, ProjectType } from '../library/common/types'; 
-import {testUsers} from '../library/common/commonData'; 
+import {ObservationType, ProjectType } from '../library/common/types'; 
 import ProjectContext from "./project-context";
 
 // ProjectUserType[]
