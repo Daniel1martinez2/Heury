@@ -10,6 +10,5 @@
   top: 50%; 
   left: .5em; 
   transform: translate(0, -50%); 
-  /* background-color: red; */
   height: 45%; 
 }

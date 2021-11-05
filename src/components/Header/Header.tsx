@@ -12,6 +12,7 @@ import {useHistory} from 'react-router-dom';
 import ModalScreen from '../../UI/ModalScreen/ModalScreen'; 
 import { AnimatePresence, motion } from 'framer-motion';
 import { appear, testUsers } from '../../library/common/commonData';
+import ProjectSettings from '../ProjectSettings/ProjectSettings';
 
 interface HeaderInterface {
   type: 'project' | 'home'; 
@@ -37,6 +38,9 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
     createProject(newProject);
     history.push(`/project/${id}/table`); 
   }
+
+  const handleCloseSettings = () => setModalView(false); 
+  
 
   const renderNav = () => {
     switch (type) {
@@ -83,14 +87,7 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
         >
           {modalView &&
             (<ModalScreen setShowModal={setModalView}>
-              <motion.div
-                variants={appear}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-              >
-                <h1>Project Settings 🔥</h1>
-              </motion.div>
+              <ProjectSettings onCloseSettings={handleCloseSettings}/>
             </ModalScreen>)
           }
         </AnimatePresence>

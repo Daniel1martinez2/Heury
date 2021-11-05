@@ -1,7 +1,7 @@
 import React from 'react'; 
 import {motion} from 'framer-motion';
 import UserProjectListItem from '../UserProjectListItem/UserProjectListItem';
-import {appear} from '../../library/common/commonData'; 
+import {appear, testUsers} from '../../library/common/commonData'; 
 import styles from './InviteUsers.module.css'; 
 import {ProjectUserType} from '../../library/common/types'; 
 import UnderBtnActions from '../UnderBtnActions/UnderBtnActions';
@@ -18,6 +18,11 @@ const InviteUsers: React.FC<InviteUsersInterface> = ({searchUser, usersArray, se
   const handleSearchUser:React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setSearchUser(e.target.value); 
   }
+  
+  const getSearchUserArray = (value: string) => {
+    const regex = new RegExp(`^${value.toLowerCase()}`, 'i'); 
+    return testUsers.filter(user =>  regex.test(user.name.toLowerCase()))
+  }
 
   const recommendUserListActive = () => {
     if(searchUser.trim() !== ''){
@@ -29,7 +34,7 @@ const InviteUsers: React.FC<InviteUsersInterface> = ({searchUser, usersArray, se
           animate="visible"
           exit="exit"
         >
-          <UserProjectListItem type="search" data={usersArray[0]}/>
+          {getSearchUserArray(searchUser).map(user => <UserProjectListItem key={user.id} type="search" data={user}/> )}
         </motion.div>
       )
     }

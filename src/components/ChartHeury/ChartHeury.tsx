@@ -11,15 +11,16 @@ interface ChartHeuryInterface {
 const ChartHeury: React.FC<ChartHeuryInterface> = ({data}) => {
   // improve 
   const dataArray = Array.from({length: heuristics.length}); 
-  const chunkData = data.map(e => e.heuristics).map(heury => heury.map(a => a.split(' ').join('') )); 
-  let mergedData: string[] = [];
-  chunkData.forEach(e => {
-    mergedData.push(...e)
+  const chunkData = data.map(d => d.heuristics).map(heury => heury.map(h => h.split(' ').join('') )); 
+  
+  const mergedData: string[] = [];
+  chunkData.forEach(cd => {
+    mergedData.push(...cd)
   }); 
-  console.log(mergedData);
-  dataArray.forEach((e, index) => dataArray[index] = mergedData.filter(h => h === heuristics[index]).length); 
-  console.log(dataArray);
 
+  dataArray.forEach((da, index) => dataArray[index] = mergedData.filter(h => h === heuristics[index]).length);
+  // ----> improve
+  
   const barColors: string[] = [
     '0, 201, 167',
     '255, 140, 0',
@@ -36,18 +37,15 @@ const ChartHeury: React.FC<ChartHeuryInterface> = ({data}) => {
   const setColor = (type: 'back' | 'border') => {
     return barColors.map(color => type === 'back'? `rgba(${color}, 0.2)`: `rgba(${color}, 1)`)
   }
-
   return (
     <div>
       <Bar
         data={{
           labels: heuristics.map(heury => transformTypeToConstansCase(heury)),
           datasets: [{
-              label: '# of Heuristic',
               data: dataArray,
               backgroundColor: setColor('back'),
               borderColor: setColor('border'),
-
               borderWidth: 1
           }]
         }}
@@ -58,6 +56,7 @@ const ChartHeury: React.FC<ChartHeuryInterface> = ({data}) => {
           responsive: true,
           color: 'white',
           plugins:{
+            legend: { display: false, }
           },
           scales: {
             xAxes:{

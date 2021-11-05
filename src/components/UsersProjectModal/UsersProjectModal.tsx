@@ -19,7 +19,7 @@ interface UsersProjectModalInterface {
 const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisible, usersArray, type, projectId}) => {
   const containerRef = useClickOutside(setModalVisible); 
   const [view, setView] = useState('projectUsersList'); 
-  const [searchUser, setSearchUser ] = useState(''); 
+  const [searchUser, setSearchUser ] = useState<string>(''); 
   const [deleteUser, setDeleteUser] = useState<ProjectUserType>(); 
 
   const setCurrentUserToDelete = (id: string) => {

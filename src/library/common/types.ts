@@ -35,6 +35,7 @@ export type ProjectType = {
   id: string;
   users: ProjectUserType[]; 
   observations: ObservationType[]; 
+  coverImage?: string;
 }
 
 export interface ObservationInterface {

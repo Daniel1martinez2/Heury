@@ -45,6 +45,13 @@ const ProjectProvider = (props:any) => {
       setProjects(projectsCopy); 
     }
   };
+  const setProjectCover = (projectId:string, img: string) => {
+    const {currentProject, projectsCopy} = checkProjectCurrent(projectId);
+    if(!!currentProject){
+      currentProject.coverImage = img; 
+      setProjects(projectsCopy); 
+    }
+  }
 
   //Delete
   const deleteObservation = (id:string, projectId: string) => {
@@ -90,7 +97,8 @@ const ProjectProvider = (props:any) => {
     setSeverityFilter,
     deleteProjectUsers,
     deleteProject,
-    createProject
+    createProject,
+    setProjectCover
   }; 
   return(
     <ProjectContext.Provider value={projectContextData}>

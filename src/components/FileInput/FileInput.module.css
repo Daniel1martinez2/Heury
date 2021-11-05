@@ -8,6 +8,7 @@
   /* border: 2px solid #4A4C5F; */
   border: 1px solid #FAFAFE;
   border-radius: 4px;
+  color: #FAFAFE; 
 }
 .btn-container:hover{
   border: 1px solid #FF7451;

@@ -1,0 +1,99 @@
+.container{
+  background-color: #353748;
+  border-radius: 8px;
+  padding: 2em; 
+  width: 80vw;
+  max-width: 1024px; 
+  display: flex;
+  flex-direction: column;
+  gap: 1em; 
+  color: #FAFAFE; 
+}
+.container h1{
+  font-size: 18px; 
+}
+.container form{
+  display: flex;
+  flex-direction: column;
+  gap: 1em; 
+}
+
+.form-data{
+  border-radius: 8px; 
+  overflow: hidden; 
+  border: 1px solid #7F8191;
+  background-color: #262837;
+  display: flex;
+}
+
+.actions{
+  padding: 1em; 
+  width: 60%; 
+  display: flex;
+  flex-direction: column;
+  gap: 1em; 
+}
+
+.set-image{
+  display: flex;
+  flex-direction: column;
+  gap: .5em; 
+  padding: 1em; 
+  width: 40%; 
+  border-right: 1px solid #7F8191;
+}
+.set-image img{
+  height: 230px !important;
+  object-fit: cover;
+  object-position: 0 0;
+}
+.set-image h2{
+  font-size: 16px; 
+  font-weight: 400;
+}
+
+.submit{
+  align-self: flex-end;
+  width: fit-content;
+}
+
+.input{
+  display: flex;
+  flex-direction: column;
+  gap: .5em; 
+}
+
+.input div input:focus{
+  border: 1px solid #FAFAFE; 
+
+}
+.input div input{
+  width: 100%;  
+  outline: none; 
+  background-color: transparent !important; 
+  border: 1px solid #7F8191; 
+  padding: .5em; 
+  border-radius: 4px;
+  color: #FAFAFE; 
+}
+.input div{
+
+}
+.delete-container{
+  padding: 1em; 
+  border: 1px solid #f85149; 
+  border-radius: 4px; 
+}
+.delete{
+  background-color: #353748;
+  color: #f85149; 
+  padding: .5em; 
+  width: 100%;
+  border-radius: 4px;
+}
+
+.submit{
+  padding: .5em; 
+  border-radius: 4px;
+  background-color: #FF7451;
+}

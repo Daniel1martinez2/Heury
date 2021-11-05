@@ -16,7 +16,6 @@ const Nav: React.FC<NavInterface> = ({setVisualizationMode}) => {
   const {projectId} = params; 
   const currentInput = useRef<HTMLInputElement>(null);   
   const currentProject = userProjects.find(project => project.id === projectId); 
-  const [text, setText] = useState(!!currentProject? currentProject.name : ''); 
 
   const handleFocus = () => {
     if(!!currentInput && currentInput.current){
@@ -24,7 +23,6 @@ const Nav: React.FC<NavInterface> = ({setVisualizationMode}) => {
     }
   }
   const handleTextInput:React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setText(event.target.value); 
     setProjectName(projectId, event.target.value);
   }
   const handleEnableInputDClick = () => {
@@ -36,8 +34,7 @@ const Nav: React.FC<NavInterface> = ({setVisualizationMode}) => {
   }
   const handleInputBlur = () => {
     setDisabled(false); 
-    if(text.trim().length === 0){
-      setText('Untitled');
+    if(currentProject?.name.trim().length === 0){
       setProjectName(projectId, 'Untitled')
     }
   }
@@ -65,7 +62,7 @@ const Nav: React.FC<NavInterface> = ({setVisualizationMode}) => {
             onChange={handleTextInput} 
             type="text"
             autoComplete="off" 
-            value={text}/>
+            value={currentProject?.name}/>
         </div>
         
       </div>

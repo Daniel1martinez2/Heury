@@ -21,6 +21,7 @@ type dataContext = {
   deleteProjectUsers: (id:string, projectId: string)=>void; 
   deleteProject: (projectId: string) => void; 
   createProject: (project:ProjectType) => void;
+  setProjectCover: (projectId: string, image: string) => void;
 };
 
 const ProjectContext = React.createContext<dataContext>({
@@ -35,7 +36,8 @@ const ProjectContext = React.createContext<dataContext>({
   createObservation: () => {},
   setHeuristicFilter: () => {},
   setSeverityFilter: () => {},
-  createProject: () => {}
+  createProject: () => {},
+  setProjectCover: () => {},
 });
 
 export default ProjectContext;

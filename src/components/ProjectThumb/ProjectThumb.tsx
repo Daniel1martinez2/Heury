@@ -68,7 +68,7 @@ const ProjectThumb: React.FC<ProjectThumbInterface> = ({data}) => {
               )
             }
           </AnimatePresence>
-          <img className={styles['img']} src={noImage} alt="project thumbnail" />
+          <img className={styles['img']} src={data.coverImage || noImage} alt="project thumbnail" />
         </Link>
       </div>
       <div className={styles['title-container']}>
