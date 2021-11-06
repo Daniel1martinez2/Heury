@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {ObservationType, ProjectType } from '../library/common/types'; 
+import {ObservationType, ProjectType, ProjectUserType } from '../library/common/types'; 
 import ProjectContext from "./project-context";
 
 // ProjectUserType[]
@@ -24,7 +24,15 @@ const ProjectProvider = (props:any) => {
 
   const createProject = (project:ProjectType) => {
     setProjects(prev => [...prev, project ]); 
-  }; 
+  };
+
+  const addUsersProject = (projectId: string, users: ProjectUserType[]) => {
+    const {currentProject, projectsCopy} = checkProjectCurrent(projectId); 
+    if (!!currentProject){
+      currentProject.users.push(...users); 
+      setProjects(projectsCopy); 
+    }
+  }
 
   //Edit
   const editObservation = ({newObservation, id, projectId}:{newObservation:ObservationType, id: string, projectId: string}) => {
@@ -97,7 +105,8 @@ const ProjectProvider = (props:any) => {
     deleteProjectUsers,
     deleteProject,
     createProject,
-    setProjectCover
+    setProjectCover,
+    addUsersProject
   }; 
   return(
     <ProjectContext.Provider value={projectContextData}>

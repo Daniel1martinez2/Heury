@@ -32,7 +32,7 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
       name: 'Untitled',
       id,
       // users: [{...user, role: 'owner'}],
-      users: [{...user, role: 'owner'}, ...testUsers],
+      users: [{...user, role: 'owner'}],
       observations:[],
     }
     createProject(newProject);

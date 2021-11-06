@@ -26,6 +26,9 @@ const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisibl
     setView('deleteUser')
     if(!!usersArray) setDeleteUser(usersArray.find(user => user.id === id))
   }; 
+  const handleResetView = () => {
+    setView('projectUsersList')
+  }
   
   const setViewModal = (usersArray:ProjectUserType[]) => {
     switch(view){
@@ -33,13 +36,16 @@ const UsersProjectModal: React.FC<UsersProjectModalInterface> = ({setModalVisibl
         return <ProjectUsersList 
           onDelete={setCurrentUserToDelete} 
           usersArray={usersArray} 
-          setView={setView} />;  
+          setView={setView} 
+          />;  
       case 'inviteUsers':
         return <InviteUsers 
-          searchUser={searchUser} 
-          usersArray={usersArray} 
+          searchUser={searchUser}  
           setSearchUser={setSearchUser} 
-          setView={setView} />; 
+
+          projectId={projectId}
+          handleResetView={handleResetView}
+          />; 
       case 'deleteUser':
         if (deleteUser){
           return <DeleteUser 

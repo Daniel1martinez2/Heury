@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ObservationType, User, ProjectType } from "../library/common/types";
+import { ObservationType, User, ProjectType, ProjectUserType } from "../library/common/types";
 
 type editObservationType = {
   newObservation: ObservationType;
@@ -22,6 +22,7 @@ type dataContext = {
   deleteProject: (projectId: string) => void; 
   createProject: (project:ProjectType) => void;
   setProjectCover: (projectId: string, image: string) => void;
+  addUsersProject: (projectId: string, project:ProjectUserType[]) => void; 
 };
 
 const ProjectContext = React.createContext<dataContext>({
@@ -38,6 +39,7 @@ const ProjectContext = React.createContext<dataContext>({
   setSeverityFilter: () => {},
   createProject: () => {},
   setProjectCover: () => {},
+  addUsersProject: () => {}
 });
 
 export default ProjectContext;
