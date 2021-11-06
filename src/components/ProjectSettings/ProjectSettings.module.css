@@ -31,7 +31,8 @@
   width: 60%; 
   display: flex;
   flex-direction: column;
-  gap: 1em; 
+  gap: 2em; 
+  
 }
 
 .set-image{
@@ -94,4 +95,11 @@
   padding: .5em; 
   border-radius: 4px;
   background-color: #FF7451;
+}
+
+.delete-area{
+  display: flex;
+  flex-direction: column;
+  gap: .5em; 
+  color: #f85149; 
 }

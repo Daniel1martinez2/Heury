@@ -11,7 +11,7 @@
   -webkit-box-shadow: 18px 10px 56px 10px rgba(16, 14, 27, 0.86);
   -moz-box-shadow: 18px 10px 56px 10px rgba(0, 0, 0, 0.86);
   overflow: auto;
-  height: 600px; 
+  height: 60vh; 
 }
 
 .form label:not(.textarea-label){

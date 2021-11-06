@@ -26,7 +26,11 @@ const InviteUsers: React.FC<InviteUsersInterface> = ({searchUser, setSearchUser,
   
   const getSearchUserArray = (value: string) => {
     const regex = new RegExp(`^${value.toLowerCase()}`, 'i'); 
-    return testUsers.filter(user => regex.test(user.name.toLowerCase()) && !selectedUsers.includes(user) && !currentProject?.users.includes(user))
+    return testUsers.filter(user => (
+      regex.test(user.name.toLowerCase()) 
+      && !selectedUsers.includes(user) 
+      && !currentProject?.users.includes(user)
+    ))
   }
 
   const handleSelectUser = (user: ProjectUserType) => {
@@ -39,8 +43,10 @@ const InviteUsers: React.FC<InviteUsersInterface> = ({searchUser, setSearchUser,
   }
 
   const handleInviteUsers = () => {
-    addUsersProject(projectId, selectedUsers); 
-    handleResetView(); 
+    if (selectedUsers.length > 0){
+      addUsersProject(projectId, selectedUsers); 
+      handleResetView(); 
+    }
   }
 
   const recommendUserListActive = () => {
@@ -76,7 +82,6 @@ const InviteUsers: React.FC<InviteUsersInterface> = ({searchUser, setSearchUser,
       initial="hidden"
       animate="visible"
       exit="exit"
-      
     >
       <h1>Invite Evaluators To This Project</h1>
       <div className={styles['actions-container']}>
@@ -99,6 +104,7 @@ const InviteUsers: React.FC<InviteUsersInterface> = ({searchUser, setSearchUser,
         rightBtnValue="Invite Evaluators"
         cancelFunction={handleCancel}
         rightBtnFunction={handleInviteUsers}
+        disableRightBtn={selectedUsers.length === 0}
       /> 
     </motion.div>
   );

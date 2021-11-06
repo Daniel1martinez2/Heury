@@ -5,9 +5,10 @@ interface underBtnActionsInterface {
   rightBtnValue: string; 
   cancelFunction: () => void; 
   rightBtnFunction: () => void;  
+  disableRightBtn?: boolean
 }
 
-const UnderBtnActions:React.FC<underBtnActionsInterface> = ({rightBtnValue, cancelFunction, rightBtnFunction}) => {
+const UnderBtnActions:React.FC<underBtnActionsInterface> = ({rightBtnValue, cancelFunction, rightBtnFunction, disableRightBtn}) => {
   return (
     <div className={styles['btn-container']}>
           <button 
@@ -18,7 +19,7 @@ const UnderBtnActions:React.FC<underBtnActionsInterface> = ({rightBtnValue, canc
           </button>
           <button 
             onClick={rightBtnFunction}
-            className={`reset-btn ${styles['add']} ${styles['active']}`}
+            className={['reset-btn', styles['add'], styles['active'], disableRightBtn ? styles['disabled'] : ''].join(' ')}
           >
             {rightBtnValue}
           </button>

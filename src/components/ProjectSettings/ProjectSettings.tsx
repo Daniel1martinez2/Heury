@@ -63,14 +63,17 @@ const ProjectSettings: React.FC<ProjectSettingsInterface> = ({onCloseSettings}) 
               defaultText={input}
               handleChange={handleInput}
             />
-            <div className={styles['delete-container']}>  
-              <button 
-                type="button" 
-                className={[styles['delete'], 'reset-btn'].join(' ')}
-                onClick={handleDeleteProject}
-              > 
-                Delete Project
-              </button>
+            <div className={styles['delete-area']}>
+              <span>Warning Area</span>
+              <div className={styles['delete-container']}>  
+                <button 
+                  type="button" 
+                  className={[styles['delete'], 'reset-btn'].join(' ')}
+                  onClick={handleDeleteProject}
+                > 
+                  Delete Project
+                </button>
+              </div>
             </div>
           </div>
         </div>
