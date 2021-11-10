@@ -86,3 +86,23 @@ table tr:hover .t-header .more{
   flex-direction: column;
   gap: .3em;
 }
+
+.evidence-img{
+  max-width: 500px;
+  max-height: 300px;
+  border-radius: 8px;
+  display: block;
+  cursor: pointer;
+}
+.evidence-img:hover{
+  opacity: 0.5;
+}
+
+.modal-img{
+  border-radius: 8px;
+  max-width: 60vw;
+  max-height: 80vh;
+  box-shadow: 18px 10px 56px 10px rgba(2, 2, 3, 0.9);
+  -webkit-box-shadow: 18px 10px 56px 10px rgba(16, 14, 27, 0.9);
+  -moz-box-shadow: 18px 10px 56px 10px rgba(0, 0, 0, 0.9);
+}

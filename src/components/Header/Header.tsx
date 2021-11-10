@@ -11,7 +11,6 @@ import { ProjectType, VisualizationType } from '../../library/common/types';
 import {useHistory} from 'react-router-dom'; 
 import ModalScreen from '../../UI/ModalScreen/ModalScreen'; 
 import { AnimatePresence } from 'framer-motion';
-import { testUsers } from '../../library/common/commonData';
 import ProjectSettings from '../ProjectSettings/ProjectSettings';
 
 interface HeaderInterface {
@@ -31,7 +30,6 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
     const newProject:ProjectType = {
       name: 'Untitled',
       id,
-      // users: [{...user, role: 'owner'}],
       users: [{...user, role: 'owner'}],
       observations:[],
     }

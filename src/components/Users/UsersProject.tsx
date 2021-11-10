@@ -26,7 +26,10 @@ const UsersProject: React.FC<UsersProjectInterface> = ({type}) => {
         const {users} = currentProject; 
         return (
           <Fragment>
-            {users.length !== 1 && <span className={styles['users-length']}>+{users.length-1}</span>}
+            <span 
+              className={styles['users-length']}>
+              {users.length !== 1? `+${users.length-1}` : 'Share'}
+            </span>
             <UserPP className={styles['main-pp']} imgSource={user.profileImg? user.profileImg : ''}/>      
           </Fragment>
         );

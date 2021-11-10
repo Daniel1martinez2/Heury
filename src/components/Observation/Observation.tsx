@@ -7,17 +7,20 @@ import {ObservationInterface} from '../../library/common/types';
 import { nanoid } from 'nanoid'; 
 
 import {normalizeText, setSeverityColor} from '../../library/common/commonFunc'; 
-import {AnimatePresence} from 'framer-motion'; 
+import {AnimatePresence, motion} from 'framer-motion'; 
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
+import ModalScreen from '../../UI/ModalScreen/ModalScreen';
+import { appear } from '../../library/common/commonData';
 
 const Observation:React.FC<ObservationInterface> = ({observationData, index, projectId}) =>{
   const [actionsActive, setActionsActive] = useState(true); 
+  const [imgModal, setImgModal] = useState(false); 
   const [showModal, setShowModal] = useState(false); 
   const ctx = useContext(ProjectContext); 
   const{deleteObservation} = ctx; 
 
- return (
-    <Fragment>
+  const renderEditObservation = () => {
+    return (
       <AnimatePresence
         initial={false}
         exitBeforeEnter={true}
@@ -28,6 +31,35 @@ const Observation:React.FC<ObservationInterface> = ({observationData, index, pro
           </ObservationForm>
         )}
       </AnimatePresence>
+    ); 
+  }
+
+  const renderImageDetail = () => {
+    return(
+      <AnimatePresence
+        initial={false}
+        exitBeforeEnter={true}
+      >
+        {imgModal && (
+          <ModalScreen setShowModal={setImgModal}> 
+            <motion.img
+              variants={appear}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              src={observationData.evidence}
+              className={styles['modal-img']}
+            />
+          </ModalScreen>
+        )}
+      </AnimatePresence>
+    ); 
+  }
+
+ return (
+    <Fragment>
+      {renderEditObservation()}
+      {renderImageDetail()}
       <tr>
         <th className={styles["t-header"]} >
           <h3>{index}</h3>
@@ -58,8 +90,10 @@ const Observation:React.FC<ObservationInterface> = ({observationData, index, pro
         <td style={{backgroundColor: setSeverityColor(observationData.severity) }} className={styles["severity"]}>{observationData.severity}</td>
         <td>
           {observationData.evidence && <img
+            className={styles['evidence-img']}
             src={observationData.evidence}
             alt="evidence"
+            onClick={() => setImgModal(true)}
           />}
         </td>
         <td>
