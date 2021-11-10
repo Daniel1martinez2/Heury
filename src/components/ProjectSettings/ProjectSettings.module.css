@@ -8,6 +8,9 @@
   flex-direction: column;
   gap: 1em; 
   color: #FAFAFE; 
+  box-shadow: 18px 10px 56px 10px rgba(2, 2, 3, 0.9);
+  -webkit-box-shadow: 18px 10px 56px 10px rgba(16, 14, 27, 0.9);
+  -moz-box-shadow: 18px 10px 56px 10px rgba(0, 0, 0, 0.9);
 }
 .container h1{
   font-size: 18px; 

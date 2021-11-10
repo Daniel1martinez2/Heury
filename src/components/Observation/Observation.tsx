@@ -7,10 +7,9 @@ import {ObservationInterface} from '../../library/common/types';
 import { nanoid } from 'nanoid'; 
 
 import {normalizeText, setSeverityColor} from '../../library/common/commonFunc'; 
-import {AnimatePresence, motion} from 'framer-motion'; 
+import {AnimatePresence} from 'framer-motion'; 
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
-import ModalScreen from '../../UI/ModalScreen/ModalScreen';
-import { appear } from '../../library/common/commonData';
+import ImageDetail from '../ImageDetail/ImageDetail';
 
 const Observation:React.FC<ObservationInterface> = ({observationData, index, projectId}) =>{
   const [actionsActive, setActionsActive] = useState(true); 
@@ -34,32 +33,14 @@ const Observation:React.FC<ObservationInterface> = ({observationData, index, pro
     ); 
   }
 
-  const renderImageDetail = () => {
-    return(
-      <AnimatePresence
-        initial={false}
-        exitBeforeEnter={true}
-      >
-        {imgModal && (
-          <ModalScreen setShowModal={setImgModal}> 
-            <motion.img
-              variants={appear}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              src={observationData.evidence}
-              className={styles['modal-img']}
-            />
-          </ModalScreen>
-        )}
-      </AnimatePresence>
-    ); 
-  }
-
  return (
     <Fragment>
       {renderEditObservation()}
-      {renderImageDetail()}
+      <ImageDetail 
+        image={observationData.evidence} 
+        setImgModal = {setImgModal}
+        imgModal = {imgModal}
+      />
       <tr>
         <th className={styles["t-header"]} >
           <h3>{index}</h3>
