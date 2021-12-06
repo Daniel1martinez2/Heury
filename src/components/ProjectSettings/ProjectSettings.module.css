@@ -83,12 +83,12 @@
 
 .delete-container{
   padding: 1em; 
-  border: 1px solid #f85149; 
+  border: 1px solid rgb(224, 196, 51); 
   border-radius: 4px; 
 }
 .delete{
   background-color: #353748;
-  color: #f85149; 
+  color: rgb(224, 196, 51); 
   padding: .5em; 
   width: 100%;
   border-radius: 4px;
@@ -104,5 +104,5 @@
   display: flex;
   flex-direction: column;
   gap: .5em; 
-  color: #f85149; 
+  color: rgb(224, 196, 51); 
 }

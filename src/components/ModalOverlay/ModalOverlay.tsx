@@ -50,7 +50,7 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({setShowModal, editData, p
       heuristics: heuristicSelectedArray.map((elem:string) => transformTypeToConstansCase(elem || '')),
       severity: transformTypeToConstansCase(formRef.severity.value) ,
       evidence: evidence, 
-      recommendations: formRef.solution.value, 
+      recommendations: formRef.recommendation.value, 
       id:editData? editData.id : nanoid(),
     }
     if(!editData){
@@ -102,8 +102,8 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({setShowModal, editData, p
       </label>
 
       <label className={styles['textarea-label']}>
-        Solution
-        <textarea onChange={onSetRecommendations} value={recommendations} name="solution">{recommendations}</textarea>
+        Recommendation
+        <textarea onChange={onSetRecommendations} value={recommendations} name="recommendation">{recommendations}</textarea>
       </label>
       <motion.button 
         className={`reset-btn ${styles['btn']}`}

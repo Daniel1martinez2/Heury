@@ -64,10 +64,11 @@ export interface ModalOverlayInterface {
 
 
 export interface FormElements extends HTMLFormControlsCollection {
+  recommendation: HTMLTextAreaElement;
   notes: HTMLTextAreaElement;
   severity: any; 
-  solution: HTMLTextAreaElement;
 }
+
 export interface Form extends HTMLFormElement {
   readonly elements: FormElements;
 }

@@ -15,7 +15,6 @@ const DocumentView: React.FC<DocumentViewInterface>= ({observationData, index}) 
   const [isIncomplete, setIsIncomplete] = useState<boolean>(false); 
   const [imgModal, setImgModal] = useState(false); 
   // let isIncomplete = false; 
-  
 
   return (
     <div className={styles['container']}>

@@ -1,13 +1,20 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {ObservationType, ProjectType, ProjectUserType } from '../library/common/types'; 
+import { addNewProject, deleteServerProject, getProjects } from '../utils/api';
 import ProjectContext from "./project-context";
 
-// ProjectUserType[]
 
 const ProjectProvider = (props:any) => {
   const [filters, setFilters] = useState({heuristic:'', severity: ''}); 
-  // const [projectUsers, setProjectUsers] = useState<ProjectUserType[]>(testUsers);
   const [projects, setProjects] = useState<ProjectType[]>([]);
+
+  useEffect(() => {
+    getProjects()
+    .then( projects => {
+      setProjects(projects); 
+    })
+    .catch(er => console.log('sorry')); 
+  }, []);
   
   const checkProjectCurrent = (projectId: string) => {
     const projectsCopy = [...projects];
@@ -24,6 +31,11 @@ const ProjectProvider = (props:any) => {
 
   const createProject = (project:ProjectType) => {
     setProjects(prev => [...prev, project ]); 
+    
+    addNewProject(project)
+    .then( projects => {
+      console.log(projects);
+    }); 
   };
 
   const addUsersProject = (projectId: string, users: ProjectUserType[]) => {
@@ -60,7 +72,7 @@ const ProjectProvider = (props:any) => {
     }
   }
 
-  //Delete
+  //DELETE ⚠️
   const deleteObservation = (id:string, projectId: string) => {
     const {currentProject, projectsCopy} = checkProjectCurrent(projectId)
     if (!!currentProject){
@@ -71,6 +83,7 @@ const ProjectProvider = (props:any) => {
   }
 
   const deleteProject = (projectId: string) => {
+    deleteServerProject(projectId).then(data => console.log(data, '🔥')); 
     setProjects(prev => prev.filter(project => project.id !== projectId)); 
   }
 
@@ -115,7 +128,7 @@ const ProjectProvider = (props:any) => {
   )
 }
 
-export default ProjectProvider;
+export default React.memo(ProjectProvider);
 
 
 
