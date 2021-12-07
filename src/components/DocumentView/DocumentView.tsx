@@ -8,16 +8,20 @@ import ImageDetail from '../ImageDetail/ImageDetail';
 interface DocumentViewInterface {
   observationData: ObservationType;
   index: number
+  ref?: any
 }
 
-const DocumentView: React.FC<DocumentViewInterface>= ({observationData, index}) => {
+const DocumentView: React.FC<DocumentViewInterface>= React.forwardRef( ({observationData, index}, ref:any) => {
   const {notes, heuristics, severity, evidence, recommendations} = observationData; 
   const [isIncomplete, setIsIncomplete] = useState<boolean>(false); 
   const [imgModal, setImgModal] = useState(false); 
   // let isIncomplete = false; 
 
   return (
-    <div className={styles['container']}>
+    <div 
+      ref={ref}
+      className={styles['container']}
+    >
       <ImageDetail 
         image={evidence} 
         setImgModal = {setImgModal}
@@ -77,6 +81,7 @@ const DocumentView: React.FC<DocumentViewInterface>= ({observationData, index}) 
       </div>
     </div>
   )
-}
+})
+
 
 export default DocumentView

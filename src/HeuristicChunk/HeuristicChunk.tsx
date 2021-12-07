@@ -6,6 +6,7 @@ import Table from '../components/Table/Table';
 import {ProjectParams, VisualizationType} from '../library/common/types'; 
 import ProjectContext from '../store/project-context';
 import styles from './HeuristicChunk.module.css'; 
+import ExportableComponent from '../components/ExportableComponent/ExportableComponent'; 
 
 interface HeuristicChunkInterface {
   mode: VisualizationType; 
@@ -23,8 +24,11 @@ const HeuristicChunk:React.FC <HeuristicChunkInterface>  = ({mode}) => {
   return (
     <Fragment>
       {mode === 'document' && 
-        <div className={styles['area']}>
-          {observations.map((observation, index) => <DocumentView key={observation.id} observationData={observation} index={index}/>)}
+        <div 
+          className={styles['area']}
+        >
+          <ExportableComponent observations={observations}/>
+          {/* {observations.map((observation, index) => <DocumentView key={observation.id} observationData={observation} index={index}/>)} */}
         </div>
       }
       {mode === 'table' && <Table id={projectId} filterData={filterData} observations={observations} />}
