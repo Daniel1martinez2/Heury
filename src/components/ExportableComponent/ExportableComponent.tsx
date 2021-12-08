@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import ReactToPrint from 'react-to-print';
+import React, { useRef, forwardRef, useImperativeHandle } from 'react';
+import ReactToPrint, {useReactToPrint} from 'react-to-print'; 
 import DocumentView from '../DocumentView/DocumentView';
 //https://www.npmjs.com/package/react-to-print
 
@@ -10,11 +10,12 @@ import DocumentView from '../DocumentView/DocumentView';
 const pageStyle = `
   @page {
     size: A4;
+  
   }
 
   @media all {
     .pagebreak {
-      display: none;
+      display: always;
     }
   }
 
@@ -27,38 +28,63 @@ const pageStyle = `
 
 const Example:React.FC<any> = React.forwardRef((props, ref:any) => {
   return (
-    // <div ref={ref}>
-    //   {[1,2,3,4].map(elem => <h1>aaa</h1>)}
-    // </div>
     <div 
       ref={ref}
       style={{
-        padding: '1em 2em',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '4em', 
+        gap: '2em',
+        padding: '1em 2em',
+        width: '100vw',
+        maxWidth: '875px'
       }}
     >
-      {props.observations.map((observation:any, index:any) => <DocumentView key={observation.id} observationData={observation} index={index}/>)}
+      {props.observations.map((observation:any, index:any) => (
+        <>
+          <div className="page-break" />
+          <DocumentView key={observation.id} observationData={observation} index={index}/>
+        </>
+      ))}
     </div>
   );
 })
 
-const ExportableComponent:React.FC<any> = ({observations}) => {
-  const componentRef = useRef<any>(null);
-  return (
-    <div>
-      <ReactToPrint
-        pageStyle={pageStyle}
-        trigger={() => <button>Print this out!</button>}
-        content={() => componentRef.current}
-      />
-      <Example ref={componentRef} observations={observations} />
-      {/* {observations.map((observation:any, index:any) => <DocumentView ref={componentRef} key={observation.id} observationData={observation} index={index}/>)} */}
-    </div>
-  );
-};
+const ExportableComponent:React.FC<any> = forwardRef(({observations}, ref) => {
+    const componentRef = useRef<any>(null);
+    const handlePrint = useReactToPrint({
+      content: () => componentRef.current,
+      pageStyle: pageStyle,
+      documentTitle: "heury"
+    });
+    useImperativeHandle(ref, () => ({
+
+      getAlert() {
+        // alert("getAlert from Child");
+        if(handlePrint){
+          handlePrint(); 
+        }
+
+      }
+  
+    }))
+  
+    return (
+      <div>
+        {/* <ReactToPrint
+          pageStyle={pageStyle}
+          trigger={() => <button style={{display: 'none'}}>Print this out!</button>}
+          content={() => componentRef.current}
+          removeAfterPrint={true}
+          copyStyles={true}
+          documentTitle="heury"
+        /> */}
+        {/* <button onClick={handlePrint}>Print this out!</button> */}
+        <Example ref={componentRef} observations={observations} />
+      </div>
+    );
+  }
+)
 
 
 

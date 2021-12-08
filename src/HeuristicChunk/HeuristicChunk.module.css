@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4em; 
+  /* gap: 4em;  */
 }
 
 .chart-area{
@@ -21,3 +21,21 @@
   width: 100%;
 }
 
+.btn{
+  padding: .5em 1em; 
+  font-size: 14px;
+  border-radius:5px; 
+  display: flex;
+  gap: .5em;  
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  background-color: #FF7451;
+  color: white;
+}
+
+.btn img{
+  width: 22px;
+  height:100%;
+}

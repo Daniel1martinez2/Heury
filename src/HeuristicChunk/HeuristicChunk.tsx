@@ -1,7 +1,7 @@
-import React, {Fragment, useContext} from 'react'
+import React, {Fragment, useContext, useRef} from 'react'
 import { Redirect, useParams } from 'react-router-dom';
 import ChartHeury from '../components/ChartHeury/ChartHeury';
-import DocumentView from '../components/DocumentView/DocumentView';
+import downloadIcon from '../library/img/download.svg'; 
 import Table from '../components/Table/Table';
 import {ProjectParams, VisualizationType} from '../library/common/types'; 
 import ProjectContext from '../store/project-context';
@@ -16,6 +16,7 @@ const HeuristicChunk:React.FC <HeuristicChunkInterface>  = ({mode}) => {
   const ctx = useContext(ProjectContext); 
   const {userProjects, filterData} = ctx; 
   const params = useParams<ProjectParams>();
+  const childRef = useRef<any>();
   const {projectId} = params;  
   const currentProject = userProjects.find(project => project.id === projectId); 
   if(!currentProject) return <Redirect to="/"/>
@@ -27,7 +28,14 @@ const HeuristicChunk:React.FC <HeuristicChunkInterface>  = ({mode}) => {
         <div 
           className={styles['area']}
         >
-          <ExportableComponent observations={observations}/>
+          <button 
+            className={['reset-btn', styles['btn']].join(' ')}
+            onClick={() => childRef.current.getAlert()}
+            >
+              <img src={downloadIcon} alt="downloadIcon" />
+              <span>Download</span>
+            </button>
+          <ExportableComponent ref={childRef} observations={observations}/>
           {/* {observations.map((observation, index) => <DocumentView key={observation.id} observationData={observation} index={index}/>)} */}
         </div>
       }
