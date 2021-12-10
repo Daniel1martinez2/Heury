@@ -1,0 +1,41 @@
+.container{
+  width: 500px;
+  height: 200px;
+  border-radius: 8px;
+  background-color: #353748;
+  padding: 2em 4em; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: #FAFAFE; 
+}
+
+.btns{
+  display: flex;
+  width: 100%;
+
+  justify-content: center;
+  gap: 1em;
+}
+
+.btns button{
+  padding: .5em 1em;
+  border-radius: 4px; 
+  flex-grow: 1;
+}
+
+.container h3{
+  text-align: center;
+}
+.container h3 strong{
+  color: #FF7451; 
+}
+
+.delete{
+  background-color: #FF7451;
+}
+
+.cancel{
+  border: 1px solid #FAFAFE;
+}

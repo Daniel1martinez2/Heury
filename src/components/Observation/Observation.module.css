@@ -13,11 +13,14 @@
   justify-content:center; 
   align-items: center; 
   margin-top: .5em;
-  -webkit-transition: background-color .3s ease-in-out;
-  -moz-transition: background-color .3s ease-in-out;
-  -o-transition: background-color .3s ease-in-out;
-  transition: background-color .3s ease-in-out;
+  -webkit-transition: background-color  .3s ease-in-out, opacity  .3s ease-in-out;
+  -moz-transition: background-color  .3s ease-in-out, opacity  .3s ease-in-out;
+  -o-transition: background-color  .3s ease-in-out, opacity  .3s ease-in-out;
+  transition: background-color  .3s ease-in-out, opacity  .3s ease-in-out;
+  
 }
+
+
 
 .t-header .more svg{
   width: 20px;
@@ -34,7 +37,6 @@
 }
 
 table tr:hover .t-header .more{
-  /* display: block; */
   opacity: 1 !important; 
 }
 
@@ -46,10 +48,6 @@ table tr:hover .t-header .more{
   display: none !important; 
   
 }
-
-/* .severity{
-  background-color: #E05D33 !important;
-} */
 
 .row-actions{
   left: 40px;

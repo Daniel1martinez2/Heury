@@ -20,7 +20,8 @@ const HeuristicChunk:React.FC <HeuristicChunkInterface>  = ({mode}) => {
   const {projectId} = params;  
   const currentProject = userProjects.find(project => project.id === projectId); 
   if(!currentProject) return <Redirect to="/"/>
-  const {observations} = currentProject;
+  const {observations, name} = currentProject;
+  
 
   return (
     <Fragment>
@@ -35,7 +36,11 @@ const HeuristicChunk:React.FC <HeuristicChunkInterface>  = ({mode}) => {
               <img src={downloadIcon} alt="downloadIcon" />
               <span>Download</span>
             </button>
-          <ExportableComponent ref={childRef} observations={observations}/>
+          <ExportableComponent 
+            ref={childRef} 
+            observations={observations}
+            projectName={name}
+          />
           {/* {observations.map((observation, index) => <DocumentView key={observation.id} observationData={observation} index={index}/>)} */}
         </div>
       }

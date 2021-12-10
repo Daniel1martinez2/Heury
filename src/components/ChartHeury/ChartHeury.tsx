@@ -1,8 +1,27 @@
-import React from 'react'
+import React from 'react';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
 import {Bar} from 'react-chartjs-2'; 
 import {heuristics} from '../../library/common/commonData'; 
 import {transformTypeToConstansCase} from '../../library/common/commonFunc'; 
 import { ObservationType } from '../../library/common/types';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 interface ChartHeuryInterface {
   data:  ObservationType[];

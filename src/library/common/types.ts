@@ -45,7 +45,7 @@ export interface ObservationInterface {
 }
 
 export interface ModalScreenInterface{
-  setShowModal:any ;
+  setShowModal:React.Dispatch<React.SetStateAction<boolean>>;
   children: React.ReactNode;
 }; 
 

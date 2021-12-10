@@ -12,6 +12,7 @@ import {useHistory} from 'react-router-dom';
 import ModalScreen from '../../UI/ModalScreen/ModalScreen'; 
 import { AnimatePresence } from 'framer-motion';
 import ProjectSettings from '../ProjectSettings/ProjectSettings';
+import BrandLogo from '../BrandLogo/BrandLogo';
 
 interface HeaderInterface {
   type: 'project' | 'home'; 
@@ -61,7 +62,7 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
       case 'home':
         return (
           <Fragment>
-            <h1 className={styles['logo']}>Heury</h1>
+            <BrandLogo type="color" className={styles['logo']}/>
             <div className={styles['right-content']}>
               <button 
                 onClick={handleNewProject}

@@ -1,5 +1,5 @@
 import React, { useRef, forwardRef, useImperativeHandle } from 'react';
-import ReactToPrint, {useReactToPrint} from 'react-to-print'; 
+import {useReactToPrint} from 'react-to-print'; 
 import DocumentView from '../DocumentView/DocumentView';
 //https://www.npmjs.com/package/react-to-print
 
@@ -50,12 +50,12 @@ const Example:React.FC<any> = React.forwardRef((props, ref:any) => {
   );
 })
 
-const ExportableComponent:React.FC<any> = forwardRef(({observations}, ref) => {
+const ExportableComponent:React.FC<any> = forwardRef(({observations, projectName}, ref) => {
     const componentRef = useRef<any>(null);
     const handlePrint = useReactToPrint({
       content: () => componentRef.current,
       pageStyle: pageStyle,
-      documentTitle: "heury"
+      documentTitle: projectName.split(' ').join('_')
     });
     useImperativeHandle(ref, () => ({
 

@@ -34,15 +34,16 @@
   gap: 1em; 
 }
 
-.logo{
-  padding:6px; 
+.logo{ 
+  width: auto;
+  height: 32px;
 }
 
 .page-header {
   width: 100%;
   border-bottom: 1px solid #434450;
   color: white;
-  padding: 2em;
+  padding: 1em 2em;
   display: flex;
   align-items: center;
   gap: 1em;

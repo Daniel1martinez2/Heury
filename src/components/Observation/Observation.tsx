@@ -10,9 +10,11 @@ import {normalizeText, setSeverityColor} from '../../library/common/commonFunc';
 import {AnimatePresence} from 'framer-motion'; 
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import ImageDetail from '../ImageDetail/ImageDetail';
+import ConfirmAction from '../ConfirmAction/ConfirmAction';
 
 const Observation:React.FC<ObservationInterface> = ({observationData, index, projectId}) =>{
   const [actionsActive, setActionsActive] = useState(true); 
+  const [showConfirmAction, setShowConfirmAction] = useState(false); 
   const [imgModal, setImgModal] = useState(false); 
   const [showModal, setShowModal] = useState(false); 
   const ctx = useContext(ProjectContext); 
@@ -31,11 +33,28 @@ const Observation:React.FC<ObservationInterface> = ({observationData, index, pro
         )}
       </AnimatePresence>
     ); 
+  };
+
+  const deleteBtnHandler = () => {
+    setShowConfirmAction(true)
   }
 
  return (
     <Fragment>
       {renderEditObservation()}
+      <AnimatePresence
+        initial={true}
+        exitBeforeEnter={true}
+      >
+        {showConfirmAction && (
+          <ConfirmAction 
+            observationIndex={index}
+            setShowModal={setShowConfirmAction}
+            mainAction={ () => deleteObservation(observationData.id, projectId)}
+          />
+        )}
+      </AnimatePresence>
+      
       <ImageDetail 
         image={observationData.evidence} 
         setImgModal = {setImgModal}
@@ -55,8 +74,19 @@ const Observation:React.FC<ObservationInterface> = ({observationData, index, pro
           </button>
             <ModalCard  className={`${styles['row-actions']} ${ actionsActive  && styles['hidden']}`}>
               <Fragment> 
-                <button onMouseDown={() => setShowModal(true)} className="reset-btn">Edit</button>
-                <button onMouseDown={() => deleteObservation(observationData.id, projectId)} className="reset-btn">Delete</button>
+                <button 
+                  onMouseDown={() => setShowModal(true)} 
+                  className="reset-btn"
+                >
+                  Edit
+                </button>
+
+                <button 
+                  onMouseDown={deleteBtnHandler} 
+                  className="reset-btn"
+                >
+                  Delete
+                </button>
               </Fragment>
             </ModalCard>
         </th>
