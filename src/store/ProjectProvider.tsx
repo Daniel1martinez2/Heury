@@ -1,20 +1,43 @@
 import React, {useEffect, useState} from 'react'
 import {ObservationType, ProjectType, ProjectUserType } from '../library/common/types'; 
-import { addNewProject, deleteServerProject, getProjects } from '../utils/api';
+// import { addNewProject, deleteServerProject, getProjects } from '../utils/api';
 import ProjectContext from "./project-context";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore'; 
+import { firebaseConfig } from '../utils/tokens'; 
+import { useAuthState } from 'react-firebase-hooks/auth'; 
+import { useCollectionData } from 'react-firebase-hooks/firestore'; 
 
+
+
+
+firebase.initializeApp(firebaseConfig); 
+
+
+const auth = firebase.auth();
+const firestore = firebase.firestore();
 
 const ProjectProvider = (props:any) => {
   const [filters, setFilters] = useState({heuristic:'', severity: ''}); 
+  
+  const projectsRef = firestore.collection('projects');
   const [projects, setProjects] = useState<ProjectType[]>([]);
+  const query:any = projectsRef.orderBy('createdAt');
+  const [projectsFromFirebase] = useCollectionData<ProjectType>(query, { idField: 'id' });
 
   useEffect(() => {
-    getProjects()
-    .then( projects => {
-      setProjects(projects); 
-    })
-    .catch(er => console.log('sorry')); 
-  }, []);
+    console.log(projectsFromFirebase);
+
+    // if(projectsFromFirebase) setProjects(projectsFromFirebase); 
+
+    // getProjects()
+    // .then( projects => {
+    //   setProjects(projects); 
+    // })
+    // .catch(er => console.log('sorry'));
+    
+  }, [projectsFromFirebase]);
   
   const checkProjectCurrent = (projectId: string) => {
     const projectsCopy = [...projects];
@@ -29,13 +52,17 @@ const ProjectProvider = (props:any) => {
     setProjects(projectsCopy)
   }; 
 
-  const createProject = (project:ProjectType) => {
-    setProjects(prev => [...prev, project ]); 
+  const createProject = (project:ProjectType, callback: () => void) => {
+    // setProjects(prev => [...prev, project ]);
+    projectsRef.add({
+      ...project,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    }).then( _ => callback());
     
-    addNewProject(project)
-    .then( projects => {
-      console.log(projects);
-    }); 
+    // addNewProject(project)
+    // .then( projects => {
+    //   console.log(projects);
+    // }); 
   };
 
   const addUsersProject = (projectId: string, users: ProjectUserType[]) => {
@@ -83,7 +110,7 @@ const ProjectProvider = (props:any) => {
   }
 
   const deleteProject = (projectId: string) => {
-    deleteServerProject(projectId).then(data => console.log(data, '🔥')); 
+    // deleteServerProject(projectId).then(data => console.log(data, '🔥')); 
     setProjects(prev => prev.filter(project => project.id !== projectId)); 
   }
 
@@ -107,7 +134,7 @@ const ProjectProvider = (props:any) => {
   
   const projectContextData = {
     user: {name: 'Daniel', id: 'asdsad', profileImg: 'https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9iMDVhNWNjMDY1M2FiNDNjNzU0NjY1ZmQxOWNmNzU3MT9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.AUtQ0KIK-lJbX9MAPyq_8rTlkO4_CiuhTGbmyvuJJ40'},
-    userProjects: projects,
+    userProjects: projectsFromFirebase || [],
     filterData: filters,
     deleteObservation, 
     editObservation, 
@@ -134,3 +161,4 @@ export default React.memo(ProjectProvider);
 
 
 
+ 

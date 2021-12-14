@@ -34,8 +34,7 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
       users: [{...user, role: 'owner'}],
       observations:[],
     }
-    createProject(newProject);
-    history.push(`/project/${id}/table`); 
+    createProject(newProject, () => {history.push(`/project/${id}`)});
   }
 
   const handleCloseSettings = () => setModalView(false); 
@@ -62,7 +61,7 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
       case 'home':
         return (
           <Fragment>
-            <BrandLogo type="color" className={styles['logo']}/>
+            <BrandLogo type="white" className={styles['logo']}/>
             <div className={styles['right-content']}>
               <button 
                 onClick={handleNewProject}

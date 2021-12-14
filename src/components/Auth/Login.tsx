@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React, {useState} from 'react'; 
 import mail from '../../library/img/mail.svg'; 
 import lock from '../../library/img/lock.svg'; 
 import styles from './Auth.module.css'; 
@@ -11,6 +11,17 @@ interface LoginInterface {
 }
 
 const Login: React.FC<LoginInterface> = ({setMode}) => {
+  const [mailInput, setMailInput] = useState('');
+  const [password, setPassword] = useState('');
+
+  const mailInputHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => setMailInput(e.target.value); 
+  const passwordHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => setPassword(e.target.value); 
+
+
+  const submitHandler = () => {
+    console.log(mailInput, password);
+  }
+
   return (
     <motion.form 
       className={styles['form']}
@@ -19,11 +30,30 @@ const Login: React.FC<LoginInterface> = ({setMode}) => {
       animate="visible"
       exit="exit"
     >
-      <AuthInput label="Mail" placeholder="user@mail.com" icon={mail} type={'text'} />
-      <AuthInput label="Password" placeholder="6 characters" icon={lock} type={'password'} />
+      <AuthInput 
+        label="Mail" 
+        placeholder="user@mail.com" 
+        icon={mail} 
+        type={'text'} 
+        defaultText={mailInput}
+        handleChange={mailInputHandler}
+        />
+      <AuthInput 
+        label="Password" 
+        placeholder="6 characters" 
+        icon={lock} 
+        type={'password'} 
+        defaultText={password}
+        handleChange={passwordHandler}
+      />
       
       <div className={styles['bottom-actions']}>
-        <button className={['reset-btn', styles['submit']].join(' ')}>Login</button>
+        <button 
+          className={['reset-btn', styles['submit']].join(' ')}
+          onClick={submitHandler}
+        >
+            Login
+          </button>
         <span className={styles['bottom-mss']}>
           Not have an account?
           <span 
