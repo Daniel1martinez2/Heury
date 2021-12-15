@@ -2,34 +2,64 @@ import React, {useEffect, useState} from 'react'
 import {ObservationType, ProjectType, ProjectUserType } from '../library/common/types'; 
 // import { addNewProject, deleteServerProject, getProjects } from '../utils/api';
 import ProjectContext from "./project-context";
-
+import { 
+  getProjectsFirebase, 
+  postProjectToFirebase, 
+  changeProjectId, 
+  changeProjectName,
+  deleteProjectFirebase,
+  addObservationFirebase
+} from '../utils/apiFIrebase'; 
 
 const ProjectProvider = (props:any) => {
   const [filters, setFilters] = useState({heuristic:'', severity: ''}); 
   const [projects, setProjects] = useState<ProjectType[]>([]);
 
+  // const getProjectsFirebase = () => {
+  //   const loadedProjects: ProjectType[] = [];
+  //   fetch('https://heury-ef325-default-rtdb.firebaseio.com/projects.json/', {
+  //     method: 'GET',
+  //     headers:{
+  //       'Content-Type': 'application/json'
+  //     }
+  //   })
+  //   .then( raw => raw.json())
+  //   .then( data => {
+  //     for (const key in data) {
+  //       loadedProjects.push({...data[key], observations:[]}); 
+  //     }
+  //     console.log(loadedProjects);
+  //     setProjects(loadedProjects);
+
+  //   });
+  // }
+  
   useEffect(() => {
+
+    const loadedProjects: ProjectType[] = [];
+    getProjectsFirebase()
+    .then( data => {
+      for (const key in data) {
+        if(data[key].observations){
+          loadedProjects.push(data[key]); 
+        } else{
+          loadedProjects.push({...data[key], observations:[]}); 
+        }
+      }      
+      setProjects(loadedProjects);
+    });
+
+    // -MqvwSZ4ye8iTLF_Uvi2
+
+ 
+
+
     // getProjects()
     // .then( projects => {
     //   setProjects(projects); 
     // })
     // .catch(er => console.log('sorry')); 
-    const loadedProjects: ProjectType[] = []; 
-    fetch('https://heury-ef325-default-rtdb.firebaseio.com/projects.json/', {
-      method: 'GET',
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    })
-    .then( raw => raw.json())
-    .then( data => {
-      for (const key in data) {
-        loadedProjects.push({...data[key], observations:[]}); 
-      }
-      console.log(loadedProjects);
-      setProjects(loadedProjects);
-
-    });
+    
   }, []);
   
   const checkProjectCurrent = (projectId: string) => {
@@ -39,48 +69,34 @@ const ProjectProvider = (props:any) => {
   }
 
   //Create
+  //----------------------------------------------------------------
+  //----------------------------------------------------------------
   const createObservation = (observation:ObservationType, projectId: string) => {
     const {currentProject, projectsCopy} = checkProjectCurrent(projectId)
     currentProject?.observations.push(observation); 
-
-
     setProjects(projectsCopy)
+    if(currentProject) addObservationFirebase(projectId, currentProject, observation);
   }; 
 
   const createProject = (project:ProjectType, callback: () => void ) => {
     // setProjects(prev => [...prev, project ]);
+    const loadedProjects: ProjectType[] = []; 
 
-    fetch('https://heury-ef325-default-rtdb.firebaseio.com/projects.json/', {
-      method: 'POST',
-      body:JSON.stringify(project),
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    })
-    .then( raw => raw.json())
+    postProjectToFirebase(project)
     .then( data => {
       console.log(data);
-      const loadedProjects: ProjectType[] = []; 
-      fetch('https://heury-ef325-default-rtdb.firebaseio.com/projects.json/', {
-        method: 'GET',
-        headers:{
-          'Content-Type': 'application/json'
-        }
-      })
-      .then( raw => raw.json())
+      //data.name --> contains the project id
+      changeProjectId(data.name, project); 
+      getProjectsFirebase()
       .then( data => {
         for (const key in data) {
           loadedProjects.push({...data[key], observations:[]}); 
-        }
+        }      
         setProjects(loadedProjects);
-        callback(); 
+        callback();
       });
     }); 
     
-    // addNewProject(project)
-    // .then( projects => {
-    //   console.log(projects);
-    // }); 
   };
 
   const addUsersProject = (projectId: string, users: ProjectUserType[]) => {
@@ -107,6 +123,8 @@ const ProjectProvider = (props:any) => {
     if(!!currentProject){
       currentProject.name = name
       setProjects(projectsCopy); 
+      changeProjectName(currentProject.id, currentProject, name); 
+
     }
   };
   const setProjectCover = (projectId:string, img: string) => {
@@ -130,6 +148,7 @@ const ProjectProvider = (props:any) => {
   const deleteProject = (projectId: string) => {
     // deleteServerProject(projectId).then(data => console.log(data, '🔥')); 
     setProjects(prev => prev.filter(project => project.id !== projectId)); 
+    deleteProjectFirebase(projectId); 
   }
 
   const deleteProjectUsers = (userId: string, projectId: string) => {
