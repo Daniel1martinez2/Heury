@@ -20,7 +20,7 @@ type dataContext = {
   setSeverityFilter: (event: React.ChangeEvent<HTMLSelectElement>) => void; 
   deleteProjectUsers: (id:string, projectId: string)=>void; 
   deleteProject: (projectId: string) => void; 
-  createProject: (project:ProjectType) => void;
+  createProject: (project:ProjectType, callback: () => void) => void;
   setProjectCover: (projectId: string, image: string) => void;
   addUsersProject: (projectId: string, project:ProjectUserType[]) => void; 
 };

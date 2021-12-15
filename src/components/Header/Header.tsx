@@ -13,6 +13,7 @@ import ModalScreen from '../../UI/ModalScreen/ModalScreen';
 import { AnimatePresence } from 'framer-motion';
 import ProjectSettings from '../ProjectSettings/ProjectSettings';
 import BrandLogo from '../BrandLogo/BrandLogo';
+import Loader from '../Loader/Loader'; 
 
 interface HeaderInterface {
   type: 'project' | 'home'; 
@@ -25,8 +26,10 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
   const ctx = useContext(ProjectContext); 
   const {createProject, user} = ctx; 
   const [modalView, setModalView] = useState<boolean>(false); 
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleNewProject = () => {
+    setLoading(true); 
     const id = nanoid(); 
     const newProject:ProjectType = {
       name: 'Untitled',
@@ -34,8 +37,12 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
       users: [{...user, role: 'owner'}],
       observations:[],
     }
-    createProject(newProject);
-    history.push(`/project/${id}/table`); 
+    console.log('a');
+    createProject(newProject, () => {
+      setLoading(false);
+      history.push(`/project/${id}`);
+    });
+    
   }
 
   const handleCloseSettings = () => setModalView(false); 
@@ -44,6 +51,7 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
   const renderNav = () => {
     switch (type) {
       case 'project':
+
         return (
           <Fragment>
             {setVisualizationMode && <Nav setVisualizationMode={setVisualizationMode}/>}
@@ -59,11 +67,12 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
             </div>
           </Fragment>
         ); 
-      case 'home':
-        return (
-          <Fragment>
-            <BrandLogo type="color" className={styles['logo']}/>
-            <div className={styles['right-content']}>
+        case 'home':
+          return (
+            <Fragment>
+              { loading &&<Loader/> }
+              <BrandLogo type="color" className={styles['logo']}/>
+              <div className={styles['right-content']}>
               <button 
                 onClick={handleNewProject}
                 className={`reset-btn ${styles['button']}`}

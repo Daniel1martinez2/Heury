@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {ObservationType, ProjectType, ProjectUserType } from '../library/common/types'; 
-import { addNewProject, deleteServerProject, getProjects } from '../utils/api';
+// import { addNewProject, deleteServerProject, getProjects } from '../utils/api';
 import ProjectContext from "./project-context";
 
 
@@ -9,11 +9,27 @@ const ProjectProvider = (props:any) => {
   const [projects, setProjects] = useState<ProjectType[]>([]);
 
   useEffect(() => {
-    getProjects()
-    .then( projects => {
-      setProjects(projects); 
+    // getProjects()
+    // .then( projects => {
+    //   setProjects(projects); 
+    // })
+    // .catch(er => console.log('sorry')); 
+    const loadedProjects: ProjectType[] = []; 
+    fetch('https://heury-ef325-default-rtdb.firebaseio.com/projects.json/', {
+      method: 'GET',
+      headers:{
+        'Content-Type': 'application/json'
+      }
     })
-    .catch(er => console.log('sorry')); 
+    .then( raw => raw.json())
+    .then( data => {
+      for (const key in data) {
+        loadedProjects.push({...data[key], observations:[]}); 
+      }
+      console.log(loadedProjects);
+      setProjects(loadedProjects);
+
+    });
   }, []);
   
   const checkProjectCurrent = (projectId: string) => {
@@ -26,16 +42,45 @@ const ProjectProvider = (props:any) => {
   const createObservation = (observation:ObservationType, projectId: string) => {
     const {currentProject, projectsCopy} = checkProjectCurrent(projectId)
     currentProject?.observations.push(observation); 
+
+
     setProjects(projectsCopy)
   }; 
 
-  const createProject = (project:ProjectType) => {
-    setProjects(prev => [...prev, project ]); 
-    
-    addNewProject(project)
-    .then( projects => {
-      console.log(projects);
+  const createProject = (project:ProjectType, callback: () => void ) => {
+    // setProjects(prev => [...prev, project ]);
+
+    fetch('https://heury-ef325-default-rtdb.firebaseio.com/projects.json/', {
+      method: 'POST',
+      body:JSON.stringify(project),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+    .then( raw => raw.json())
+    .then( data => {
+      console.log(data);
+      const loadedProjects: ProjectType[] = []; 
+      fetch('https://heury-ef325-default-rtdb.firebaseio.com/projects.json/', {
+        method: 'GET',
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      })
+      .then( raw => raw.json())
+      .then( data => {
+        for (const key in data) {
+          loadedProjects.push({...data[key], observations:[]}); 
+        }
+        setProjects(loadedProjects);
+        callback(); 
+      });
     }); 
+    
+    // addNewProject(project)
+    // .then( projects => {
+    //   console.log(projects);
+    // }); 
   };
 
   const addUsersProject = (projectId: string, users: ProjectUserType[]) => {
@@ -83,7 +128,7 @@ const ProjectProvider = (props:any) => {
   }
 
   const deleteProject = (projectId: string) => {
-    deleteServerProject(projectId).then(data => console.log(data, '🔥')); 
+    // deleteServerProject(projectId).then(data => console.log(data, '🔥')); 
     setProjects(prev => prev.filter(project => project.id !== projectId)); 
   }
 

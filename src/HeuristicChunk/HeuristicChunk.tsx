@@ -18,7 +18,7 @@ const HeuristicChunk:React.FC <HeuristicChunkInterface>  = ({mode}) => {
   const params = useParams<ProjectParams>();
   const childRef = useRef<any>();
   const {projectId} = params;  
-  const currentProject = userProjects.find(project => project.id === projectId); 
+  const currentProject = userProjects.find(project => project.id === projectId);
   if(!currentProject) return <Redirect to="/"/>
   const {observations, name} = currentProject;
   
