@@ -8,31 +8,13 @@ import {
   changeProjectId, 
   changeProjectName,
   deleteProjectFirebase,
-  addObservationFirebase
+  SetObservationFirebase
 } from '../utils/apiFIrebase'; 
 
 const ProjectProvider = (props:any) => {
   const [filters, setFilters] = useState({heuristic:'', severity: ''}); 
   const [projects, setProjects] = useState<ProjectType[]>([]);
 
-  // const getProjectsFirebase = () => {
-  //   const loadedProjects: ProjectType[] = [];
-  //   fetch('https://heury-ef325-default-rtdb.firebaseio.com/projects.json/', {
-  //     method: 'GET',
-  //     headers:{
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-  //   .then( raw => raw.json())
-  //   .then( data => {
-  //     for (const key in data) {
-  //       loadedProjects.push({...data[key], observations:[]}); 
-  //     }
-  //     console.log(loadedProjects);
-  //     setProjects(loadedProjects);
-
-  //   });
-  // }
   
   useEffect(() => {
 
@@ -49,16 +31,7 @@ const ProjectProvider = (props:any) => {
       setProjects(loadedProjects);
     });
 
-    // -MqvwSZ4ye8iTLF_Uvi2
 
- 
-
-
-    // getProjects()
-    // .then( projects => {
-    //   setProjects(projects); 
-    // })
-    // .catch(er => console.log('sorry')); 
     
   }, []);
   
@@ -74,26 +47,33 @@ const ProjectProvider = (props:any) => {
   const createObservation = (observation:ObservationType, projectId: string) => {
     const {currentProject, projectsCopy} = checkProjectCurrent(projectId)
     currentProject?.observations.push(observation); 
-    setProjects(projectsCopy)
-    if(currentProject) addObservationFirebase(projectId, currentProject, observation);
+    setProjects(projectsCopy);
+    console.log(projectId);
+    if(currentProject) SetObservationFirebase(projectId, currentProject, currentProject.observations);
   }; 
 
-  const createProject = (project:ProjectType, callback: () => void ) => {
+  const createProject = (project:ProjectType, callback: (newID:string) => void ) => {
     // setProjects(prev => [...prev, project ]);
     const loadedProjects: ProjectType[] = []; 
 
     postProjectToFirebase(project)
-    .then( data => {
-      console.log(data);
+    .then( dataID => {
+      console.log(dataID);
       //data.name --> contains the project id
-      changeProjectId(data.name, project); 
+      changeProjectId(dataID.name, project)
+      
+      
       getProjectsFirebase()
       .then( data => {
         for (const key in data) {
           loadedProjects.push({...data[key], observations:[]}); 
-        }      
+        }
+        const current = loadedProjects.findIndex(p => p.id === project.id); 
+        loadedProjects[current].id = dataID.name;
+        console.log(current);
+        console.log(loadedProjects);
         setProjects(loadedProjects);
-        callback();
+        callback(dataID.name);
       });
     }); 
     

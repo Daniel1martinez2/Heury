@@ -30,7 +30,7 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
 
   const handleNewProject = () => {
     setLoading(true); 
-    const id = nanoid(); 
+    const id = nanoid();
     const newProject:ProjectType = {
       name: 'Untitled',
       id,
@@ -38,9 +38,10 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
       observations:[],
     }
     console.log('a');
-    createProject(newProject, () => {
+    createProject(newProject, (newID: string) => {
       setLoading(false);
-      history.push(`/project/${id}`);
+      console.log(id, 'aaaaaa');
+      history.push(`/project/${newID}`);
     });
     
   }
