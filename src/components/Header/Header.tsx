@@ -72,7 +72,7 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
           return (
             <Fragment>
               { loading &&<Loader/> }
-              <BrandLogo type="color" className={styles['logo']}/>
+              <BrandLogo type="white" className={styles['logo']}/>
               <div className={styles['right-content']}>
               <button 
                 onClick={handleNewProject}

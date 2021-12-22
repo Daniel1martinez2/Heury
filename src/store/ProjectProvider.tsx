@@ -94,7 +94,8 @@ const ProjectProvider = (props:any) => {
       const {observations} = currentProject
       const currentObservation = observations.findIndex(elem => elem.id === id)
       observations[currentObservation] = {...newObservation}; 
-      setProjects(projectsCopy); 
+      SetObservationFirebase(projectId, currentProject, observations)
+      setProjects(projectsCopy);
     }
   }; 
 
