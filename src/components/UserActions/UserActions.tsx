@@ -1,5 +1,6 @@
+import React, {useContext} from 'react'; 
+import ProjectContext from '../../store/project-context'; 
 import { motion } from 'framer-motion'; 
-import React from 'react'; 
 import { appear } from '../../library/common/commonData'; 
 import styles from './UserActions.module.css';
 import {useHistory} from 'react-router'; 
@@ -10,6 +11,13 @@ interface UserActionsInterface {
 
 const UserActions: React.FC<UserActionsInterface> = ({classes}) => {
   const history = useHistory(); 
+  const ctx = useContext(ProjectContext)
+  const {logout} = ctx; 
+
+  const signOutHandler = () => {
+    logout(); 
+    history.push('/session'); 
+  }
   return (
     <motion.div 
       className={styles['user-actions-container']}
@@ -21,7 +29,7 @@ const UserActions: React.FC<UserActionsInterface> = ({classes}) => {
         <button className="reset-btn">Settings</button>
         <button 
           className="reset-btn"
-          onClick={() => history.push('/session')}
+          onClick={signOutHandler}
         >
           Sign Out
         </button>
