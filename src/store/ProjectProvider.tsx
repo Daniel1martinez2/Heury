@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {ObservationType, ProjectType, ProjectUserType } from '../library/common/types'; 
+import {ObservationType, ProjectType, ProjectUserType, UserFirebase } from '../library/common/types'; 
 // import { addNewProject, deleteServerProject, getProjects } from '../utils/api';
 import ProjectContext from "./project-context";
 import { 
@@ -15,11 +15,16 @@ const ProjectProvider = (props:any) => {
   const [filters, setFilters] = useState({heuristic:'', severity: ''}); 
   const [projects, setProjects] = useState<ProjectType[]>([]);
   const [token, setToken] = useState<string | null>(null); 
+  const [user, setUser] = useState<UserFirebase | null>(null); 
   const userIsLoggedIn = !!token; 
+  
+  const setUserHandler = (user: UserFirebase) => {
+    setUser(user);
+  }
   
   const loginHandler = (token: string) => {
     console.log(token, '🍷');
-    setToken(token); 
+    setToken(token);
   }; 
 
   const logoutHandler = () => {
@@ -161,7 +166,9 @@ const ProjectProvider = (props:any) => {
     isLoggedIn: userIsLoggedIn,
     login: loginHandler,
     logout: logoutHandler,
-    user: {name: 'Daniel', id: 'asdsad', profileImg: 'https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9iMDVhNWNjMDY1M2FiNDNjNzU0NjY1ZmQxOWNmNzU3MT9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.AUtQ0KIK-lJbX9MAPyq_8rTlkO4_CiuhTGbmyvuJJ40'},
+    // user: {name: 'Daniel', id: 'asdsad', profileImg: 'https://avatars.githubusercontent.com/u/53487916?s=40&v=4'},
+    user: user,
+    setUserHandler,
     userProjects: projects,
     filterData: filters,
     deleteObservation, 

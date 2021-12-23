@@ -50,7 +50,7 @@ const Register:React.FC<RegisterInterface> = ({setMode}) => {
     })
     .then(data => {
       console.log(data);
-      addUserRefToFirebase({name, id: '', projectsIds: [] })
+      addUserRefToFirebase({name, id: '', projectsIds: [], mail: mailInput })
     })
     .catch(err => setWeakPassword('paila')); 
     

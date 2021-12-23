@@ -41,3 +41,4 @@ export const deleteServerProject = async (projectId: string ) => {
   } = await raw.json();
   return data; 
 }
+

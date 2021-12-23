@@ -85,3 +85,23 @@ export const SetObservationFirebase = (id: string, project: ProjectType, observa
   })
 }
 
+
+// Get users
+export const getUsers = async () => {
+  const raw = await fetch(`${ apiToken }/users.json/`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json'}
+  })
+  const users:UserFirebase[] = await raw.json(); 
+  console.log(users, '✨');
+  return users; 
+}
+
+export const findUserByMail = async (mail: string) => {
+  const users = await getUsers(); 
+  const loadedUsers: UserFirebase[] = [];
+  for (const key in users) {
+    loadedUsers.push(users[key]); 
+  } 
+  return loadedUsers.find( user => user.mail === mail);
+}

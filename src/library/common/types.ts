@@ -87,6 +87,7 @@ export type ProjectUserType  = User & {
 
 export type UserFirebase  = User & {
   projectsIds: string[];
+  mail: string;
 }
 
 export type VisualizationType = 'table' | 'document' | 'stats'; 

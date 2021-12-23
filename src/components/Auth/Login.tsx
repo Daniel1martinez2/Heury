@@ -9,6 +9,8 @@ import AuthInput from '../AuthInput/AuthInput';
 import { handleAuth } from '../../utils/authApi';
 import Loader from '../Loader/Loader';
 import { useHistory} from 'react-router-dom';
+import { findUserByMail } from '../../utils/apiFIrebase';
+
 
 interface LoginInterface {
   setMode: React.Dispatch<React.SetStateAction<string>>; 
@@ -19,7 +21,7 @@ const Login: React.FC<LoginInterface> = ({setMode}) => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const ctx = useContext(ProjectContext); 
-  const {login} = ctx; 
+  const {login, setUserHandler} = ctx; 
 
   const mailInputHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => setMailInput(e.target.value); 
   const passwordHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => setPassword(e.target.value); 
@@ -46,7 +48,12 @@ const Login: React.FC<LoginInterface> = ({setMode}) => {
     .then(data => {
       console.log(data);
       login(data.idToken);
-      history.push('/'); 
+      findUserByMail(mailInput).then( data => {
+        console.log( data, '😳 si señorr');
+        if(!data) return
+        setUserHandler({name: data.name, id: data.id, profileImg: 'https://avatars.githubusercontent.com/u/53487916?s=40&v=4', projectsIds:[], mail: data.mail})
+        history.push('/'); 
+      })
     })
     .catch(err => {}); 
   }

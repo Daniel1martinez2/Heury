@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ObservationType, User, ProjectType, ProjectUserType } from "../library/common/types";
+import { ObservationType, ProjectType, ProjectUserType, UserFirebase } from "../library/common/types";
 
 type editObservationType = {
   newObservation: ObservationType;
@@ -13,7 +13,8 @@ type dataContext = {
   isLoggedIn: boolean;
   login: (token: string) => void;
   logout: () => void;
-  user: User; 
+  user: UserFirebase | null; 
+  setUserHandler: (user: UserFirebase) => void;
   userProjects: ProjectType[];
   filterData: {heuristic: string, severity: string};
   createObservation: (observation: ObservationType, projectId: string) => void;
@@ -34,8 +35,8 @@ const ProjectContext = React.createContext<dataContext>({
   isLoggedIn: false,
   login: () => {},
   logout: () => {},
-  
-  user: {name: '', id: '', profileImg: ''},
+  user: null,
+  setUserHandler: () => {},
   deleteProject: () => {},
   userProjects: [],
   setProjectName: ()=>{},

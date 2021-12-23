@@ -16,6 +16,7 @@ const UsersProject: React.FC<UsersProjectInterface> = ({type}) => {
   const {projectId} = params; 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const {userProjects, user} = useContext(ProjectContext); 
+  if(!user) return <Redirect to="/session"/>
   const currentProject = userProjects.find(project => project.id === projectId); 
   
 
