@@ -1,7 +1,8 @@
-import React, {useState} from 'react'; 
+import React, {useState, useContext} from 'react'; 
+import ProjectContext from '../../store/project-context'; 
 import Header from '../Header/Header'; 
 import HeuristicChunk from '../../HeuristicChunk/HeuristicChunk'; 
-import { Route} from 'react-router-dom';
+import { Redirect, Route} from 'react-router-dom';
 import styles from './Project.module.css'; 
 import SignUp from '../Auth/Auth';
 import HomePage from  '../../pages/Home-page'; 
@@ -10,12 +11,16 @@ import { VisualizationType } from '../../library/common/types';
 //I had force this, because the library Rive is kinda new
 // @ts-ignore
 // import anima from '../animations/anima.riv'; 
-
-const Project = () => {  
-  const [visualizationMode, setVisualizationMode] = useState<VisualizationType>('table'); 
+  
+const Project = () => { 
+  const [visualizationMode, setVisualizationMode] = useState<VisualizationType>('table');
+  const ctx = useContext(ProjectContext); 
+  const {isLoggedIn} = ctx; 
+  
   return(
     <div className={styles['app']}>
       <Route path="/project/:projectId">
+        {!isLoggedIn && <Redirect to="/session"/>}
         <Header 
           visualizationMode={visualizationMode} 
           type="project" 
@@ -29,6 +34,7 @@ const Project = () => {
         </div>
       </Route>
       <Route path="/" exact>
+        {!isLoggedIn && <Redirect to="/session"/>}
         <HomePage/>
       </Route>
     </div>

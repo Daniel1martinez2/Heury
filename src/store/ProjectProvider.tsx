@@ -14,10 +14,19 @@ import {
 const ProjectProvider = (props:any) => {
   const [filters, setFilters] = useState({heuristic:'', severity: ''}); 
   const [projects, setProjects] = useState<ProjectType[]>([]);
+  const [token, setToken] = useState<string | null>(null); 
+  const userIsLoggedIn = !!token; 
+  
+  const loginHandler = (token: string) => {
+    console.log(token, '🍷');
+    setToken(token); 
+  }; 
 
+  const logoutHandler = () => {
+    setToken(null); 
+  }; 
   
   useEffect(() => {
-
     const loadedProjects: ProjectType[] = [];
     getProjectsFirebase()
     .then( data => {
@@ -30,9 +39,6 @@ const ProjectProvider = (props:any) => {
       }      
       setProjects(loadedProjects);
     });
-
-
-    
   }, []);
   
   const checkProjectCurrent = (projectId: string) => {
@@ -151,6 +157,10 @@ const ProjectProvider = (props:any) => {
   }
   
   const projectContextData = {
+    token: token,
+    isLoggedIn: userIsLoggedIn,
+    login: loginHandler,
+    logout: logoutHandler,
     user: {name: 'Daniel', id: 'asdsad', profileImg: 'https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9iMDVhNWNjMDY1M2FiNDNjNzU0NjY1ZmQxOWNmNzU3MT9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.AUtQ0KIK-lJbX9MAPyq_8rTlkO4_CiuhTGbmyvuJJ40'},
     userProjects: projects,
     filterData: filters,

@@ -1,4 +1,4 @@
-import { ProjectType, ObservationType } from "../library/common/types";
+import { ProjectType, ObservationType, UserFirebase } from "../library/common/types";
 import { apiToken } from '../utils/tokens'; 
 
 //Get projects from
@@ -23,9 +23,29 @@ export const postProjectToFirebase = async (project: ProjectType) => {
     }
   });
   const data = await raw.json(); 
+
   return data; 
 }
 
+//Post user
+export const addUserRefToFirebase = async (user: UserFirebase) => {
+  const raw = await fetch(`${ apiToken }/users.json/`, {
+    method: 'POST',
+    body:JSON.stringify(user),
+    headers:{
+      'Content-Type': 'application/json'
+    }
+  });
+  const data = await raw.json(); 
+
+  fetch(`${apiToken}/users/${data.name}.json`, {
+    method: 'PUT',
+    body:JSON.stringify({...user, id: data.name}),
+    headers:{'Content-Type': 'application/'}
+  })
+  
+  return data; 
+}
 
 // Set the project id
 export const changeProjectId = async (id: string, project: ProjectType) => {

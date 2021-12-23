@@ -9,6 +9,10 @@ type editObservationType = {
 }
 
 type dataContext = {
+  token: string | null;
+  isLoggedIn: boolean;
+  login: (token: string) => void;
+  logout: () => void;
   user: User; 
   userProjects: ProjectType[];
   filterData: {heuristic: string, severity: string};
@@ -26,6 +30,11 @@ type dataContext = {
 };
 
 const ProjectContext = React.createContext<dataContext>({
+  token: '',
+  isLoggedIn: false,
+  login: () => {},
+  logout: () => {},
+  
   user: {name: '', id: '', profileImg: ''},
   deleteProject: () => {},
   userProjects: [],

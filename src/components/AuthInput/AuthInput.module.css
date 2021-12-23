@@ -1,7 +1,13 @@
 .input-container input:focus {
   border: 2px solid #b0b2c5;
 }
-
+.error span{
+  color: #FF7451 !important; 
+}
+.error input{
+  border: 1px solid #FF7451 !important; 
+  color: #FF7451 !important; 
+}
 .input-container{
   position: relative;
 }

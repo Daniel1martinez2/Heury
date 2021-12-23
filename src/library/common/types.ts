@@ -85,4 +85,8 @@ export type ProjectUserType  = User & {
   role: 'owner' | 'collaborator';
 }
 
+export type UserFirebase  = User & {
+  projectsIds: string[];
+}
+
 export type VisualizationType = 'table' | 'document' | 'stats'; 
