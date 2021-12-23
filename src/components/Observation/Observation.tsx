@@ -95,7 +95,7 @@ const Observation:React.FC<ObservationInterface> = ({observationData, index, pro
         </td>
         <td>
           <ul className={styles['ul']}>
-            {observationData.heuristics.map(elem => <li key={nanoid()} >{normalizeText(elem)}</li>)}
+            {observationData.heuristics && observationData.heuristics.map(elem => <li key={nanoid()} >{normalizeText(elem)}</li>)}
           </ul>
         </td>
         <td style={{backgroundColor: setSeverityColor(observationData.severity) }} className={styles["severity"]}>{observationData.severity}</td>

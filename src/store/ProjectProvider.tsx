@@ -1,5 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import {ObservationType, ProjectType, ProjectUserType, UserFirebase } from '../library/common/types'; 
+import {
+  ObservationType, 
+  ProjectType, 
+  ProjectUserType, 
+  UserFirebase 
+} from '../library/common/types'; 
 // import { addNewProject, deleteServerProject, getProjects } from '../utils/api';
 import ProjectContext from "./project-context";
 import { 
@@ -8,7 +13,11 @@ import {
   changeProjectId, 
   changeProjectName,
   deleteProjectFirebase,
-  SetObservationFirebase
+  SetObservationFirebase,
+  addProjectIdTOUserProjectList,
+  findUserByMail,
+  getUserProjectsFirebase,
+  deleteProjectFromUserRef
 } from '../utils/apiFIrebase'; 
 
 const ProjectProvider = (props:any) => {
@@ -17,6 +26,8 @@ const ProjectProvider = (props:any) => {
   const [token, setToken] = useState<string | null>(null); 
   const [user, setUser] = useState<UserFirebase | null>(null); 
   const userIsLoggedIn = !!token; 
+
+  
   
   const setUserHandler = (user: UserFirebase) => {
     setUser(user);
@@ -32,19 +43,27 @@ const ProjectProvider = (props:any) => {
   }; 
   
   useEffect(() => {
-    const loadedProjects: ProjectType[] = [];
-    getProjectsFirebase()
-    .then( data => {
-      for (const key in data) {
-        if(data[key].observations){
-          loadedProjects.push(data[key]); 
-        } else{
-          loadedProjects.push({...data[key], observations:[]}); 
-        }
-      }      
-      setProjects(loadedProjects);
-    });
-  }, []);
+    // const loadedProjects: ProjectType[] = [];
+    // getProjectsFirebase()
+    // .then( data => {
+    //   for (const key in data) {
+    //     if(data[key].observations){
+    //       loadedProjects.push(data[key]); 
+    //     } else{
+    //       loadedProjects.push({...data[key], observations:[]}); 
+    //     }
+    //   }
+    //   setProjects(loadedProjects);
+    // });
+    if(!user) return
+    getUserProjectsFirebase(user)
+    .then(projects => {
+      console.log('sss');
+      console.log(projects, '🔥🔥')
+      setProjects(projects);
+    })
+    
+  }, [user]);
   
   const checkProjectCurrent = (projectId: string) => {
     const projectsCopy = [...projects];
@@ -66,26 +85,37 @@ const ProjectProvider = (props:any) => {
   const createProject = (project:ProjectType, callback: (newID:string) => void ) => {
     // setProjects(prev => [...prev, project ]);
     const loadedProjects: ProjectType[] = []; 
-
+    if(!user) return;
     postProjectToFirebase(project)
     .then( dataID => {
       console.log(dataID);
       //data.name --> contains the project id
-      changeProjectId(dataID.name, project)
+      changeProjectId(dataID.name, project).then(_ => {
+        //Wait for project id change
+        addProjectIdTOUserProjectList(user, dataID.name).then(_ => {
+          findUserByMail(user.mail).then( data => {
+            if(data) setUserHandler(data); 
+          })
+        }) 
+      })
       
       
       getProjectsFirebase()
       .then( data => {
         for (const key in data) {
-          loadedProjects.push({...data[key], observations:[]}); 
+          console.log(data[key], '✅');
+          loadedProjects.push({...data[key], observations:data[key].observations || []}); 
         }
         const current = loadedProjects.findIndex(p => p.id === project.id); 
-        loadedProjects[current].id = dataID.name;
-        console.log(current);
-        console.log(loadedProjects);
+        if(current) loadedProjects[current].id = dataID.name;
+        
         setProjects(loadedProjects);
+        
+        //function needed to navigate to the project detail according to the id 
         callback(dataID.name);
       });
+
+
     }); 
     
   };
@@ -139,8 +169,11 @@ const ProjectProvider = (props:any) => {
 
   const deleteProject = (projectId: string) => {
     // deleteServerProject(projectId).then(data => console.log(data, '🔥')); 
-    setProjects(prev => prev.filter(project => project.id !== projectId)); 
+    setProjects(prev => prev.filter(project => project.id !== projectId));
+
     deleteProjectFirebase(projectId); 
+    if(!user) return
+    deleteProjectFromUserRef(user, projectId);
   }
 
   const deleteProjectUsers = (userId: string, projectId: string) => {

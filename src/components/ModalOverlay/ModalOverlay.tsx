@@ -19,7 +19,7 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({setShowModal, editData, p
 
   const notesDefault = editData? editData.notes : '';
   const recommendationsDefault = editData? editData.recommendations : '';
-  const heuristicSelectedArrayDefault = editData? editData.heuristics.map((elem:string) => elem.split(' ').join('')) : [];
+  const heuristicSelectedArrayDefault = editData && editData.heuristics ? editData.heuristics.map((elem:string) => elem.split(' ').join('')) : [];
   const severityDefault = editData? editData.severity : '';
   const evidenceDefault = editData? editData.evidence : '';
 

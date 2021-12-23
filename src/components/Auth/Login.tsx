@@ -51,7 +51,7 @@ const Login: React.FC<LoginInterface> = ({setMode}) => {
       findUserByMail(mailInput).then( data => {
         console.log( data, '😳 si señorr');
         if(!data) return
-        setUserHandler({name: data.name, id: data.id, profileImg: 'https://avatars.githubusercontent.com/u/53487916?s=40&v=4', projectsIds:[], mail: data.mail})
+        setUserHandler({name: data.name, id: data.id, profileImg: 'https://avatars.githubusercontent.com/u/53487916?s=40&v=4', projectsIds:data.projectsIds || [], mail: data.mail})
         history.push('/'); 
       })
     })
