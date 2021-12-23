@@ -26,8 +26,6 @@ const ProjectProvider = (props:any) => {
   const [token, setToken] = useState<string | null>(null); 
   const [user, setUser] = useState<UserFirebase | null>(null); 
   const userIsLoggedIn = !!token; 
-
-  
   
   const setUserHandler = (user: UserFirebase) => {
     setUser(user);
@@ -43,18 +41,6 @@ const ProjectProvider = (props:any) => {
   }; 
   
   useEffect(() => {
-    // const loadedProjects: ProjectType[] = [];
-    // getProjectsFirebase()
-    // .then( data => {
-    //   for (const key in data) {
-    //     if(data[key].observations){
-    //       loadedProjects.push(data[key]); 
-    //     } else{
-    //       loadedProjects.push({...data[key], observations:[]}); 
-    //     }
-    //   }
-    //   setProjects(loadedProjects);
-    // });
     if(!user) return
     getUserProjectsFirebase(user)
     .then(projects => {
@@ -62,7 +48,6 @@ const ProjectProvider = (props:any) => {
       console.log(projects, '🔥🔥')
       setProjects(projects);
     })
-    
   }, [user]);
   
   const checkProjectCurrent = (projectId: string) => {
@@ -199,7 +184,6 @@ const ProjectProvider = (props:any) => {
     isLoggedIn: userIsLoggedIn,
     login: loginHandler,
     logout: logoutHandler,
-    // user: {name: 'Daniel', id: 'asdsad', profileImg: 'https://avatars.githubusercontent.com/u/53487916?s=40&v=4'},
     user: user,
     setUserHandler,
     userProjects: projects,

@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useContext} from 'react';
 import user from '../../library/img/user.svg'; 
 import mail from '../../library/img/mail.svg'; 
 import lock from '../../library/img/lock.svg'; 
@@ -8,7 +8,9 @@ import {appear} from '../../library/common/commonData';
 import AuthInput from '../AuthInput/AuthInput'; 
 import { handleAuth } from '../../utils/authApi';
 import Loader from '../Loader/Loader'; 
-import { addUserRefToFirebase } from '../../utils/apiFIrebase';
+import { useHistory} from 'react-router-dom';
+import { addUserRefToFirebase, findUserByMail } from '../../utils/apiFIrebase';
+import ProjectContext from '../../store/project-context'; 
 
 
 interface RegisterInterface {
@@ -24,6 +26,10 @@ const Register:React.FC<RegisterInterface> = ({setMode}) => {
   const [isLoading, setIsLoading] = useState(false);
   //form validations
   const [weakPassword, setWeakPassword] = useState('');
+
+  const ctx = useContext(ProjectContext); 
+  const {login, setUserHandler} = ctx; 
+  const history = useHistory(); 
 
   const setNameHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => setName(e.target.value); 
   const mailInputHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => setMailInput(e.target.value); 
@@ -51,6 +57,34 @@ const Register:React.FC<RegisterInterface> = ({setMode}) => {
     .then(data => {
       console.log(data);
       addUserRefToFirebase({name, id: '', projectsIds: [], mail: mailInput })
+
+      //LOGIN --------------------------------
+      handleAuth('login', mailInput, password)
+      .then(res => {
+        setIsLoading(false); 
+        if(res.ok){
+          console.log(res);
+          return res.json(); 
+        }else{
+          return res.json().then(data => {
+            //Show an error modal
+            console.log(data.error.message);
+            throw new Error(data.error.message);
+          })
+        }
+      })
+      .then(data => {
+        console.log(data);
+        login(data.idToken);
+        findUserByMail(mailInput).then( data => {
+          console.log( data, '😳 si señorr');
+          if(!data) return
+          setUserHandler({name: data.name, id: data.id, profileImg: 'https://avatars.githubusercontent.com/u/53487916?s=40&v=4', projectsIds:data.projectsIds || [], mail: data.mail})
+          history.push('/'); 
+        })
+      })
+      .catch(err => {}); 
+
     })
     .catch(err => setWeakPassword('paila')); 
     
