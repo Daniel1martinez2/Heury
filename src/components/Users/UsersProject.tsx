@@ -6,6 +6,7 @@ import {AnimatePresence} from 'framer-motion';
 import UsersProjectModal from '../UsersProjectModal/UsersProjectModal'; 
 import { Redirect, useParams } from 'react-router';
 import { ProjectParams } from '../../library/common/types';
+import Loader from '../Loader/Loader'; 
 
 interface UsersProjectInterface {
   type: 'project' | 'home';
@@ -16,7 +17,10 @@ const UsersProject: React.FC<UsersProjectInterface> = ({type}) => {
   const {projectId} = params; 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const {userProjects, user} = useContext(ProjectContext); 
-  if(!user) return <Redirect to="/session"/>
+  if(!user) {
+    console.log('REDIRECT IN USER_PROJECT');
+    return <Loader/>
+  }
   const currentProject = userProjects.find(project => project.id === projectId); 
   
 

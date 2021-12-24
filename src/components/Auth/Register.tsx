@@ -75,7 +75,8 @@ const Register:React.FC<RegisterInterface> = ({setMode}) => {
       })
       .then(data => {
         console.log(data);
-        login(data.idToken);
+        const expirationTime = new Date(new Date().getTime() + (+ data.expiresIn * 1000)); 
+        login(data.idToken, expirationTime.toISOString(), mailInput);
         findUserByMail(mailInput).then( data => {
           console.log( data, '😳 si señorr');
           if(!data) return

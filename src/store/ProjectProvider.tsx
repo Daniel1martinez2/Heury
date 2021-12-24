@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {
   ObservationType, 
   ProjectType, 
@@ -8,7 +8,6 @@ import {
 // import { addNewProject, deleteServerProject, getProjects } from '../utils/api';
 import ProjectContext from "./project-context";
 import { 
-  getProjectsFirebase, 
   postProjectToFirebase, 
   changeProjectId, 
   changeProjectName,
@@ -19,36 +18,80 @@ import {
   getUserProjectsFirebase,
   deleteProjectFromUserRef
 } from '../utils/apiFIrebase'; 
+import { retrieveStoredToken } from '../utils/localStorageUtil';
+
+//this is a reference to a timeOut function
+let logOutTimer: any; 
+let tokenData: any;
 
 const ProjectProvider = (props:any) => {
   const [filters, setFilters] = useState({heuristic:'', severity: ''}); 
   const [projects, setProjects] = useState<ProjectType[]>([]);
-  const [token, setToken] = useState<string | null>(null); 
+  
   const [user, setUser] = useState<UserFirebase | null>(null); 
-  const userIsLoggedIn = !!token; 
   
-  const setUserHandler = (user: UserFirebase) => {
-    setUser(user);
+  useEffect(() => {
+    tokenData = retrieveStoredToken();
+  }, []);
+
+  let initialToken: string | null = null;
+  if(tokenData){
+    initialToken = tokenData.token;
   }
+
+  const [token, setToken] = useState<string | null>(initialToken);
+  const userIsLoggedIn = !!token;   
+  const setUserHandler = useCallback( (user: UserFirebase) => {
+    setUser(user);
+  },[])
   
-  const loginHandler = (token: string) => {
-    console.log(token, '🍷');
+  const loginHandler = (token: string, expirationTime: string, userMail: string) => {
     setToken(token);
+    localStorage.setItem('token', token);
+    localStorage.setItem('userMail', userMail);
+
+    //stored the expiration time
+    localStorage.setItem('expirationTime', expirationTime);
   }; 
 
-  const logoutHandler = () => {
+  const logoutHandler = useCallback(() => {
     setToken(null); 
-  }; 
+    setUser(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('userMail');
+    localStorage.removeItem('expirationTime');
+    if(logOutTimer){
+      clearTimeout(logOutTimer); 
+    } 
+  }, []); 
   
+  useEffect(() => {
+    
+    if(tokenData){
+      console.log(tokenData.duration, 'SI HAY');
+      const userMailLS = localStorage.getItem('userMail');
+      if(!userMailLS) return
+      findUserByMail(userMailLS)
+      .then( user => {
+        if(user) setUserHandler(user)
+      }); 
+      
+      
+      logOutTimer = setTimeout(logoutHandler, tokenData.duration); 
+    }else{
+      console.log('No token data');
+    }
+
+  }, [logoutHandler, setUserHandler]);
+
   useEffect(() => {
     if(!user) return
     getUserProjectsFirebase(user)
     .then(projects => {
-      console.log('sss');
-      console.log(projects, '🔥🔥')
       setProjects(projects);
     })
-  }, [user]);
+  }, [user])
+  
   
   const checkProjectCurrent = (projectId: string) => {
     const projectsCopy = [...projects];
@@ -63,46 +106,38 @@ const ProjectProvider = (props:any) => {
     const {currentProject, projectsCopy} = checkProjectCurrent(projectId)
     currentProject?.observations.push(observation); 
     setProjects(projectsCopy);
-    console.log(projectId);
+    // console.log(projectId);
     if(currentProject) SetObservationFirebase(projectId, currentProject, currentProject.observations);
   }; 
 
   const createProject = (project:ProjectType, callback: (newID:string) => void ) => {
-    // setProjects(prev => [...prev, project ]);
-    const loadedProjects: ProjectType[] = []; 
+
     if(!user) return;
     postProjectToFirebase(project)
     .then( dataID => {
-      console.log(dataID);
       //data.name --> contains the project id
       changeProjectId(dataID.name, project).then(_ => {
         //Wait for project id change
-        addProjectIdTOUserProjectList(user, dataID.name).then(_ => {
-          findUserByMail(user.mail).then( data => {
-            if(data) setUserHandler(data); 
-          })
-        }) 
+        setUser(prev => {
+          if(prev){
+            return ({...prev, projectsIds: [...prev.projectsIds || [], dataID.name]})
+          }
+          return null
+        })
+        addProjectIdTOUserProjectList(user, dataID.name); 
       })
-      
-      
-      getProjectsFirebase()
-      .then( data => {
-        for (const key in data) {
-          console.log(data[key], '✅');
-          loadedProjects.push({...data[key], observations:data[key].observations || []}); 
-        }
-        const current = loadedProjects.findIndex(p => p.id === project.id); 
-        if(current) loadedProjects[current].id = dataID.name;
-        
-        setProjects(loadedProjects);
-        
-        //function needed to navigate to the project detail according to the id 
+      //----------------------------------------------------------------
+      //----------------------------------------------------------------
+      //----------------------------------------------------------------
+      getUserProjectsFirebase(user)
+      .then(projects => {
+        // console.log('sss');
+        // console.log(projects, '🔥🔥')
+        setProjects([...projects, {...project, id: dataID.name}]);
         callback(dataID.name);
-      });
-
+      })
 
     }); 
-    
   };
 
   const addUsersProject = (projectId: string, users: ProjectUserType[]) => {
@@ -153,9 +188,7 @@ const ProjectProvider = (props:any) => {
   }
 
   const deleteProject = (projectId: string) => {
-    // deleteServerProject(projectId).then(data => console.log(data, '🔥')); 
     setProjects(prev => prev.filter(project => project.id !== projectId));
-
     deleteProjectFirebase(projectId); 
     if(!user) return
     deleteProjectFromUserRef(user, projectId);

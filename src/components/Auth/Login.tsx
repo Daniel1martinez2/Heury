@@ -47,10 +47,12 @@ const Login: React.FC<LoginInterface> = ({setMode}) => {
     })
     .then(data => {
       console.log(data);
-      login(data.idToken);
+      const expirationTime = new Date(new Date().getTime() + (+ data.expiresIn * 1000)); 
+      login(data.idToken, expirationTime.toISOString(), mailInput);
       findUserByMail(mailInput).then( data => {
         console.log( data, '😳 si señorr');
         if(!data) return
+        console.log('----->');
         setUserHandler({name: data.name, id: data.id, profileImg: 'https://avatars.githubusercontent.com/u/53487916?s=40&v=4', projectsIds:data.projectsIds || [], mail: data.mail})
         history.push('/'); 
       })

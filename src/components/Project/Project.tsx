@@ -1,5 +1,5 @@
-import React, {useState, useContext} from 'react'; 
-import ProjectContext from '../../store/project-context'; 
+import React, { useState, useContext } from 'react'; 
+import ProjectContext from '../../store/project-context';
 import Header from '../Header/Header'; 
 import HeuristicChunk from '../../HeuristicChunk/HeuristicChunk'; 
 import { Redirect, Route} from 'react-router-dom';
@@ -15,12 +15,16 @@ import { VisualizationType } from '../../library/common/types';
 const Project = () => { 
   const [visualizationMode, setVisualizationMode] = useState<VisualizationType>('table');
   const ctx = useContext(ProjectContext); 
-  const {isLoggedIn} = ctx; 
-  
+  const {user} = ctx; 
+  const storedToken = localStorage.getItem('token');
+  console.log('HEURISTIC');
+  console.log(!!storedToken);
+  const isUser = !!storedToken;
+
   return(
     <div className={styles['app']}>
       <Route path="/project/:projectId">
-        {!isLoggedIn && <Redirect to="/session"/>}
+        {!isUser && <Redirect to="/session"/>}
         <Header 
           visualizationMode={visualizationMode} 
           type="project" 
@@ -34,7 +38,7 @@ const Project = () => {
         </div>
       </Route>
       <Route path="/" exact>
-        {!isLoggedIn && <Redirect to="/session"/>}
+        {!isUser && <Redirect to="/session"/>}
         <HomePage/>
       </Route>
     </div>

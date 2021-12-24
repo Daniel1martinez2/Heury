@@ -11,7 +11,7 @@ type editObservationType = {
 type dataContext = {
   token: string | null;
   isLoggedIn: boolean;
-  login: (token: string) => void;
+  login: (token: string, expirationTime: string, userMail: string) => void;
   logout: () => void;
   user: UserFirebase | null; 
   setUserHandler: (user: UserFirebase) => void;

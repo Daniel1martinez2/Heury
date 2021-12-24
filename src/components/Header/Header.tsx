@@ -8,7 +8,7 @@ import UsersProject from '../Users/UsersProject';
 import Visualization from '../Visualization/Visualization'; 
 import ProjectContext from '../../store/project-context'; 
 import { ProjectType, VisualizationType } from '../../library/common/types';
-import {Redirect, useHistory} from 'react-router-dom'; 
+import {useHistory} from 'react-router-dom'; 
 import ModalScreen from '../../UI/ModalScreen/ModalScreen'; 
 import { AnimatePresence } from 'framer-motion';
 import ProjectSettings from '../ProjectSettings/ProjectSettings';
@@ -27,8 +27,13 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
   const {createProject, user} = ctx;
   const [modalView, setModalView] = useState<boolean>(false); 
   const [loading, setLoading] = useState<boolean>(false);
-  if(!user) return <Redirect to="/session"/>
-  console.log(user);
+  
+  if(!user) {
+    console.log('WAITING USER');
+    return <Loader/>
+  }
+  
+  
   const handleNewProject = () => {
     setLoading(true); 
     const id = nanoid();
@@ -38,11 +43,10 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
       users: [{...user, role: 'owner'}],
       observations:[],
     }
-    console.log('a');
     createProject(newProject, (newID: string) => {
       setLoading(false);
-      console.log(id, 'aaaaaa');
       history.push(`/project/${newID}`);
+      console.log('NAVIGATE TO '+ newID);
     });
     
   }

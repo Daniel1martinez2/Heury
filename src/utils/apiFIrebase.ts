@@ -33,7 +33,6 @@ export const getUserProjectsFirebase = async (user: UserFirebase) => {
       loadedProjects.push({...data[key], observations:[]}); 
     }
   } 
-  console.log(loadedProjects, projectsIdsArray, user);
   return loadedProjects.filter( project => projectsIdsArray.includes(project.id)); 
 }
 
@@ -52,7 +51,7 @@ export const postProjectToFirebase = async (project: ProjectType) => {
 
 export const addProjectIdTOUserProjectList = async (user: UserFirebase, projectId: string) => {
   const {projectsIds} = user; 
-  const projectsIdCopy = [...projectsIds, projectId]; 
+  const projectsIdCopy = [...projectsIds || [], projectId]; 
   
 
   const raw = await fetch(`${ apiToken }/users/${user.id}.json/`, {
@@ -144,7 +143,6 @@ export const getUsers = async () => {
     headers: { 'Content-Type': 'application/json'}
   })
   const users:UserFirebase[] = await raw.json(); 
-  console.log(users, '✨');
   return users; 
 }
 

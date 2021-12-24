@@ -5,6 +5,7 @@ import { normalizeText } from '../../library/common/commonFunc';
 import {setSeverityColor} from '../../library/common/commonFunc'; 
 import { nanoid } from 'nanoid'; 
 import ImageDetail from '../ImageDetail/ImageDetail';
+
 interface DocumentViewInterface {
   observationData: ObservationType;
   index: number
