@@ -51,5 +51,14 @@
   flex-direction: column;
   justify-content: center; 
   height: 100vh; 
-  
+}
+
+.back-image{
+  position: fixed; 
+  top: 0;
+  right: -20%;
+  z-index:-1;
+  height: 100%;
+  opacity: .3;
+  mix-blend-mode: screen;
 }

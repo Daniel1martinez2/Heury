@@ -41,10 +41,7 @@ const Example:React.FC<any> = React.forwardRef((props, ref:any) => {
       }}
     >
       {props.observations.map((observation:any, index:any) => (
-        <>
-          <div className="page-break" />
-          <DocumentView key={observation.id} observationData={observation} index={index}/>
-        </>
+        <DocumentView key={observation.id} observationData={observation} index={index}/>
       ))}
     </div>
   );

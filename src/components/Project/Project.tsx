@@ -7,6 +7,7 @@ import styles from './Project.module.css';
 import SignUp from '../Auth/Auth';
 import HomePage from  '../../pages/Home-page'; 
 import { VisualizationType } from '../../library/common/types';
+import backImage from "./backlogin.jpg"; 
 // import Rive from 'rive-react'; 
 //I had force this, because the library Rive is kinda new
 // @ts-ignore
@@ -15,7 +16,7 @@ import { VisualizationType } from '../../library/common/types';
 const Project = () => { 
   const [visualizationMode, setVisualizationMode] = useState<VisualizationType>('table');
   const ctx = useContext(ProjectContext); 
-  const {user} = ctx; 
+  const {user} = ctx;
   const storedToken = localStorage.getItem('token');
   console.log('HEURISTIC');
   console.log(!!storedToken);
@@ -34,6 +35,7 @@ const Project = () => {
       </Route>
       <Route path="/session">
         <div className={styles['register-container']}>  
+          {/* <img className={styles['back-image']} src={backImage} alt="" /> */}
           <SignUp/>
         </div>
       </Route>
