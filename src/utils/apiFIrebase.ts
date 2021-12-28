@@ -126,7 +126,7 @@ export const deleteProjectFromUserRef = async (user: UserFirebase, projectId: st
 }
 
 //Set observation
-export const SetObservationFirebase = (id: string, project: ProjectType, observations:ObservationType[] ) => {
+export const setObservationFirebase = (id: string, project: ProjectType, observations:ObservationType[] ) => {
   
   fetch(`${apiToken}/projects/${id}.json`, {
     method: 'PUT',
@@ -153,4 +153,13 @@ export const findUserByMail = async (mail: string) => {
     loadedUsers.push(users[key]); 
   } 
   return loadedUsers.find( user => user.mail === mail);
+}
+
+//delete observation
+export const deleteObservationFirebase = (id: string, project: ProjectType, observations:ObservationType[] ) => {
+  fetch(`${apiToken}/projects/${id}.json`, {
+    method: 'PUT',
+    body:JSON.stringify({...project, observations}),
+    headers:{'Content-Type': 'application/'}
+  })
 }

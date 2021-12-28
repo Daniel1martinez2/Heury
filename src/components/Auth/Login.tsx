@@ -14,9 +14,10 @@ import { findUserByMail } from '../../utils/apiFIrebase';
 
 interface LoginInterface {
   setMode: React.Dispatch<React.SetStateAction<string>>; 
+  errorMessageHandler: (error: string) => void; 
 }
 
-const Login: React.FC<LoginInterface> = ({setMode}) => {
+const Login: React.FC<LoginInterface> = ({setMode, errorMessageHandler}) => {
   const [mailInput, setMailInput] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -41,6 +42,7 @@ const Login: React.FC<LoginInterface> = ({setMode}) => {
         return res.json().then(data => {
           //Show an error modal
           console.log(data.error.message);
+          errorMessageHandler(data.error.message); 
           throw new Error(data.error.message);
         })
       }

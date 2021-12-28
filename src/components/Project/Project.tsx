@@ -7,7 +7,7 @@ import styles from './Project.module.css';
 import SignUp from '../Auth/Auth';
 import HomePage from  '../../pages/Home-page'; 
 import { VisualizationType } from '../../library/common/types';
-import backImage from "./backlogin.jpg"; 
+import backImage from "./backlogin.jpg";
 // import Rive from 'rive-react'; 
 //I had force this, because the library Rive is kinda new
 // @ts-ignore

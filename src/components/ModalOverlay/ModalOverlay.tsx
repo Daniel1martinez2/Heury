@@ -107,8 +107,6 @@ const ModalOverlay:React.FC<ModalOverlayInterface> = ({setShowModal, editData, p
       </label>
       <motion.button 
         className={`reset-btn ${styles['btn']}`}
-        whileHover={{scale: 1.1}}
-        whileTap={{scale: 0.9}}
       >
         {editData? 'Save Changes' : 'Create Observation'}
       </motion.button>

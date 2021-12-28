@@ -12,11 +12,12 @@ import {
   changeProjectId, 
   changeProjectName,
   deleteProjectFirebase,
-  SetObservationFirebase,
+  setObservationFirebase,
   addProjectIdTOUserProjectList,
   findUserByMail,
   getUserProjectsFirebase,
-  deleteProjectFromUserRef
+  deleteProjectFromUserRef,
+  deleteObservationFirebase
 } from '../utils/apiFIrebase'; 
 import { retrieveStoredToken } from '../utils/localStorageUtil';
 
@@ -107,7 +108,7 @@ const ProjectProvider = (props:any) => {
     currentProject?.observations.push(observation); 
     setProjects(projectsCopy);
     // console.log(projectId);
-    if(currentProject) SetObservationFirebase(projectId, currentProject, currentProject.observations);
+    if(currentProject) setObservationFirebase(projectId, currentProject, currentProject.observations);
   }; 
 
   const createProject = (project:ProjectType, callback: (newID:string) => void ) => {
@@ -155,7 +156,7 @@ const ProjectProvider = (props:any) => {
       const {observations} = currentProject
       const currentObservation = observations.findIndex(elem => elem.id === id)
       observations[currentObservation] = {...newObservation}; 
-      SetObservationFirebase(projectId, currentProject, observations)
+      setObservationFirebase(projectId, currentProject, observations)
       setProjects(projectsCopy);
     }
   }; 
@@ -182,8 +183,10 @@ const ProjectProvider = (props:any) => {
     const {currentProject, projectsCopy} = checkProjectCurrent(projectId)
     if (!!currentProject){
       const {observations} = currentProject;
-      currentProject.observations = observations.filter(elem => elem.id !== id);
-      setProjects(projectsCopy); 
+      const newObservations = observations.filter(elem => elem.id !== id);
+      currentProject.observations = newObservations; 
+      deleteObservationFirebase(projectId, currentProject, newObservations);
+      setProjects(projectsCopy);
     }
   }
 

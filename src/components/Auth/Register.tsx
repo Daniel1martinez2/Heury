@@ -14,10 +14,11 @@ import ProjectContext from '../../store/project-context';
 
 
 interface RegisterInterface {
-  setMode: React.Dispatch<React.SetStateAction<string>>; 
+  setMode: React.Dispatch<React.SetStateAction<string>>;
+  errorMessageHandler: (error: string) => void;
 }
 
-const Register:React.FC<RegisterInterface> = ({setMode}) => {
+const Register:React.FC<RegisterInterface> = ({setMode, errorMessageHandler}) => {
     
   const [name, setName] = useState('');
   const [mailInput, setMailInput] = useState('');
@@ -37,8 +38,20 @@ const Register:React.FC<RegisterInterface> = ({setMode}) => {
   const confirmedPasswordHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => setConfirmedPassword(e.target.value); 
 
   const submitHandler:React.FormEventHandler<HTMLFormElement> = (e) => {
-    setIsLoading(true)
     e.preventDefault(); 
+    setIsLoading(true)
+    setWeakPassword(''); 
+    if(name.trim() === '' || mailInput.trim() === '' || password.trim() === '' || confirmedPassword.trim() === '' ){
+      errorMessageHandler('Blank inputs');
+      setIsLoading(false)
+      return; 
+    }
+    if(password !== confirmedPassword){
+      errorMessageHandler('Invalid Password');
+      setIsLoading(false)
+      return; 
+    }
+
     console.log(name, mailInput, password, confirmedPassword);
     //FIREBASE 🔥🔥🔥🔥
     handleAuth('register', mailInput, password)
@@ -84,10 +97,11 @@ const Register:React.FC<RegisterInterface> = ({setMode}) => {
           history.push('/'); 
         })
       })
-      .catch(err => {}); 
-
     })
-    .catch(err => setWeakPassword('paila')); 
+    .catch(err => {
+      console.log(err.message);
+      errorMessageHandler(err.message); 
+    }); 
     
   }
 

@@ -94,3 +94,9 @@
   color: #FF7451; 
   cursor: pointer;
 }
+
+.error-message{
+  color: #FF7451;
+  margin-bottom: 1em;
+  
+}
