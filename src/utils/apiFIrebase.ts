@@ -76,6 +76,7 @@ export const addUserRefToFirebase = async (user: UserFirebase) => {
   });
   const data = await raw.json(); 
 
+  //Changing the user id reference in firebase according to the given firebase id
   fetch(`${apiToken}/users/${data.name}.json`, {
     method: 'PUT',
     body:JSON.stringify({...user, id: data.name}),

@@ -56,7 +56,7 @@ const Register:React.FC<RegisterInterface> = ({setMode, errorMessageHandler}) =>
     //FIREBASE 🔥🔥🔥🔥
     handleAuth('register', mailInput, password)
     .then(res => {
-      setIsLoading(false); 
+      
       if(res.ok){
         console.log(res);
         return res.json(); 
@@ -70,38 +70,50 @@ const Register:React.FC<RegisterInterface> = ({setMode, errorMessageHandler}) =>
     .then(data => {
       console.log(data);
       addUserRefToFirebase({name, id: '', projectsIds: [], mail: mailInput })
-
-      //LOGIN --------------------------------
-      handleAuth('login', mailInput, password)
-      .then(res => {
-        setIsLoading(false); 
-        if(res.ok){
-          console.log(res);
-          return res.json(); 
-        }else{
-          return res.json().then(data => {
-            //Show an error modal
-            console.log(data.error.message);
-            throw new Error(data.error.message);
+      .then(newId => {
+        console.log(newId, '🍫🍫🍫🍫🍫🍫🍫🍫🍫🍫🍫🍫')
+        //LOGIN --------------------------------
+        handleAuth('login', mailInput, password)
+        .then(res => {
+          
+          if(res.ok){
+            console.log(res);
+            return res.json(); 
+          }else{
+            return res.json().then(data => {
+              //Show an error modal
+              console.log(data.error.message);
+              throw new Error(data.error.message);
+            })
+          }
+        })
+        .then(data => {
+          console.log(data);
+          const expirationTime = new Date(new Date().getTime() + (+ data.expiresIn * 1000)); 
+          login(data.idToken, expirationTime.toISOString(), mailInput);
+          findUserByMail(mailInput).then( data => {
+            console.log( data, '😳 si señorr');
+            if(!data) return
+            setUserHandler({name: data.name, id: newId.name, profileImg: '', projectsIds:data.projectsIds || [], mail: data.mail})
+            setIsLoading(false); 
+            history.push('/'); 
           })
-        }
-      })
-      .then(data => {
-        console.log(data);
-        const expirationTime = new Date(new Date().getTime() + (+ data.expiresIn * 1000)); 
-        login(data.idToken, expirationTime.toISOString(), mailInput);
-        findUserByMail(mailInput).then( data => {
-          console.log( data, '😳 si señorr');
-          if(!data) return
-          setUserHandler({name: data.name, id: data.id, profileImg: 'https://avatars.githubusercontent.com/u/53487916?s=40&v=4', projectsIds:data.projectsIds || [], mail: data.mail})
-          history.push('/'); 
         })
       })
+      .catch(err => {
+        setIsLoading(false); 
+        console.log(err.message);
+        errorMessageHandler(err.message); 
+      }); 
+        
     })
     .catch(err => {
+      setIsLoading(false); 
       console.log(err.message);
       errorMessageHandler(err.message); 
     }); 
+
+      
     
   }
 
