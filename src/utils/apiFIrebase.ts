@@ -1,3 +1,9 @@
+// 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+// 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+// 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+// 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+// 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+// 🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
 import { ProjectType, ObservationType, UserFirebase } from "../library/common/types";
 import { apiToken } from '../utils/tokens'; 
 
@@ -107,11 +113,13 @@ export const changeProjectName = (id: string, project: ProjectType, name: string
 }
 
 //Delete project
-export const deleteProjectFirebase = (id: string) => {
-  fetch(`${apiToken}/projects/${id}.json`, {
+export const deleteProjectFirebase = async (id: string) => {
+  const raw = await fetch(`${apiToken}/projects/${id}.json`, {
     method: 'DELETE',
     headers:{'Content-Type': 'application/'}
   })
+  
+  return raw; 
 }
 
 //Delete project from user reference

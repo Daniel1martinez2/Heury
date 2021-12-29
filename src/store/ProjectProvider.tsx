@@ -125,6 +125,7 @@ const ProjectProvider = (props:any) => {
           }
           return null
         })
+        //🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
         addProjectIdTOUserProjectList(user, dataID.name); 
       })
       //----------------------------------------------------------------
@@ -133,7 +134,7 @@ const ProjectProvider = (props:any) => {
       getUserProjectsFirebase(user)
       .then(projects => {
         // console.log('sss');
-        // console.log(projects, '🔥🔥')
+        console.log(projects, '🔥🔥')
         setProjects([...projects, {...project, id: dataID.name}]);
         callback(dataID.name);
       })
@@ -191,8 +192,18 @@ const ProjectProvider = (props:any) => {
   }
 
   const deleteProject = (projectId: string) => {
-    setProjects(prev => prev.filter(project => project.id !== projectId));
     deleteProjectFirebase(projectId); 
+    setProjects(prev => prev.filter(project => project.id !== projectId));
+    //🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩
+    setUser(prev => {
+
+      if(prev){
+        return ({...prev, projectsIds: prev.projectsIds.filter(currentProjectId => currentProjectId !==  projectId)})
+      }
+      return null
+    }); 
+
+    console.log(projects, 'ssss');
     if(!user) return
     deleteProjectFromUserRef(user, projectId);
   }
