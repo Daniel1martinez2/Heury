@@ -28,6 +28,7 @@ let tokenData: any;
 const ProjectProvider = (props:any) => {
   const [filters, setFilters] = useState({heuristic:'', severity: ''}); 
   const [projects, setProjects] = useState<ProjectType[]>([]);
+  const [loading, setLoading] = useState(false);
   
   const [user, setUser] = useState<UserFirebase | null>(null); 
   
@@ -87,8 +88,12 @@ const ProjectProvider = (props:any) => {
 
   useEffect(() => {
     if(!user) return
+    console.log('LOADING<<<<<<<<<<<<<<<<');
+    setLoading(true); 
     getUserProjectsFirebase(user)
     .then(projects => {
+      console.log('LOADING_FINISH>>>>>>>>>>>>');
+      setLoading(false); 
       setProjects(projects);
     })
   }, [user])
@@ -228,6 +233,7 @@ const ProjectProvider = (props:any) => {
   
   const projectContextData = {
     token: token,
+    loading,
     isLoggedIn: userIsLoggedIn,
     login: loginHandler,
     logout: logoutHandler,

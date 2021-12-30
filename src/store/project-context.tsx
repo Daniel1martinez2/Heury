@@ -28,11 +28,13 @@ type dataContext = {
   createProject: (project:ProjectType, callback: (newId: string) => void) => void;
   setProjectCover: (projectId: string, image: string) => void;
   addUsersProject: (projectId: string, project:ProjectUserType[]) => void; 
+  loading: boolean;
 };
 
 const ProjectContext = React.createContext<dataContext>({
   token: '',
   isLoggedIn: false,
+  loading: false,
   login: () => {},
   logout: () => {},
   user: null,
