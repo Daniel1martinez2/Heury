@@ -3,16 +3,13 @@ import Header from '../components/Header/Header';
 import styles from '../components/Project/Project.module.css';
 import ProjectThumb from '../components/ProjectThumb/ProjectThumb';
 import ProjectContext from '../store/project-context';
-import Loader from '../components/Loader/Loader'; 
-
 
 const HomePage = () => {
   const ctx = useContext(ProjectContext);
-  const {userProjects, loading} = ctx
+  const {userProjects} = ctx
   
   return (
     <Fragment>
-      {loading && <Loader/>}
       <Header type="home"/>
       <div className={styles['projects-container']}>
         <div className={styles['projects-title']}>

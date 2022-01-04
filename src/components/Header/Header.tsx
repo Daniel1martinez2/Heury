@@ -24,7 +24,7 @@ interface HeaderInterface {
 const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualizationMode}) => {
   const history = useHistory(); 
   const ctx = useContext(ProjectContext); 
-  const {createProject, user} = ctx;
+  const {createProject, user, loading: loadingProjects} = ctx;
   const [modalView, setModalView] = useState<boolean>(false); 
   const [loading, setLoading] = useState<boolean>(false);
   
@@ -76,7 +76,7 @@ const Header: React.FC<HeaderInterface> = ({type, setVisualizationMode, visualiz
         case 'home':
           return (
             <Fragment>
-              { loading &&<Loader/> }
+              { (loading || loadingProjects) &&<Loader/> }
               <BrandLogo type="white" className={styles['logo']}/>
               <div className={styles['right-content']}>
               <button 

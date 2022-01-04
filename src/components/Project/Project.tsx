@@ -7,6 +7,7 @@ import styles from './Project.module.css';
 import SignUp from '../Auth/Auth';
 import HomePage from  '../../pages/Home-page'; 
 import { VisualizationType } from '../../library/common/types';
+import AsideAuth from '../AsideAuth/AsideAuth'; 
 import backImage from "./backlogin.jpg";
 // import Rive from 'rive-react'; 
 //I had force this, because the library Rive is kinda new
@@ -34,9 +35,9 @@ const Project = () => {
         <HeuristicChunk mode={visualizationMode}/>
       </Route>
       <Route path="/session">
-        <div className={styles['register-container']}>  
-          {/* <img className={styles['back-image']} src={backImage} alt="" /> */}
+        <div className={styles['register-container']}> 
           <SignUp/>
+          <AsideAuth/>
         </div>
       </Route>
       <Route path="/" exact>
