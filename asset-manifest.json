@@ -1,22 +1,24 @@
 {
   "files": {
-    "main.css": "/Heury/static/css/main.26cfe473.chunk.css",
-    "main.js": "/Heury/static/js/main.c68a6c72.chunk.js",
-    "main.js.map": "/Heury/static/js/main.c68a6c72.chunk.js.map",
+    "main.css": "/Heury/static/css/main.a9d91e23.chunk.css",
+    "main.js": "/Heury/static/js/main.673f3aa2.chunk.js",
+    "main.js.map": "/Heury/static/js/main.673f3aa2.chunk.js.map",
     "runtime-main.js": "/Heury/static/js/runtime-main.9f76a91a.js",
     "runtime-main.js.map": "/Heury/static/js/runtime-main.9f76a91a.js.map",
-    "static/js/2.75c96837.chunk.js": "/Heury/static/js/2.75c96837.chunk.js",
-    "static/js/2.75c96837.chunk.js.map": "/Heury/static/js/2.75c96837.chunk.js.map",
+    "static/js/2.4fe73921.chunk.js": "/Heury/static/js/2.4fe73921.chunk.js",
+    "static/js/2.4fe73921.chunk.js.map": "/Heury/static/js/2.4fe73921.chunk.js.map",
     "index.html": "/Heury/index.html",
-    "static/css/main.26cfe473.chunk.css.map": "/Heury/static/css/main.26cfe473.chunk.css.map",
-    "static/js/2.75c96837.chunk.js.LICENSE.txt": "/Heury/static/js/2.75c96837.chunk.js.LICENSE.txt",
+    "static/css/main.a9d91e23.chunk.css.map": "/Heury/static/css/main.a9d91e23.chunk.css.map",
+    "static/js/2.4fe73921.chunk.js.LICENSE.txt": "/Heury/static/js/2.4fe73921.chunk.js.LICENSE.txt",
     "static/media/FilterActions.module.css": "/Heury/static/media/arrow-down.416676d2.svg",
+    "static/media/brandFinal.265343cf.svg": "/Heury/static/media/brandFinal.265343cf.svg",
     "static/media/cancel.a3515b76.svg": "/Heury/static/media/cancel.a3515b76.svg",
     "static/media/ModalOverlay.module.css": "/Heury/static/media/noCheck.277b2a24.svg",
     "static/media/download.bc192960.svg": "/Heury/static/media/download.bc192960.svg",
     "static/media/git.d561aa2c.svg": "/Heury/static/media/git.d561aa2c.svg",
     "static/media/google.9ed16233.svg": "/Heury/static/media/google.9ed16233.svg",
     "static/media/lock.d35a333a.svg": "/Heury/static/media/lock.d35a333a.svg",
+    "static/media/loginStuff.3ff9306c.png": "/Heury/static/media/loginStuff.3ff9306c.png",
     "static/media/mail.8e2c3fb9.svg": "/Heury/static/media/mail.8e2c3fb9.svg",
     "static/media/more.a703f652.svg": "/Heury/static/media/more.a703f652.svg",
     "static/media/plus.5a82668c.svg": "/Heury/static/media/plus.5a82668c.svg",
@@ -25,8 +27,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.9f76a91a.js",
-    "static/js/2.75c96837.chunk.js",
-    "static/css/main.26cfe473.chunk.css",
-    "static/js/main.c68a6c72.chunk.js"
+    "static/js/2.4fe73921.chunk.js",
+    "static/css/main.a9d91e23.chunk.css",
+    "static/js/main.673f3aa2.chunk.js"
   ]
 }
