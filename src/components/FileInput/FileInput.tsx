@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useCallback } from 'react';
+import {useDropzone} from 'react-dropzone'
 import styles from './FileInput.module.css'; 
 interface FileInputInterface {
   onSetEvidence: (img:string) => void; 
@@ -6,15 +7,29 @@ interface FileInputInterface {
 }; 
 
 const FileInput:React.FC<FileInputInterface> = ({onSetEvidence, prevEvidence}) => {
+  const readFile = useCallback(
+    (file: File) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file)
+  
+      reader.onload = (e) => {
+        onSetEvidence((e as any).target.result)
+      }
+    }
+  ,[onSetEvidence])
+
+  const onDrop = useCallback(acceptedFiles => {
+    // Do something with the files
+    const file: File = (acceptedFiles as any)[0]; 
+    if(file.type !== 'image/png' && file.type !== 'image/jpeg') return
+    readFile(file)
+    
+  }, [readFile]);
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 
   const handleFileInput:React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const file: File = (event as any).currentTarget.files[0]; 
-    const reader = new FileReader();
-    reader.readAsDataURL(file)
-
-    reader.onload = (e) => {
-      onSetEvidence((e as any).target.result)
-    }
+    readFile(file); 
   }; 
 
   const handleDeleteImage = () => onSetEvidence('')
@@ -22,9 +37,17 @@ const FileInput:React.FC<FileInputInterface> = ({onSetEvidence, prevEvidence}) =
   return (
     <React.Fragment>
       {prevEvidence === '' && 
-        <div className={styles['btn-container']}>
-          <input onChange={handleFileInput} className={styles['file-input']} type="file" accept=".jpg, .png" name="file"/>
-          <span>Upload Image</span>
+        <div className={`${styles['zone']} ${isDragActive? styles['zone__on-drop']:''}`} {...getRootProps()}>
+          <input {...getInputProps()} />
+          {
+            isDragActive ?
+              <p>Drop the files here ...</p> :
+              <p>Drag 'n' drop some files here, or click to select files</p>    
+          }
+          <div className={styles['btn-container']}>
+            <input onChange={handleFileInput} className={styles['file-input']} type="file" accept=".jpg, .png" name="file"/>
+            <span>Browse</span>
+          </div>
         </div>
       }
       {prevEvidence !== '' && 
